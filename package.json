@@ -11,8 +11,11 @@
   "dependencies": {
     "babel-preset-react": "^6.5.0",
     "babelify": "^7.2.0",
+    "desandro-classie": "^1.0.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-router": "^2.0.0",
+    "reflux": "^0.3.0",
     "watchify": "^3.7.0"
   }
 }
