@@ -16,8 +16,8 @@ var PedidoDetalle = React.createClass({
                     <div className="table-responsive">
                         <table  className="table well">
                             <tbody>
-                            <tr>
-                                <th>Codigo</th><th>Descripcion</th><th>Cantidad</th><th>Subtotal</th>
+                            <tr className="table-heading">
+                                <th>Codigo</th><th>Descripcion</th><th className="productQty">Cantidad</th><th className="productQty">Precio</th><th className="productQty">Subtotal</th>
                             </tr>
                                 {productos}
                             </tbody>

@@ -9,7 +9,7 @@ var Pedido = React.createClass({
     render: function() {
         return (
             <tr className="pedido" id={'pedido'+this.props.code} onClick={this.onClick}>
-                <td>{this.props.pedido.id}</td><td>{this.props.pedido.cliente}</td><td>{this.props.pedido.fecha}</td><td>{this.props.pedido.total}</td>
+                <td>{this.props.pedido.id}</td><td>{this.props.pedido.cliente}</td><td>{this.props.pedido.fecha}</td><td className="productPrice">{this.props.pedido.total}</td>
             </tr>
         );
     }
