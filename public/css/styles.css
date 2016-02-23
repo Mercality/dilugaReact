@@ -1,0 +1,46 @@
+body {
+  background:#fafafa;
+}
+  .lineaPedido>td {
+    max-height: 10px;
+  }
+  .productPrice {
+    text-align: right;
+
+  }
+  .productQty {
+    text-align:center !important;
+    max-width:45px;
+  }
+  .pedido {
+    cursor:pointer;
+    background:#232323;
+    color:white;
+  }
+  .animated {
+    animation-duration: .2s ;
+  }
+
+  .componentWrap {
+    padding:5px 20px 20px 20px;
+    margin:20px;
+
+    background:white;
+    box-shadow:1px 2px 2px #ccc;
+    border:1px solid #ccc;
+  }
+
+  .componentWrap>h3 {
+    margin-bottom:20px
+  }
+
+  span.fa.fa-cart-plus {
+    font-size:25px;
+    cursor:pointer;
+  }
+    span.fa.fa-cart-plus:hover {
+      color:orange;
+    }
+  .filtering {
+    margin-bottom:10px;
+  }
