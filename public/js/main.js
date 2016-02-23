@@ -18264,7 +18264,7 @@ var HistorialPedidos = React.createClass({
 
 module.exports = HistorialPedidos;
 
-},{"../../mockData.js":155,"./Pedido.jsx":151,"./PedidoDetalle.jsx":152,"react":149}],151:[function(require,module,exports){
+},{"../../mockData.js":161,"./Pedido.jsx":151,"./PedidoDetalle.jsx":152,"react":149}],151:[function(require,module,exports){
 var React = require('react');
 var PropTypes = React.PropTypes;
 var classie = require('desandro-classie');
@@ -18457,63 +18457,413 @@ module.exports = ProductoDetalle;
 
 },{"desandro-classie":1,"react":149}],154:[function(require,module,exports){
 var React = require('react');
+var PropTypes = React.PropTypes;
+
+var CategoryList = React.createClass({
+    displayName: 'CategoryList',
+
+
+    onChange: function (e) {
+        this.props.filter(e.target.value);
+    },
+    render: function () {
+
+        var options = this.props.categories.map(function (category) {
+            return React.createElement(
+                'option',
+                { value: category },
+                category
+            );
+        });
+
+        return React.createElement(
+            'span',
+            null,
+            React.createElement(
+                'label',
+                null,
+                'Categorias: '
+            ),
+            React.createElement(
+                'select',
+                { onChange: this.onChange },
+                options
+            )
+        );
+    }
+
+});
+
+module.exports = CategoryList;
+
+},{"react":149}],155:[function(require,module,exports){
+var React = require('react');
+var ProductRow = require('./ProductRow.jsx');
+
+var ProductList = React.createClass({
+    displayName: 'ProductList',
+
+
+    render: function () {
+        var products = this.props.products.map(function (product) {
+            return React.createElement(ProductRow, { product: product });
+        });
+        return React.createElement(
+            'div',
+            { className: 'productsTable table-responsive' },
+            React.createElement(
+                'table',
+                { className: 'table' },
+                React.createElement(
+                    'tbody',
+                    null,
+                    React.createElement(
+                        'tr',
+                        null,
+                        React.createElement(
+                            'th',
+                            null,
+                            'Codigo'
+                        ),
+                        React.createElement(
+                            'th',
+                            null,
+                            'Descripción'
+                        ),
+                        React.createElement(
+                            'th',
+                            { className: 'text-center' },
+                            'Existencia'
+                        ),
+                        React.createElement(
+                            'th',
+                            { className: 'text-center' },
+                            'Cantidad'
+                        ),
+                        React.createElement(
+                            'th',
+                            { className: 'text-center' },
+                            'Precio'
+                        ),
+                        React.createElement(
+                            'th',
+                            { className: 'text-center' },
+                            'Agregar'
+                        )
+                    ),
+                    products
+                )
+            )
+        );
+    }
+
+});
+
+module.exports = ProductList;
+
+},{"./ProductRow.jsx":156,"react":149}],156:[function(require,module,exports){
+var React = require('react');
+
+//props.product = {code: String, desc: String, stock: Integer, price: Decimal}
+var ProductRow = React.createClass({
+    displayName: "ProductRow",
+
+
+    render: function () {
+        return React.createElement(
+            "tr",
+            null,
+            React.createElement(
+                "td",
+                null,
+                this.props.product.code
+            ),
+            React.createElement(
+                "td",
+                null,
+                this.props.product.desc
+            ),
+            React.createElement(
+                "td",
+                { className: "text-center" },
+                this.props.product.stock
+            ),
+            React.createElement(
+                "td",
+                { className: "text-center" },
+                React.createElement("input", { className: "productQty", type: "Number" })
+            ),
+            React.createElement(
+                "td",
+                { className: "productPrice" },
+                this.props.product.price
+            ),
+            React.createElement(
+                "td",
+                { className: "text-center" },
+                React.createElement("span", { className: "fa fa-cart-plus" })
+            )
+        );
+    }
+
+});
+
+module.exports = ProductRow;
+
+},{"react":149}],157:[function(require,module,exports){
+var React = require('react');
+var ProductList = require('./ProductList.jsx');
+var SearchFilters = require('./SearchFilters.jsx');
+var products = require('../../mockData.js').products; //Remove when conected to web service
+
+var ProductSearch = React.createClass({
+    displayName: 'ProductSearch',
+
+
+    //We load products as props to save the original products data for filtering
+    getDefaultProps: function () {
+        return {
+            products: products
+        };
+    },
+
+    //The products state changes upon filtering
+    getInitialState: function () {
+        return {
+            products: products
+        };
+    },
+
+    //This functions is passed to the corresponding childs to perform queries.
+    filterProducts: function (q) {
+        var query = new RegExp(q, 'gi');
+        var products = this.props.products.filter(function (product) {
+            return product.desc.match(query) || product.code.toString().match(query);
+        });
+
+        this.setState({ products: products });
+    },
+
+    render: function () {
+        return React.createElement(
+            'div',
+            { className: 'componentWrap' },
+            React.createElement(
+                'h3',
+                null,
+                'Lista de Productos'
+            ),
+            React.createElement(SearchFilters, { filter: this.filterProducts }),
+            React.createElement(ProductList, { products: this.state.products })
+        );
+    }
+
+});
+
+module.exports = ProductSearch;
+
+},{"../../mockData.js":161,"./ProductList.jsx":155,"./SearchFilters.jsx":159,"react":149}],158:[function(require,module,exports){
+var React = require('react');
+var PropTypes = React.PropTypes;
+
+var SearchBox = React.createClass({
+    displayName: 'SearchBox',
+
+    getInitialState: function () {
+        return {
+            value: ''
+        };
+    },
+
+    onChange: function (e) {
+        this.setState({ value: e.target.value });
+        this.props.filter(e.target.value);
+    },
+
+    render: function () {
+        return React.createElement(
+            'span',
+            null,
+            React.createElement(
+                'label',
+                null,
+                'Busqueda: '
+            ),
+            ' ',
+            React.createElement('input', { onChange: this.onChange,
+                value: this.state.value,
+                type: 'text', size: '10',
+                placeholder: 'Filtro...' })
+        );
+    }
+
+});
+
+module.exports = SearchBox;
+
+},{"react":149}],159:[function(require,module,exports){
+var React = require('react');
+var PropTypes = React.PropTypes;
+var SearchBox = require('./SearchBox.jsx');
+var CategoryList = require('./CategoryList.jsx');
+var categories = ['Aceite', 'Petroleo', 'Moto', 'Filtros', 'Frenos'];
+var SearchFilters = React.createClass({
+    displayName: 'SearchFilters',
+
+
+    render: function () {
+        return React.createElement(
+            'div',
+            { className: 'filtering' },
+            React.createElement(SearchBox, { filter: this.props.filter }),
+            '  ',
+            React.createElement(CategoryList, { filter: this.props.filter, categories: categories })
+        );
+    }
+
+});
+
+module.exports = SearchFilters;
+
+},{"./CategoryList.jsx":154,"./SearchBox.jsx":158,"react":149}],160:[function(require,module,exports){
+var React = require('react');
 var ReactDOM = require('react-dom');
 var HistorialPedidos = require('./components/HistorialPedidos/HistorialPedidos.jsx');
+var ProductsSearch = require('./components/ProductsSearch/ProductsSearch.jsx');
 
-ReactDOM.render(React.createElement(HistorialPedidos, null), document.getElementById('reactContainer'));
+ReactDOM.render(React.createElement(ProductsSearch, null), document.getElementById('reactContainer'));
 
-},{"./components/HistorialPedidos/HistorialPedidos.jsx":150,"react":149,"react-dom":29}],155:[function(require,module,exports){
-var pedidos = [{
+},{"./components/HistorialPedidos/HistorialPedidos.jsx":150,"./components/ProductsSearch/ProductsSearch.jsx":157,"react":149,"react-dom":29}],161:[function(require,module,exports){
+var data = {
+  pedidos: [{
     id: 1,
     cliente: 'Repuestos Los Gallegos',
     fecha: '2015-20-01',
     total: '45.000,00',
     detallePedido: [{
-        code: '00xx32',
-        desc: 'Bujia Champion 2567',
-        qty: 6,
-        price: 500.01
+      code: '00xx32',
+      desc: 'Bujia Champion 2567',
+      qty: 6,
+      price: 500.01
     }]
-}, {
+  }, {
     id: 2,
     cliente: 'Repuestos Los Gallegos',
     fecha: '2015-20-01',
     total: '45.000,00',
     detallePedido: [{
-        code: '00xx32',
-        desc: 'Bujia Champion 2567',
-        qty: 6,
-        price: 500.01
+      code: '00xx32',
+      desc: 'Bujia Champion 2567',
+      qty: 6,
+      price: 500.01
     }]
-}, {
+  }, {
     id: 3,
     cliente: 'Repuestos Los Gallegos',
     fecha: '2015-20-01',
     total: '45.000,00',
     detallePedido: [{
-        code: '00xx32',
-        desc: 'Bujia Champion 2567',
-        qty: 6,
-        price: 500.00
+      code: '00xx32',
+      desc: 'Bujia Champion 2567',
+      qty: 6,
+      price: 500.00
     }, {
-        code: '234234',
-        desc: 'Rele de Arranque Sierra',
-        qty: 2,
-        price: 2343.45
+      code: '234234',
+      desc: 'Rele de Arranque Sierra',
+      qty: 2,
+      price: 2343.45
     }]
-}, {
+  }, {
     id: 4,
     cliente: 'Repuestos Los Gallegos',
     fecha: '2015-20-01',
     total: '45.000,00',
     detallePedido: [{
-        code: '00xx32',
-        desc: 'Bujia Champion 2567',
-        qty: 6,
-        price: 500.00
+      code: '00xx32',
+      desc: 'Bujia Champion 2567',
+      qty: 6,
+      price: 500.00
     }]
-}];
+  }],
 
-module.exports = pedidos;
+  products: [{
+    "price": "2572.97",
+    "stock": 374,
+    "desc": "Limpiador",
+    "code": 7648
+  }, {
+    "price": "1681.62",
+    "stock": 202,
+    "desc": "Caucho",
+    "code": 8088
+  }, {
+    "price": "3144.07",
+    "stock": 283,
+    "desc": "Aceite",
+    "code": 2332
+  }, {
+    "price": "3294.53",
+    "stock": 365,
+    "desc": "Filtros",
+    "code": 6436
+  }, {
+    "price": "2286.57",
+    "stock": 70,
+    "desc": "Bujia",
+    "code": 5861
+  }, {
+    "price": "4752.15",
+    "stock": 7,
+    "desc": "Bujia",
+    "code": 4245
+  }, {
+    "price": "2181.76",
+    "stock": 79,
+    "desc": "Caucho",
+    "code": 9603
+  }, {
+    "price": "2361.02",
+    "stock": 261,
+    "desc": "Bujia",
+    "code": 9149
+  }, {
+    "price": "3998.6",
+    "stock": 134,
+    "desc": "Spray",
+    "code": 2322
+  }, {
+    "price": "2258.16",
+    "stock": 420,
+    "desc": "Spray",
+    "code": 7066
+  }, {
+    "price": "2053.47",
+    "stock": 411,
+    "desc": "Aceite",
+    "code": 8021
+  }, {
+    "price": "1434.94",
+    "stock": 92,
+    "desc": "Limpiador",
+    "code": 3790
+  }, {
+    "price": "2731.71",
+    "stock": 39,
+    "desc": "Aceite",
+    "code": 4583
+  }, {
+    "price": "1362.03",
+    "stock": 471,
+    "desc": "Spray",
+    "code": 4266
+  }, {
+    "price": "3868.73",
+    "stock": 493,
+    "desc": "Limpiador",
+    "code": 8061
+  }]
+};
 
-},{}]},{},[154]);
+module.exports = data;
+
+},{}]},{},[160]);
