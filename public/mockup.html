@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>mOCKUPS</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+  
+  </head>
+  <body>
+    <div class="container">
+
+
+
+
+
+      <div class="table">
+      <table class="table">
+        <thead>
+        <th>Pedido</th><th>Cliente</th><th>Fecha</th><th>Total</th>
+        </thead>
+        <tbody>
+          <tr class="pedido" id="pedido10">
+            <td>10</td><td>Repuestos Los GAllegos</td><td>15/02/2016</td><td>45.000</td>
+            <tr>
+
+                <td id="detail10" style="" class="hidden  animated zoomIn" colspan="4">
+                  <div class="table-responsive">
+                  <table  class="table well">
+                    <th>Codigo</th><th>Descripcion</th><th>Cantidad</th><th>Subtotal</th>
+                    <tr>
+                      <td>1234234</td><td>Pote 20w50 PDV</td><td contenteditable="true">120<td>15.000</td>
+                    </tr>
+                    <tr>
+                      <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
+                    </tr>
+                    <tr>
+                      <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
+                    </tr>
+                    <tr>
+                      <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
+                    </tr>
+                  </table>
+                  </div>
+              </td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr class="pedido" id="pedido10">
+              <td>10</td><td>Repuestos Los GAllegos</td><td>15/02/2016</td><td>45.000</td>
+              <tr>
+                  <td id="detail10" style="" class="hidden  animated zoomIn" colspan="4">
+                    <div class="table-responsive">
+                    <table  class="table well">
+                      <th>Codigo</th><th>Descripcion</th><th>Cantidad</th><th>Subtotal</th>
+                      <tr>
+                        <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
+                      </tr>
+                      <tr>
+                        <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
+                      </tr>
+                      <tr>
+                        <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
+                      </tr>
+                      <tr>
+                        <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
+                      </tr>
+                    </table>
+                    </div>
+                </td>
+              </tr>
+
+          </tr>
+
+        </tbody>
+
+
+      </table>
+</div>
+
+
+    <script src="js/jquery-1.12.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+
+
+
+    <script type="text/javascript">
+      var showing = true;
+      $('#pedido10').click(function(e){
+        showing ? $('#detail10').addClass('hidden') : $('#detail10').removeClass('hidden')
+        showing = showing ? false : true
+
+      });
+
+    </script>
+  </body>
+</html>
