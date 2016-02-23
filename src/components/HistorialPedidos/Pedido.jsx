@@ -1,9 +1,10 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var classie = require('desandro-classie');
 
 var Pedido = React.createClass({
     onClick: function(e) {
-        $(e.target.parentNode.nextSibling).removeClass('hidden');
+        classie.toggle(e.target.parentNode.nextSibling.firstChild,'hidden');
     },
     render: function() {
         return (

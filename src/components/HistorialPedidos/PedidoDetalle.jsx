@@ -12,7 +12,7 @@ var PedidoDetalle = React.createClass({
 
         return (
             <tr>
-                <td id={'detail'+this.props.pedido.id} className="hidden  animated zoomIn" colSpan="4">
+                <td id={'detail'+this.props.pedido.id} className="hidden  animated zoomIn " colSpan="4">
                     <div className="table-responsive">
                         <table  className="table well">
                             <tbody>
