@@ -26,7 +26,7 @@ var ProductoDetalle = React.createClass({
     },
 
     render: function() {
-        //Table: Product Code - Description - Quantity - Unit Price
+        //Table: Product Code - Description - Quantity - Unit Price - Subtotal(qty*price)
         //Qty can be changed to update order
         return (
             <tr className="lineaPedido">

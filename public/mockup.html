@@ -5,93 +5,67 @@
     <title>mOCKUPS</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
-  
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <style>
+    .pSearchComponent{
+          padding:20px;
+          margin:20px;
+
+          background:white;
+          box-shadow:1px 2px 2px #ccc;
+          border:1px solid #ccc;
+    }
+  </style>
   </head>
   <body>
     <div class="container">
+      <div class="componentWrap">
+        <h3>Lista de Productos</h3>
+        <div class="filtering">
+          <label for="">Busqueda</label>
+          <input type="text" size="10" placeholder="Filtro...">
+          <label for="">Categorias</label>
+          <select name="" id="">
+            <option value="1">Lubricantes</option>
+            <option value="2">Filtros</option>
+            <option value="3">Champu</option>
+          </select>
+        </div>
 
-
-
-
-
-      <div class="table">
-      <table class="table">
-        <thead>
-        <th>Pedido</th><th>Cliente</th><th>Fecha</th><th>Total</th>
-        </thead>
-        <tbody>
-          <tr class="pedido" id="pedido10">
-            <td>10</td><td>Repuestos Los GAllegos</td><td>15/02/2016</td><td>45.000</td>
-            <tr>
-
-                <td id="detail10" style="" class="hidden  animated zoomIn" colspan="4">
-                  <div class="table-responsive">
-                  <table  class="table well">
-                    <th>Codigo</th><th>Descripcion</th><th>Cantidad</th><th>Subtotal</th>
-                    <tr>
-                      <td>1234234</td><td>Pote 20w50 PDV</td><td contenteditable="true">120<td>15.000</td>
-                    </tr>
-                    <tr>
-                      <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
-                    </tr>
-                    <tr>
-                      <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
-                    </tr>
-                    <tr>
-                      <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
-                    </tr>
-                  </table>
-                  </div>
-              </td>
-            </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <tr class="pedido" id="pedido10">
-              <td>10</td><td>Repuestos Los GAllegos</td><td>15/02/2016</td><td>45.000</td>
+        <div class="productsTable table-responsive">
+          <table class="table">
+            <tbody>
               <tr>
-                  <td id="detail10" style="" class="hidden  animated zoomIn" colspan="4">
-                    <div class="table-responsive">
-                    <table  class="table well">
-                      <th>Codigo</th><th>Descripcion</th><th>Cantidad</th><th>Subtotal</th>
-                      <tr>
-                        <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
-                      </tr>
-                      <tr>
-                        <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
-                      </tr>
-                      <tr>
-                        <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
-                      </tr>
-                      <tr>
-                        <td>1234234</td><td>Pote 20w50 PDV</td><td>120</td><td>15.000</td>
-                      </tr>
-                    </table>
-                    </div>
-                </td>
+                <th>Codigo</th>
+                <th>Descripción</th>
+                <th class="text-center">Existencia</th>
+                <th class="text-center">Cantidad</th>
+                <th class="text-center">Precio</th>
+                <th class="text-center">Agregar</th>
               </tr>
+              <tr>
+                <td>2342315</td>
+                <td>Bujia Champion 2343</td>
+                <td class="text-center">10</td>
+                <td class="text-center"><input class="productQty" type="number"></td>
+                <td class="productPrice">200.00</td>
+                <td class="text-center"><span class="fa fa-cart-plus"></span></td>
+              </tr>
+              <tr>
+                <td>abc2345</td>
+                <td>Aceite 20w50 PDV</td>
+                <td class="text-center"  >400</td>
+                <td class="text-center"><input class="productQty" type="number"></td>
+                <td class="productPrice">87.54</td>
+                <td class="text-center"><span class="fa fa-cart-plus"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-          </tr>
-
-        </tbody>
-
-
-      </table>
-</div>
+    </div>
 
 
     <script src="js/jquery-1.12.0.min.js"></script>
@@ -101,12 +75,7 @@
 
 
     <script type="text/javascript">
-      var showing = true;
-      $('#pedido10').click(function(e){
-        showing ? $('#detail10').addClass('hidden') : $('#detail10').removeClass('hidden')
-        showing = showing ? false : true
 
-      });
 
     </script>
   </body>
