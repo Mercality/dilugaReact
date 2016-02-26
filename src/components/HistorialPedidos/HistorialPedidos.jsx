@@ -3,7 +3,7 @@ var PropTypes = React.PropTypes;
 var PedidoDetalle = require('./PedidoDetalle.jsx');
 var Pedido = require('./Pedido.jsx');
 
-var pedidos = require('../../mockData.js'); //Remove this when http service is set.
+var pedidos = require('../../mockData.js').pedidos; //Remove this when http service is set.
 
 var HistorialPedidos = React.createClass({
 
