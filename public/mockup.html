@@ -20,50 +20,27 @@
   </head>
   <body>
     <div class="container">
-      <div class="componentWrap">
-        <h3>Lista de Productos</h3>
-        <div class="filtering">
-          <label for="">Busqueda</label>
-          <input type="text" size="10" placeholder="Filtro...">
-          <label for="">Categorias</label>
-          <select name="" id="">
-            <option value="1">Lubricantes</option>
-            <option value="2">Filtros</option>
-            <option value="3">Champu</option>
-          </select>
-        </div>
 
-        <div class="productsTable table-responsive">
-          <table class="table">
-            <tbody>
-              <tr>
-                <th>Codigo</th>
-                <th>Descripción</th>
-                <th class="text-center">Existencia</th>
-                <th class="text-center">Cantidad</th>
-                <th class="text-center">Precio</th>
-                <th class="text-center">Agregar</th>
-              </tr>
-              <tr>
-                <td>2342315</td>
-                <td>Bujia Champion 2343</td>
-                <td class="text-center">10</td>
-                <td class="text-center"><input class="productQty" type="number"></td>
-                <td class="productPrice">200.00</td>
-                <td class="text-center"><span class="fa fa-cart-plus"></span></td>
-              </tr>
-              <tr>
-                <td>abc2345</td>
-                <td>Aceite 20w50 PDV</td>
-                <td class="text-center"  >400</td>
-                <td class="text-center"><input class="productQty" type="number"></td>
-                <td class="productPrice">87.54</td>
-                <td class="text-center"><span class="fa fa-cart-plus"></span></td>
-              </tr>
-            </tbody>
-          </table>
+
+
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Inicie Sesión</h2>
+        <label for="inputEmail" class="sr-only">Dirección de Email</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Correo Electrónico" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Recordarme
+          </label>
         </div>
-      </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
+      </form>
+
+
+
+
+
 
     </div>
 
