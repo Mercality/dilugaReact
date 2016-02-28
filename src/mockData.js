@@ -73,94 +73,203 @@ var data = {
 
 products: [
   {
-    "price": "2572.97",
-    "stock": 374,
-    "desc": "Limpiador",
-    "code": 7648
+    "code": 4595,
+    "desc": "Bujia",
+    "stock": 322,
+    "price": 4734
   },
   {
-    "price": "1681.62",
-    "stock": 202,
-    "desc": "Caucho",
-    "code": 8088
+    "code": 3043,
+    "desc": "Bujia",
+    "stock": 6,
+    "price": 4783
   },
   {
-    "price": "3144.07",
-    "stock": 283,
+    "code": 5475,
+    "desc": "Bujia",
+    "stock": 427,
+    "price": 2412
+  },
+  {
+    "code": 7007,
+    "desc": "Bujia",
+    "stock": 468,
+    "price": 3109
+  },
+  {
+    "code": 7846,
     "desc": "Aceite",
-    "code": 2332
+    "stock": 98,
+    "price": 1629
   },
   {
-    "price": "3294.53",
-    "stock": 365,
+    "code": 6888,
+    "desc": "Aceite",
+    "stock": 478,
+    "price": 3079
+  },
+  {
+    "code": 6226,
+    "desc": "Bujia",
+    "stock": 114,
+    "price": 2675
+  },
+  {
+    "code": 7728,
+    "desc": "Spray",
+    "stock": 400,
+    "price": 1331
+  },
+  {
+    "code": 7793,
+    "desc": "Caucho",
+    "stock": 87,
+    "price": 1178
+  },
+  {
+    "code": 6309,
+    "desc": "Caucho",
+    "stock": 447,
+    "price": 2247
+  },
+  {
+    "code": 2730,
+    "desc": "Limpiador",
+    "stock": 331,
+    "price": 4460
+  },
+  {
+    "code": 4843,
     "desc": "Filtros",
-    "code": 6436
+    "stock": 437,
+    "price": 2118
   },
   {
-    "price": "2286.57",
-    "stock": 70,
-    "desc": "Bujia",
-    "code": 5861
-  },
-  {
-    "price": "4752.15",
-    "stock": 7,
-    "desc": "Bujia",
-    "code": 4245
-  },
-  {
-    "price": "2181.76",
-    "stock": 79,
+    "code": 8890,
     "desc": "Caucho",
-    "code": 9603
+    "stock": 149,
+    "price": 2113
   },
   {
-    "price": "2361.02",
-    "stock": 261,
+    "code": 8508,
+    "desc": "Limpiador",
+    "stock": 380,
+    "price": 2177
+  },
+  {
+    "code": 7465,
+    "desc": "Limpiador",
+    "stock": 337,
+    "price": 2598
+  }
+],
+
+
+cart: [
+  {
+    "code": 5485,
+    "desc": "Spray",
+    "qty": 252,
+    "price": "4880.03",
+    "subtotal": "81464.33"
+  },
+  {
+    "code": 4907,
+    "desc": "Spray",
+    "qty": 380,
+    "price": "3420.43",
+    "subtotal": "78597.73"
+  },
+  {
+    "code": 6311,
+    "desc": "Limpiador",
+    "qty": 425,
+    "price": "1083.52",
+    "subtotal": "48597.15"
+  },
+  {
+    "code": 8604,
+    "desc": "Filtros",
+    "qty": 292,
+    "price": "2661.51",
+    "subtotal": "5953.54"
+  },
+  {
+    "code": 7406,
+    "desc": "Caucho",
+    "qty": 158,
+    "price": "1442.91",
+    "subtotal": "49418.06"
+  },
+  {
+    "code": 8434,
+    "desc": "Aceite",
+    "qty": 217,
+    "price": "1615.36",
+    "subtotal": "81443.52"
+  },
+  {
+    "code": 3300,
+    "desc": "Spray",
+    "qty": 10,
+    "price": "3113.88",
+    "subtotal": "6162.32"
+  },
+  {
+    "code": 9421,
+    "desc": "Limpiador",
+    "qty": 75,
+    "price": "2626.06",
+    "subtotal": "27899.54"
+  },
+  {
+    "code": 6434,
     "desc": "Bujia",
-    "code": 9149
+    "qty": 327,
+    "price": "3365.78",
+    "subtotal": "30424.26"
   },
   {
-    "price": "3998.6",
-    "stock": 134,
-    "desc": "Spray",
-    "code": 2322
-  },
-  {
-    "price": "2258.16",
-    "stock": 420,
-    "desc": "Spray",
-    "code": 7066
-  },
-  {
-    "price": "2053.47",
-    "stock": 411,
+    "code": 5517,
     "desc": "Aceite",
-    "code": 8021
+    "qty": 207,
+    "price": "1703.24",
+    "subtotal": "95908.35"
   },
   {
-    "price": "1434.94",
-    "stock": 92,
+    "code": 2319,
     "desc": "Limpiador",
-    "code": 3790
+    "qty": 290,
+    "price": "4238.28",
+    "subtotal": "99324.48"
   },
   {
-    "price": "2731.71",
-    "stock": 39,
-    "desc": "Aceite",
-    "code": 4583
+    "code": 9889,
+    "desc": "Filtros",
+    "qty": 437,
+    "price": "2148.45",
+    "subtotal": "66364.61"
   },
   {
-    "price": "1362.03",
-    "stock": 471,
+    "code": 9876,
+    "desc": "Caucho",
+    "qty": 24,
+    "price": "1929.6",
+    "subtotal": "39328.1"
+  },
+  {
+    "code": 6024,
+    "desc": "Limpiador",
+    "qty": 493,
+    "price": "2870.6",
+    "subtotal": "46990.13"
+  },
+  {
+    "code": 6203,
     "desc": "Spray",
-    "code": 4266
-  },
-  {
-    "price": "3868.73",
-    "stock": 493,
-    "desc": "Limpiador",
-    "code": 8061
+    "qty": 301,
+    "price": "1956.07",
+    "subtotal": "83681.76"
   }
 ]
 };
