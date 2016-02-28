@@ -10,7 +10,7 @@ var CartItem = React.createClass({
         //Check for every of the objects properties and generate a column for
         //each one, the object must be already filtered and ordered as desired.
         for (var key in this.props.product) {
-            columns.push(<ItemColumn value={this.props.product[key]} itemType={this.props.itemType} isHeader={this.props.isHeader} />);
+            columns.push(<ItemColumn key={this.props.product[key]+Date.now()/3600} value={this.props.product[key]} itemType={this.props.itemType} isHeader={this.props.isHeader} />);
         }
 
         if (this.props.ItemType === 'table') {

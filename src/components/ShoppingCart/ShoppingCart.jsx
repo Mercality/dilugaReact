@@ -1,18 +1,26 @@
 var React = require('react');
 var CartItem = require('./CartItem.jsx');
-
 var CartInput = require('./CartInput.jsx');
+
+var addProps = require('../../services/addProperties.js');
 
 
 var ShoppingCart = React.createClass({
 
     render: function() {
+
         //Headers initialization
         var headers = '';
 
         //Get items according to product list.
-        var items = this.props.products.map(function(product) {
-            return <CartItem product={product} itemType={this.props.cartType} />
+        var items = this.props.products.map(function(product, index) {
+
+        if(typeof this.props.customProp === 'object') {
+            var cProp = this.props.customProp;
+            product = addProps(product, cProp.pos, cProp.name, <CartInput className={cProp.className} inputType={cProp.type} content={cProp.content} />);
+        }
+
+            return <CartItem key={product.code+index} product={product} itemType={this.props.cartType} />
         }.bind(this));
 
         //If headers are set, generate the headers line.

@@ -15,14 +15,14 @@ var CartInput = React.createClass({
             return (
                 <a className={this.props.className}
                    href={this.props.href}
-                   onClick={this.this.props.onClick}>{this.props.content}</a>
+                   onClick={this.props.onClick}>{this.props.content}</a>
             );
         }
 
         if (this.props.inputType === 'span') {
             return (
                 <span className={this.props.className}
-                      onClick={this.this.props.onClick}>{this.props.content}</span>
+                      onClick={this.props.onClick}>{this.props.content}</span>
             );
         }
 
@@ -36,7 +36,7 @@ var CartInput = React.createClass({
         if (this.props.inputType === 'button') {
             return (
                 <button className={this.props.className}
-                        onClick={this.this.props.onClick}>{this.props.content}</button>
+                        onClick={this.props.onClick}>{this.props.content}</button>
             );
         }
 

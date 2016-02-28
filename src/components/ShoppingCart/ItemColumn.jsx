@@ -12,6 +12,7 @@ var ItemColumn = React.createClass({
 
         if (this.props.itemType === 'table') {
             return (
+
                 <td>{this.props.value}</td>
             );
         }

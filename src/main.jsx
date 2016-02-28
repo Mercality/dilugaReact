@@ -5,8 +5,9 @@ var ProductsSearch = require('./components/ProductsSearch/ProductsSearch.jsx');
 var LoginForm = require('./components/Forms/LoginForm.jsx');
 var ShoppingCart = require('./components/ShoppingCart/ShoppingCart.jsx');
 
-var addProps = require('./services/addProperties.js');
-var CartInput = <CartInput className='someClass' inputType='button'  />
+
+
+
 var products = require('./mockData.js').cart;
 
 var headers = [
@@ -16,6 +17,15 @@ var headers = [
     'Precio',
     'Subtotal',
 ];
-products = addProps(products, 'subtotal', 'age', CartInput);
-console.log(products);
-ReactDOM.render(<ShoppingCart cartType='table' headers={headers} products={products} />, document.getElementById('reactContainer'));
+
+var customProp = {
+    pos: "subtotal",
+    name: "input",
+    className: "fa fa-times",
+    type: "span",
+    content: "",
+}
+
+
+
+ReactDOM.render(<ShoppingCart cartType='table' headers={headers} customProp={customProp} products={products} />, document.getElementById('reactContainer'));
