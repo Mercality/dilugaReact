@@ -1,15 +1,14 @@
 var React = require('react');
-var PropTypes = React.PropTypes;
 
 var SearchBox = React.createClass({
     getInitialState: function() {
-        return {
-            value:''
-        };
+        return {value:''};
     },
 
     onChange: function(e) {
         this.setState({value:e.target.value});
+
+        //Filters the objects in parent Element
         this.props.filter(e.target.value);
     },
 

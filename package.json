@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "watchify src/main.jsx -v -t [ babelify --presets [ react ] ] -o public/js/main.js",
-    "dist": "browserify public/js/main.js | uglifyjs > public/js/bundle.js"
+    "dist": "uglifyjs public/js/main.js --compress -o public/js/main.min.js"
   },
   "author": "",
   "license": "ISC",
