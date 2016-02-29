@@ -5,5 +5,5 @@ var ProductsSearch = require('./components/ProductsSearch/ProductsSearch.jsx');
 var LoginForm = require('./components/Forms/LoginForm.jsx');
 var ShoppingCart = require('./components/ShoppingCart/ShoppingCart.jsx');
 
-console.log('yes');    
-ReactDOM.render(<ShoppingCart />, document.getElementById('reactContainer'));
+console.log('yes');
+ReactDOM.render(<HistorialPedidos />, document.getElementById('reactContainer'));
