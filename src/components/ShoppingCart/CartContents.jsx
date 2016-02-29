@@ -13,8 +13,10 @@ var CartContents = React.createClass({
         var headers = '';
 
         //Get items according to product list.
+            
         var items = this.props.products.map(function(product, index) {
 
+        //Add custom properties if they were passed in.
         if(typeof this.props.customProp === 'object') {
             var cProp = this.props.customProp;
             product = addProps(product, cProp.pos, cProp.name, <CartInput className={cProp.className} inputType={cProp.type} content={cProp.content} />);
