@@ -5,8 +5,9 @@ var ItemColumn = React.createClass({
     render: function() {
 
         if (this.props.itemType === 'table' && this.props.isHeader === true) {
+            var width = this.props.value.width > 0 ? {width:this.props.value.width} : {}
             return (
-                <th>{this.props.value}</th>
+                <th style={width}>{this.props.value.title}</th>
             );
         }
 

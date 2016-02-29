@@ -4,6 +4,7 @@ var HistorialPedidos = require('./components/HistorialPedidos/HistorialPedidos.j
 var ProductsSearch = require('./components/ProductsSearch/ProductsSearch.jsx');
 var LoginForm = require('./components/Forms/LoginForm.jsx');
 var ShoppingCart = require('./components/ShoppingCart/ShoppingCart.jsx');
+var Layout = require('./components/AdminPanel/Layout.jsx');
 
 console.log('yes');
-ReactDOM.render(<HistorialPedidos />, document.getElementById('reactContainer'));
+ReactDOM.render(<Layout />, document.getElementById('reactContainer'));

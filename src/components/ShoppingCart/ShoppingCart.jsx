@@ -3,13 +3,12 @@ var CartContents = require('./CartContents.jsx');
 var Summary = require('./Summary.jsx');
 //This has to be set from outside.
 var products = require('../../mockData.js').cart;
-console.log(products);
 var headers = [
-    'Codigo',
-    'Descripción',
-    'Cantidad',
-    'Precio',
-    'Subtotal',
+    {title:'Codigo', width:0},
+    {title:'Descripción', width:0},
+    {title:'Cantidad', width:0},
+    {title:'Precio', width:0},
+    {title:'Subtotal', width:0},
 ];
 
 var customProp = {

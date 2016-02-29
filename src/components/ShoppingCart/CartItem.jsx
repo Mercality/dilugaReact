@@ -6,11 +6,17 @@ var CartItem = React.createClass({
     render: function() {
 
         var columns = [];
-
         //Check for every of the objects properties and generate a column for
         //each one, the object must be already filtered and ordered as desired.
         for (var key in this.props.product) {
-            columns.push(<ItemColumn key={this.props.product[key]+Date.now()/3600} value={this.props.product[key]} itemType={this.props.itemType} isHeader={this.props.isHeader} />);
+            if(this.props.product[key].hasOwnProperty('width')) {
+                var value = this.props.product[key];
+            } else {
+                var value = this.props.product[key];
+            }
+
+
+            columns.push(<ItemColumn key={Math.random()} value={value} itemType={this.props.itemType} isHeader={this.props.isHeader} />);
         }
 
         if (this.props.ItemType === 'table') {
@@ -23,7 +29,7 @@ var CartItem = React.createClass({
 
         if (this.props.itemType === 'div') {
             return (
-                <div>
+                <div className="componentWrap">
                     {columns}
                 </div>
             );
