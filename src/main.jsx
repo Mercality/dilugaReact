@@ -7,4 +7,4 @@ var ShoppingCart = require('./components/ShoppingCart/ShoppingCart.jsx');
 var Layout = require('./components/AdminPanel/Layout.jsx');
 var Routes = require('./Routes.jsx');
 console.log('yes');
-ReactDOM.render(<Routes />, document.getElementById('reactContainer'));
+ReactDOM.render(Routes, document.getElementById('reactContainer'));

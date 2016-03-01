@@ -93,3 +93,9 @@ body, .container-fluid {
     border:1px solid #ccc;
     width:260px;
   }
+
+
+/********************Admin PAnel ******************************************/
+ul.nav.navbar-nav.side-nav, nav.navbar.navbar-inverse.navbar-fixed-top {
+  box-shadow: 4px 4px 2px grey;
+}

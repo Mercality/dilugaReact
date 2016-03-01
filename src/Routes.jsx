@@ -20,4 +20,6 @@ var Routes  = (
             <Route path="/pedido/nuevo" component={NuevoPedido} />
         </Route>
     </Router>
-)
+);
+
+module.exports = Routes;
