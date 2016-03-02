@@ -5,7 +5,7 @@ var ProductList = React.createClass({
 
     render: function() {
         var products = this.props.products.map(function(product) {
-            return <ProductRow product={product} />
+            return <ProductRow key={product.code+Date.now()/3600} product={product} />
         });
         return (
             <div className="productsTable table-responsive">

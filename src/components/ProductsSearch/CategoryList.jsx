@@ -9,7 +9,7 @@ var CategoryList = React.createClass({
     render: function() {
 
         var options = this.props.categories.map(function(category) {
-            return <option value={category}>{category}</option>
+            return <option key={category+Date.now()/3600} value={category}>{category}</option>
         });
 
         return (
