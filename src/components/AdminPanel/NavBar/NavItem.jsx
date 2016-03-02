@@ -5,8 +5,13 @@ var PropTypes = React.PropTypes;
 var NavItem = React.createClass({
 
     render: function() {
+        var url = document.URL;
+        if (url.substr(url.lastIndexOf('#')+1) === this.props.href) {
+            var className = 'active';
+        }
+
         return (
-            <li className={this.props.className}>
+            <li onClick={this.onClick} className={className}>
                 <Link to={this.props.href}><i className={this.props.icon}></i> {this.props.text}</Link>
             </li>
         );
