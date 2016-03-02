@@ -16,7 +16,7 @@ var UserMenu = React.createClass({
                                                 <img className="media-object" src="http://placehold.it/50x50" alt="" />
                                             </span>
                                             <div className="media-body">
-                                                <h5 className="media-heading"><strong>John Smith</strong>
+                                                <h5 className="media-heading"><strong>Ramon Ledezma</strong>
                                                 </h5>
                                                 <p className="small text-muted"><i className="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                                 <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -31,7 +31,7 @@ var UserMenu = React.createClass({
                                                 <img className="media-object" src="http://placehold.it/50x50" alt="" />
                                             </span>
                                             <div className="media-body">
-                                                <h5 className="media-heading"><strong>John Smith</strong>
+                                                <h5 className="media-heading"><strong>Ramon Ledezma</strong>
                                                 </h5>
                                                 <p className="small text-muted"><i className="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                                 <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -46,7 +46,7 @@ var UserMenu = React.createClass({
                                                 <img className="media-object" src="http://placehold.it/50x50" alt="" />
                                             </span>
                                             <div className="media-body">
-                                                <h5 className="media-heading"><strong>John Smith</strong>
+                                                <h5 className="media-heading"><strong>Ramon Ledezma</strong>
                                                 </h5>
                                                 <p className="small text-muted"><i className="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                                 <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -87,7 +87,7 @@ var UserMenu = React.createClass({
                             </ul>
                         </li>
                         <li className="dropdown">
-                            <a href="#" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-user"></i> John Smith <b className="caret"></b></a>
+                            <a href="#" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-user"></i> Ramon Ledezma <b className="caret"></b></a>
                             <ul className="dropdown-menu">
                                 <li>
                                     <a href="#"><i className="fa fa-fw fa-user"></i> Profile</a>

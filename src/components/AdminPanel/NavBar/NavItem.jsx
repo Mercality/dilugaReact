@@ -1,4 +1,5 @@
 var React = require('react');
+var Link = require('react-router').Link;
 var PropTypes = React.PropTypes;
 
 var NavItem = React.createClass({
@@ -6,7 +7,7 @@ var NavItem = React.createClass({
     render: function() {
         return (
             <li className={this.props.className}>
-                <a href={this.props.href}><i className={this.props.icon}></i> {this.props.text}</a>
+                <Link to={this.props.href}><i className={this.props.icon}></i> {this.props.text}</Link>
             </li>
         );
     }

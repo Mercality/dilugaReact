@@ -1,4 +1,5 @@
 var React = require('react');
+var Link = require('react-router').Link;
 var NavItem = require('./NavItem.jsx');
 var UserMenu = require('./UserMenu.jsx');
 var NavBar = React.createClass({
@@ -14,15 +15,15 @@ var NavBar = React.createClass({
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a style={{padding:4}} className="navbar-brand" href="index.html"><img style={{maxWidth:100}} src="images/logo.png" alt=""/></a>
+                        <Link style={{padding:4}} className="navbar-brand" to="/"><img style={{maxWidth:100}} src="images/logo.png" alt=""/></Link>
                     </div>
 
                     <UserMenu />
 
                     <div className="collapse navbar-collapse navbar-ex1-collapse">
                         <ul className="nav navbar-nav side-nav">
-                            <NavItem className="active" href="index.html" icon="fa fa-w fa-history" text="Historial de Pedidos" />
-                            <NavItem className="" href="#" icon="fa fa-w fa-pencil" text="Tomar Pedido" />
+                            <NavItem className="active" href="historial" icon="fa fa-w fa-history" text="Historial de Pedidos" />
+                            <NavItem className="" href="pedido/nuevo" icon="fa fa-w fa-pencil" text="Tomar Pedido" />
                             <NavItem className="" href="#" icon="fa fa-w fa-facebook" text="Page" />
                             <NavItem className="" href="#" icon="fa fa-w fa-table" text="Tables" />
                         </ul>
