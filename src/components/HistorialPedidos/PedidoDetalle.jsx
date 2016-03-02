@@ -7,7 +7,7 @@ var PedidoDetalle = React.createClass({
 
     render: function() {
         var productos = this.props.pedido.detallePedido.map(function(producto) {
-            return <ProductoDetalle key={producto.code} code={producto.code} desc={producto.desc} qty={producto.qty} price={producto.price} />
+            return <ProductoDetalle key={producto.code+Date.now()/3600} code={producto.code} desc={producto.desc} qty={producto.qty} price={producto.price} />
         });
 
         return (

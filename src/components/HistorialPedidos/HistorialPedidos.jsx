@@ -12,11 +12,23 @@ var HistorialPedidos = React.createClass({
     },
 
     render: function() {
+
         var pedidos = this.props.pedidos.map(function(pedido) {
-            return <div><Pedido key={pedido.id+'p'} pedido={pedido} />
-                   <PedidoDetalle key={pedido.id} pedido={pedido} /></div>
+            return (
+                    <Pedido key={pedido.id+Date.now()/3600} pedido={pedido} />
+            )
         });
 
+        var detalles = this.props.pedidos.map(function(pedido) {
+            return (
+                    <PedidoDetalle key={Math.random()}  pedido={pedido} />
+            )
+        });
+        var length = pedidos.length;
+        for (var i = 0; i <= length-1; i++) {
+            pedidos.splice(i+1, 0, detalles[i]);
+        }
+        console.log(pedidos);
         return (
             <div className="componentWrap">
                 <h3>Ultimos Pedidos</h3>
