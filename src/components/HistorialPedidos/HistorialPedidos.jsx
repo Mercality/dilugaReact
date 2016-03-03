@@ -25,8 +25,10 @@ var HistorialPedidos = React.createClass({
             )
         });
         var length = pedidos.length;
+        var j = 1;
         for (var i = 0; i <= length-1; i++) {
-            pedidos.splice(i+1, 0, detalles[i]);
+            pedidos.splice(i+j, 0, detalles[i]);
+            j++;
         }
         console.log(pedidos);
         return (
