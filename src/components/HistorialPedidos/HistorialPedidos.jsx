@@ -30,7 +30,7 @@ var HistorialPedidos = React.createClass({
             pedidos.splice(i+j, 0, detalles[i]);
             j++;
         }
-        console.log(pedidos);
+
         return (
             <div className="componentWrap">
                 <h3>Ultimos Pedidos</h3>
