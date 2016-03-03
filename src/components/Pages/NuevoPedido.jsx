@@ -3,6 +3,45 @@ var PropTypes = React.PropTypes;
 var ProductSearch = require('../ProductsSearch/ProductsSearch.jsx');
 var ShoppingCart = require('../ShoppingCart/ShoppingCart.jsx');
 var NuevoPedido = React.createClass({
+    getInitialState: function() {
+        return {
+            cartProducts:[],
+            totals: {
+                base: 0,
+                tax: 0,
+            },
+        };
+    },
+
+    addToCart: function(product) {
+        var actCart = this.state.cartProducts;
+
+        actCart.push(product);
+        this.setState({cartProducts: actCart});
+        this.updateSum(actCart);
+    },
+
+    removeFromCart: function(uuid) {
+        cartProducts = this.state.cartProducts;
+
+        newCart = cartProducts.filter(function(product){
+            return product['uuid'] !== uuid;
+        });
+
+        this.setState({cartProducts: newCart});
+        this.updateSum(newCart);
+    },
+
+    updateSum: function(cart) {
+        var totals = {base:0, tax: 0};
+
+        for (var i = 0; i <= cart.length-1; i++) {
+            totals.base = totals.base + cart[i].subtotal;
+        }
+
+        totals.tax = Math.round((totals.base*12/100),2);
+        this.setState({totals:totals});
+    },
 
     render: function() {
         return (
@@ -21,10 +60,10 @@ var NuevoPedido = React.createClass({
             </div>
             <div className="row">
                 <div className="col-sm-12">
-                    <ProductSearch />
+                    <ProductSearch addToCart={this.addToCart} />
                 </div>
                 <div className="col-sm-12">
-                    <ShoppingCart />
+                    <ShoppingCart products={this.state.cartProducts} removeFromCart={this.removeFromCart} totals={this.state.totals} />
                 </div>
             </div>
             </div>

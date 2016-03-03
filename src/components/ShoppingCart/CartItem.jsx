@@ -9,19 +9,23 @@ var CartItem = React.createClass({
         //Check for every of the objects properties and generate a column for
         //each one, the object must be already filtered and ordered as desired.
         for (var key in this.props.product) {
-            if(this.props.product[key].hasOwnProperty('width')) {
-                var value = this.props.product[key];
-            } else {
-                var value = this.props.product[key];
+
+            if (key !== 'uuid') {
+
+                if (this.props.product[key].hasOwnProperty('width')) {
+                    var value = this.props.product[key];
+                }
+
+                else {
+                    var value = this.props.product[key];
+                }
+                columns.push(<ItemColumn key={Math.random()} value={value} itemType={this.props.itemType} isHeader={this.props.isHeader} />);
             }
-
-
-            columns.push(<ItemColumn key={Math.random()} value={value} itemType={this.props.itemType} isHeader={this.props.isHeader} />);
         }
 
         if (this.props.ItemType === 'table') {
             return (
-                <tr>
+                <tr className="animated fadeIn">
                     {columns}
                 </tr>
             );

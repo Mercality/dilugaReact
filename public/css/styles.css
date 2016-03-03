@@ -99,3 +99,16 @@ body, .container-fluid {
 ul.nav.navbar-nav.side-nav, nav.navbar.navbar-inverse.navbar-fixed-top {
   box-shadow: 4px 4px 2px grey;
 }
+
+@media (max-width: 767px) {
+    .navbar-fixed-top {
+        position: relative;
+        top: auto;
+    }
+    .navbar-collapse {
+        max-height: none;
+    }
+    body {
+        margin: 0 !important;
+    }
+}

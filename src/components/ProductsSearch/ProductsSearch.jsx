@@ -15,7 +15,7 @@ var ProductSearch = React.createClass({
     //The products state changes upon filtering
     getInitialState: function() {
         return {
-            products:products
+            products:[]
         };
     },
 
@@ -26,7 +26,7 @@ var ProductSearch = React.createClass({
             return product.desc.match(query) || product.code.toString().match(query);
         });
 
-        this.setState({products:products});
+        this.setState({products:products.slice(0,5)});
     },
 
     render: function() {
@@ -34,7 +34,7 @@ var ProductSearch = React.createClass({
             <div className="componentWrap">
                 <h3>Lista de Productos</h3>
                 <SearchFilters filter={this.filterProducts} />
-                <ProductList products={this.state.products} />
+                <ProductList addToCart={this.props.addToCart} products={this.state.products} />
             </div>
         );
     }
