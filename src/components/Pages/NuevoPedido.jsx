@@ -2,7 +2,14 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var ProductSearch = require('../ProductsSearch/ProductsSearch.jsx');
 var ShoppingCart = require('../ShoppingCart/ShoppingCart.jsx');
+
+var Reflux = require('reflux');
+var Actions = require('../../reflux/Actions.jsx');
+var ProductStore = require('../../reflux/ProductStore.jsx');
+
 var NuevoPedido = React.createClass({
+    mixins: [Reflux.listenTo(ProductStore, 'onChange')],
+
     getInitialState: function() {
         return {
             cartProducts:[],
@@ -10,8 +17,22 @@ var NuevoPedido = React.createClass({
                 base: 0,
                 tax: 0,
             },
+            productList: [],
         };
     },
+
+    componentWillMount: function() {
+        Actions.getProducts();
+    },
+
+    componentDidMount: function() {
+
+    },
+
+    onChange: function(event, data) {
+        this.setState({productList: data});
+    },
+
 
     addToCart: function(product) {
         var actCart = this.state.cartProducts;
@@ -58,12 +79,26 @@ var NuevoPedido = React.createClass({
                     </ol>
                 </div>
             </div>
+
             <div className="row">
                 <div className="col-sm-12">
-                    <ProductSearch addToCart={this.addToCart} />
+
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-sm-12">
+
+                    <ProductSearch addToCart={this.addToCart}
+                         products={this.state.productList} />
+
                 </div>
                 <div className="col-sm-12">
-                    <ShoppingCart products={this.state.cartProducts} removeFromCart={this.removeFromCart} totals={this.state.totals} />
+
+                    <ShoppingCart products={this.state.cartProducts}
+                        removeFromCart={this.removeFromCart}
+                        totals={this.state.totals} />
+
                 </div>
             </div>
             </div>

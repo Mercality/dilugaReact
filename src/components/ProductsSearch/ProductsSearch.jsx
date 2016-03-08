@@ -1,16 +1,13 @@
 var React = require('react');
 var ProductList = require('./ProductList.jsx');
 var SearchFilters = require('./SearchFilters.jsx');
+var Q = require('q');
 var products = require('../../mockData.js').products; //Remove when conected to web service
 
 var ProductSearch = React.createClass({
 
     //We load products as props to save the original products data for filtering
-    getDefaultProps: function() {
-        return {
-            products:products
-        };
-    },
+
 
     //The products state changes upon filtering
     getInitialState: function() {
@@ -18,6 +15,8 @@ var ProductSearch = React.createClass({
             products:[]
         };
     },
+
+
 
     //This functions is passed to the corresponding childs to perform queries.
     filterProducts: function(q) {

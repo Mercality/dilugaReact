@@ -4,7 +4,7 @@ var data = {
             id:1,
             cliente: 'Repuestos Los Gallegos',
             fecha: '2015-20-01',
-            total: '45.000,00',
+            total: '128.657,69',
             detallePedido: [
                 {
                     code: '00xx32',
@@ -16,9 +16,9 @@ var data = {
         },
         {
             id:2,
-            cliente: 'Repuestos Los Gallegos',
-            fecha: '2015-20-01',
-            total: '45.000,00',
+            cliente: 'Estación de Servicio La Palma',
+            fecha: '2015-12-16',
+            total: '85.658,69',
             detallePedido: [
                 {
                     code: '00xx32',
@@ -30,9 +30,9 @@ var data = {
         },
         {
             id:3,
-            cliente: 'Repuestos Los Gallegos',
-            fecha: '2015-20-01',
-            total: '45.000,00',
+            cliente: 'Auto Repuestos Manguito, C.A.',
+            fecha: '2015-03-16',
+            total: '5.365,78',
             detallePedido: [
                 {
                     code: '00xx32',
@@ -50,9 +50,9 @@ var data = {
         },
         {
             id:4,
-            cliente: 'Repuestos Los Gallegos',
-            fecha: '2015-20-01',
-            total: '45.000,00',
+            cliente: 'Sucesion Nieto Causal',
+            fecha: '2016-23-12',
+            total: '35.213,54',
             detallePedido: [
                 {
                     code: '00xx32',
