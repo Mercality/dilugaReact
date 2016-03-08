@@ -1,4 +1,14 @@
 var data = {
+    clientes: [
+        {
+            codigo:108,
+            descripcion: 'Repuestos Los Gallegos, C.A.',
+            rif: 'J304008234',
+            direccion: 'Calle real',
+            telefono: '0412-4782431',
+
+        }
+    ],
     pedidos: [
         {
             id:1,

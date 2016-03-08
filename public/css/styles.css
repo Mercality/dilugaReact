@@ -112,3 +112,12 @@ ul.nav.navbar-nav.side-nav, nav.navbar.navbar-inverse.navbar-fixed-top {
         margin: 0 !important;
     }
 }
+
+
+.table-borderless tbody tr td, .table-borderless tbody tr th, .table-borderless thead tr th {
+    border: none;
+}
+
+.clientDetails {
+  margin-top:20px;
+}
