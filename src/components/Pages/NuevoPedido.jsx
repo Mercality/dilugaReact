@@ -66,7 +66,6 @@ var NuevoPedido = React.createClass({
     },
 
     clientSelected: function(selected) {
-        console.log('yes');
         this.setState({clientSelected: selected});
     },
 

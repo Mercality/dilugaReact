@@ -20,9 +20,7 @@ var ClientDetails = React.createClass({
 
     componentWillReceiveProps: function(nextProps) {
         /// MAX STACK ERROR
-        this.state.disableInput
-        ? nextProps.clientSelected(true)
-        : nextProps.clientSelected(false)
+
 
     },
 
@@ -33,6 +31,7 @@ var ClientDetails = React.createClass({
 
     clickEdit: function(e) {
         this.setState({client:{}, disableInput: false});
+        this.props.clientSelected(false)
     },
 
     onGetClient: function(e, client) {
@@ -45,6 +44,10 @@ var ClientDetails = React.createClass({
         } else {
             this.setState({client:client, errorMessage:'', disableInput:true});
         }
+
+        this.state.disableInput
+        ? this.props.clientSelected(true)
+        : this.props.clientSelected(false)
 
     },
 
