@@ -27,6 +27,14 @@ app.get('/productos', function(req, res) {
     res.send(data.products);
 });
 
+app.get('/clientes/:id', function(req, res) {
+    console.log("GET From SERVER");
+    var cliente = data.clientes.filter(function(client) {
+        return client['codigo'] == req.params.id;
+    });
+    res.send(cliente[0]);
+});
+
 app.post('/products', function(req, res) {
     var subscriber = req.body;
     subscriber.id = Math.floor(Date.now()/1000) + subscriber.email;

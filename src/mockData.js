@@ -2,10 +2,22 @@ var data = {
     clientes: [
         {
             codigo:108,
-            descripcion: 'Repuestos Los Gallegos, C.A.',
+            name: 'Repuestos Los Gallegos, C.A.',
             rif: 'J304008234',
-            direccion: 'Calle real',
-            telefono: '0412-4782431',
+            addr: 'Calle real',
+            phone: '0412-4782431',
+            email: 'sistemas@reloga.com.ve',
+            ultimo: '03 de marzo de 2016'
+
+        },
+        {
+            codigo:110,
+            name: 'Inversiones DONCAR 2012',
+            rif: 'J00045778',
+            addr: 'Calle orinoco cruce con acacia local 76',
+            phone: '0412-4782431',
+            email: 'carlos@doncar.com',
+            ultimo: '23 de junio de 2015'
 
         }
     ],
