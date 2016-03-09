@@ -27,7 +27,7 @@ app.get('/productos', function(req, res) {
     res.send(data.products);
 });
 
-app.post('/subscribers', function(req, res) {
+app.post('/products', function(req, res) {
     var subscriber = req.body;
     subscriber.id = Math.floor(Date.now()/1000) + subscriber.email;
 
