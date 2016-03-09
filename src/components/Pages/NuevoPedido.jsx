@@ -1,4 +1,5 @@
 var React = require('react');
+var ClientDetails = require('../ClientDetails/ClientDetails.jsx');
 var ProductSearch = require('../ProductsSearch/ProductsSearch.jsx');
 var ShoppingCart = require('../ShoppingCart/ShoppingCart.jsx');
 
@@ -17,6 +18,7 @@ var NuevoPedido = React.createClass({
                 tax: 0,
             },
             productList: [],
+            clientSelected:false,
         };
     },
 
@@ -63,7 +65,34 @@ var NuevoPedido = React.createClass({
         this.setState({totals:totals});
     },
 
+    clientSelected: function(selected) {
+        console.log('yes');
+        this.setState({clientSelected: selected});
+    },
+
     render: function() {
+
+        var productsAndCart = false;
+        if (this.state.clientSelected) {
+            productsAndCart = (
+                <div className="row">
+                    <div className="col-sm-12">
+
+                        <ProductSearch addToCart={this.addToCart}
+                             products={this.state.productList} />
+
+                    </div>
+                    <div className="col-sm-12">
+
+                        <ShoppingCart products={this.state.cartProducts}
+                            removeFromCart={this.removeFromCart}
+                            totals={this.state.totals} />
+
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div>
             <div className="row">
@@ -81,25 +110,12 @@ var NuevoPedido = React.createClass({
 
             <div className="row">
                 <div className="col-sm-12">
-
+                    <ClientDetails clientSelected={this.clientSelected}/>
                 </div>
             </div>
 
-            <div className="row">
-                <div className="col-sm-12">
+                {productsAndCart}
 
-                    <ProductSearch addToCart={this.addToCart}
-                         products={this.state.productList} />
-
-                </div>
-                <div className="col-sm-12">
-
-                    <ShoppingCart products={this.state.cartProducts}
-                        removeFromCart={this.removeFromCart}
-                        totals={this.state.totals} />
-
-                </div>
-            </div>
             </div>
         );
     }

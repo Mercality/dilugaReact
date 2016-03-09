@@ -18,6 +18,14 @@ var ClientDetails = React.createClass({
         };
     },
 
+    componentWillReceiveProps: function(nextProps) {
+        /// MAX STACK ERROR
+        this.state.disableInput
+        ? nextProps.clientSelected(true)
+        : nextProps.clientSelected(false)
+
+    },
+
     onSubmit: function(e, id) {
         e.preventDefault();
         Actions.getClient(id);
