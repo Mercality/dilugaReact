@@ -1,5 +1,4 @@
 var React = require('react');
-var PropTypes = React.PropTypes;
 
 var Details = React.createClass({
     getDefaultProps: function() {

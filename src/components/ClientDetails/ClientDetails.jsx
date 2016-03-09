@@ -6,8 +6,6 @@ var Reflux = require('reflux');
 var Actions = require('../../reflux/Actions.jsx');
 var ClientsStore = require('../../reflux/ClientsStore.jsx');
 
-var PropTypes = React.PropTypes;
-
 var ClientDetails = React.createClass({
 
     mixins: [Reflux.listenTo(ClientsStore, 'onGetClient')],

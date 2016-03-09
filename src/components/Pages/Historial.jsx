@@ -1,5 +1,4 @@
 var React = require('react');
-var PropTypes = React.PropTypes;
 var HistorialPedidos = require('../HistorialPedidos/HistorialPedidos.jsx');
 var LoginForm = require('../Forms/LoginForm.jsx');
 var Historial = React.createClass({

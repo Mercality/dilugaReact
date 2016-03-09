@@ -1,5 +1,4 @@
 var React = require('react');
-var PropTypes = React.PropTypes;
 var ProductSearch = require('../ProductsSearch/ProductsSearch.jsx');
 var ShoppingCart = require('../ShoppingCart/ShoppingCart.jsx');
 

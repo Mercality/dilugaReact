@@ -1,7 +1,6 @@
 var React = require('react');
 var ProductList = require('./ProductList.jsx');
 var SearchFilters = require('./SearchFilters.jsx');
-var Q = require('q');
 var products = require('../../mockData.js').products; //Remove when conected to web service
 
 var ProductSearch = React.createClass({

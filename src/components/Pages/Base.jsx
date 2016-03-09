@@ -1,6 +1,5 @@
 var React = require('react');
 var NavBar = require('../AdminPanel/NavBar/NavBar.jsx');
-var PropTypes = React.PropTypes;
 
 var Base = React.createClass({
 
