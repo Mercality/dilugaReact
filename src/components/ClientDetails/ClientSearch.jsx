@@ -16,7 +16,7 @@ var ClientSearch = React.createClass({
     },
 
     onSubmit: function(e) {
-        this.props.onSubmit(e, this.state.codigo);    
+        this.props.onSubmit(e, this.state.codigo);
     },
 
 
@@ -34,7 +34,9 @@ var ClientSearch = React.createClass({
                     <span style={{padding:0}} className="input-group-addon">
                         <button type="submit" className="btn" ><i className="fa fa-search"></i></button>
                     </span>
+
                 </form>
+                <span id="helpBlock" className="help-block">{this.props.errorMessage}</span>
             </div>
         );
     }

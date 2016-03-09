@@ -15,6 +15,7 @@ var ClientDetails = React.createClass({
     getInitialState: function() {
         return {
             client: {},
+            errorMessage: ''
         };
     },
 
@@ -24,7 +25,16 @@ var ClientDetails = React.createClass({
     },
 
     onGetClient: function(e, client) {
-        this.setState({client:client});
+
+        //Means there as an error on the request
+        if (client.hasOwnProperty('response')) {
+            this.setState({client:{}, errorMessage:'No se encontraron resultados'});
+
+        //A client was successfully retrieved.
+        } else {
+            this.setState({client:client, errorMessage:''});
+        }
+
     },
 
     render: function() {
@@ -49,7 +59,8 @@ var ClientDetails = React.createClass({
 
                     <div className="col-md-3 col-sm-4 col-xs-8">
 
-                        <ClientSearch onSubmit={this.onSubmit} />
+                        <ClientSearch onSubmit={this.onSubmit}
+                            errorMessage={this.state.errorMessage} />
 
                     </div>
 

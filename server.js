@@ -29,10 +29,28 @@ app.get('/productos', function(req, res) {
 
 app.get('/clientes/:id', function(req, res) {
     console.log("GET From SERVER");
+
     var cliente = data.clientes.filter(function(client) {
         return client['codigo'] == req.params.id;
     });
-    res.send(cliente[0]);
+
+    cliente = cliente[0];
+
+    var response = {
+        status:'',
+        json: cliente,
+        text:''
+    }
+    if (typeof cliente !== 'object') {
+        response.status = 404;
+        response.statusText = "Not Found";
+        res.status(404).send(response);
+    } else {
+        response.status = 200;
+        response.statusText = "Ok";
+        res.status(200).send(response);
+    }
+
 });
 
 app.post('/products', function(req, res) {
