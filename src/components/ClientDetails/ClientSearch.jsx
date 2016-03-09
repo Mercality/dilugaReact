@@ -17,8 +17,20 @@ var ClientSearch = React.createClass({
         this.props.onSubmit(e, this.state.codigo);
     },
 
+    clickEdit: function(e) {
+        this.props.clickEdit();
+    },
+
 
     render: function() {
+        var submit = false,
+        edit = false;
+
+        if (this.props.disable === false) {
+            submit = <button type="submit" className="btn" ><i className="fa fa-search"></i></button>
+        } else {
+            edit = <button type="button" onClick={this.clickEdit} className="btn" ><i className="fa fa-pencil"></i></button>
+        }
         return (
             <div className="input-group">
                 <form action="" onSubmit={this.onSubmit} style={{display:'inherit'}}>
@@ -30,7 +42,8 @@ var ClientSearch = React.createClass({
                         value={this.state.codigo}/>
 
                     <span style={{padding:0}} className="input-group-addon">
-                        <button type="submit" className="btn" ><i className="fa fa-search"></i></button>
+                        {submit}
+                        {edit}
                     </span>
 
                 </form>

@@ -13,13 +13,18 @@ var ClientDetails = React.createClass({
     getInitialState: function() {
         return {
             client: {},
-            errorMessage: ''
+            errorMessage: '',
+            disableInput: false,
         };
     },
 
     onSubmit: function(e, id) {
         e.preventDefault();
         Actions.getClient(id);
+    },
+
+    clickEdit: function(e) {
+        this.setState({client:{}, disableInput: false});
     },
 
     onGetClient: function(e, client) {
@@ -30,7 +35,7 @@ var ClientDetails = React.createClass({
 
         //A client was successfully retrieved.
         } else {
-            this.setState({client:client, errorMessage:''});
+            this.setState({client:client, errorMessage:'', disableInput:true});
         }
 
     },
@@ -58,7 +63,9 @@ var ClientDetails = React.createClass({
                     <div className="col-md-3 col-sm-4 col-xs-8">
 
                         <ClientSearch onSubmit={this.onSubmit}
-                            errorMessage={this.state.errorMessage} />
+                            errorMessage={this.state.errorMessage}
+                            disable={this.state.disableInput}
+                            clickEdit={this.clickEdit} />
 
                     </div>
 
