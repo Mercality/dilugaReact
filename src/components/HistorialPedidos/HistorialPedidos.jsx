@@ -3,10 +3,22 @@ var PropTypes = React.PropTypes;
 var PedidoDetalle = require('./PedidoDetalle.jsx');
 var Pedido = require('./Pedido.jsx');
 
+var Reflux = require('reflux');
+var Actions = require('../../reflux/Actions.jsx');
+var PedidosStore = require('../../reflux/PedidosStore.jsx');
+
 var pedidos = require('../../mockData.js').pedidos; //Remove this when http service is set.
+
 
 var HistorialPedidos = React.createClass({
 
+    mixins: [Reflux.listenTo(PedidosStore, 'onChange')],
+
+    getInitialState: function() {
+        return {
+            pedidos:[]
+        };
+    },
     getDefaultProps: function() {
         return {pedidos:pedidos};
     },
