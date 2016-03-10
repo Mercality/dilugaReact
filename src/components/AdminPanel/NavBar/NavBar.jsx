@@ -1,5 +1,5 @@
 var React = require('react');
-var Link = require('react-router').Link;
+var Link = require('react-router/lib/Link');
 var NavItem = require('./NavItem.jsx');
 var UserMenu = require('./UserMenu.jsx');
 var classie = require('desandro-classie');

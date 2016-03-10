@@ -1,6 +1,5 @@
 var React = require('react');
-var Link = require('react-router').Link;
-var PropTypes = React.PropTypes;
+var Link = require('react-router/lib/Link');
 
 var NavItem = React.createClass({
 

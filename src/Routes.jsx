@@ -1,13 +1,12 @@
 var React = require('react');
-var ReactRouter = require('react-router');
-var useRouterHistory = require('react-router').useRouterHistory;
-var CreateHistory = require('history');
-var IndexRoute = ReactRouter.IndexRoute;
+var Router = require('react-router/lib/router')
+var useRouterHistory = require('react-router/lib/useRouterHistory');
+var hashHistory = require('history/lib/createHashHistory');
+var IndexRoute = require('react-router/lib/IndexRoute');
 
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
+var Route = require('react-router/lib/Route');
 
-var History = useRouterHistory(CreateHistory.createHashHistory)({
+var History = useRouterHistory(hashHistory)({
     queryKey: false
 });
 

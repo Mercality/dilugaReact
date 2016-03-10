@@ -9,9 +9,8 @@ var browserify = require('browserify'),
 
 gulp.task('browserify', function() {
   return browserify(sourceFile)
-  .plugin(resolutions, ['react', 'validate' ])
-  .transform('babelify', {presets: ["react"]})
-
+  .transform('babelify', {presets: ["react","es2015"]})
+  .plugin(resolutions, ['react', 'validate', 'react-router', 'react-dom' ])
   .bundle()
   .pipe(source(destFile))
   .pipe(gulp.dest(destFolder));
@@ -28,6 +27,11 @@ gulp.task('watch', function() {
   }
 
   return rebundle();
+});
+
+gulp.task('build', function() {
+    process.env.NODE_ENV = 'production';
+    gulp.start('browserify');
 });
 
 gulp.task('default', ['browserify', 'watch']);

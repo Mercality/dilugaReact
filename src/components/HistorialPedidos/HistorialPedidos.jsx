@@ -1,5 +1,4 @@
 var React = require('react');
-var PropTypes = React.PropTypes;
 var PedidoDetalle = require('./PedidoDetalle.jsx');
 var Pedido = require('./Pedido.jsx');
 
