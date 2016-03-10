@@ -39,7 +39,7 @@ var ShoppingCart = React.createClass({
                 <span className="clearfix"></span>
 
                 <div>
-                    <button className="btn btn-primary">Enviar</button>
+                    <button onClick={this.props.submitCart} className="btn btn-primary">Enviar</button>
                     <button className="btn btn-warning">Reiniciar</button>
                 </div>
 

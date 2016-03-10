@@ -23,10 +23,18 @@ app.get('/pedidos', function(req, res) {
     res.send(data.pedidos);
 });
 
+
+
+
+
 app.get('/productos', function(req, res) {
     console.log("GET From SERVER");
     res.send(data.products);
 });
+
+
+
+
 
 app.get('/clientes/:id', function(req, res) {
     console.log("GET From SERVER");
@@ -45,22 +53,29 @@ app.get('/clientes/:id', function(req, res) {
     if (typeof cliente !== 'object') {
         response.status = 404;
         response.statusText = "Not Found";
+
         res.status(404).send(response);
     } else {
         response.status = 200;
         response.statusText = "Ok";
+
         res.status(200).send(response);
     }
 
 });
 
-app.post('/products', function(req, res) {
-    var subscriber = req.body;
-    subscriber.id = Math.floor(Date.now()/1000) + subscriber.email;
 
-    subscribers.push(subscriber);
+
+
+
+app.post('/pedidos', function(req, res) {
+    var pedido = req.body;
+    pedido.id = Math.floor(Date.now()/1000) + pedido.cliente;
+
+    data.pedidos.push(pedido);
+
     res.status(200).send("Successfully posted subscriber");
-    console.log(subscribers);
+    console.log(pedido);
 });
 
 app.listen(6069);

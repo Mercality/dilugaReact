@@ -1,12 +1,12 @@
 var Fetch = require('whatwg-fetch');
 
-var baseUrl = 'http://192.168.8.15:6069';
+var baseUrl = 'http://localhost:6069';
 var ingredients = '/ingredients';
 var service = {
     get: function(url) {
         return fetch(baseUrl + url)
         .then (function(response) {
-            return response.json();
+            return response;
         });
     },
 
@@ -23,8 +23,7 @@ var service = {
 
     checkStatus: function(response) {
           if (response.status >= 200 && response.status < 300) {
-
-            return response
+            return response.json()
           } else {
 
             var error = new Error(response.statusText)

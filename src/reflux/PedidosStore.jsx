@@ -2,21 +2,22 @@ var HTTP = require('../services/httpService.js');
 var Reflux = require('reflux');
 var Actions = require('./Actions.jsx');
 
-var ProductStore = Reflux.createStore({
+var PedidosStore = Reflux.createStore({
     listenables: [Actions],
-    getProducts: function(body) {
-        HTTP.get('/productos')
+    postPedido: function(body) {
+
+        HTTP.post('/pedidos', body)
         .then(HTTP.checkStatus)
         .then(function(json) {
-            this.products = json;
+            console.log(json);
             this.fireUpdate();
         }.bind(this));
     },
 
     fireUpdate: function() {
-        this.trigger('change', this.products);
+        this.trigger('change');
     },
 
 });
 
-module.exports = ProductStore;
+module.exports = PedidosStore;

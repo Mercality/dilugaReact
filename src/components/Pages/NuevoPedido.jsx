@@ -6,9 +6,13 @@ var ShoppingCart = require('../ShoppingCart/ShoppingCart.jsx');
 var Reflux = require('reflux');
 var Actions = require('../../reflux/Actions.jsx');
 var ProductStore = require('../../reflux/ProductStore.jsx');
+var PedidosStore = require('../../reflux/PedidosStore.jsx');
 
 var NuevoPedido = React.createClass({
-    mixins: [Reflux.listenTo(ProductStore, 'onChange')],
+    mixins: [
+        Reflux.listenTo(ProductStore, 'onChange'),
+        Reflux.listenTo(PedidosStore, 'newPedido')
+    ],
 
     getInitialState: function() {
         return {
@@ -65,6 +69,17 @@ var NuevoPedido = React.createClass({
         this.setState({totals:totals});
     },
 
+    submitCart: function(e) {
+        var body = {
+            id: 10,
+            cliente: 'ramon',
+            fecha: Date.now(),
+            total: this.state.totals.base,
+            detallePedido: this.state.cartProducts
+        }
+        Actions.postPedido(body);
+    },
+
     clientSelected: function(selected) {
         this.setState({clientSelected: selected});
     },
@@ -75,17 +90,18 @@ var NuevoPedido = React.createClass({
         if (this.state.clientSelected) {
             productsAndCart = (
                 <div className="row">
-                    <div className="col-sm-12">
+                    <div className="col-sm-12 animated zoomIn">
 
                         <ProductSearch addToCart={this.addToCart}
                              products={this.state.productList} />
 
                     </div>
-                    <div className="col-sm-12">
+                    <div className="col-sm-12 animated zoomIn">
 
                         <ShoppingCart products={this.state.cartProducts}
                             removeFromCart={this.removeFromCart}
-                            totals={this.state.totals} />
+                            totals={this.state.totals}
+                            submitCart={this.submitCart} />
 
                     </div>
                 </div>
