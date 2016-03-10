@@ -19,11 +19,17 @@ var service = {
             method: 'post',
             body: JSON.stringify(body)
         })
+        .then(function(response) {
+            return response;
+        })
     },
 
     checkStatus: function(response) {
           if (response.status >= 200 && response.status < 300) {
             return response.json()
+          }
+          else if (typeof response === 'string') {
+              return response;
           } else {
 
             var error = new Error(response.statusText)
