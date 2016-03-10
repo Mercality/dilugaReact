@@ -73,8 +73,7 @@ app.post('/pedidos', function(req, res) {
     pedido.id = Math.floor(Date.now()/1000) + pedido.cliente;
 
     data.pedidos.push(pedido);
-
-    res.status(200).send("Successfully posted subscriber");
+    res.status(200).send(pedido);
     console.log(pedido);
 });
 

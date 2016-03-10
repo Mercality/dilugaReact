@@ -1,5 +1,5 @@
 var React = require('react');
-var validator = require('validator');
+var validator = require('validator/lib/isEmail');
 var toggleErrors = require('../../services/toggleErrors');
 
 var LoginForm = React.createClass({
@@ -55,7 +55,7 @@ var LoginForm = React.createClass({
 
     //Validate email address and change class to show user there's and error.
     validateEmail: function(email, formControl) {
-        validator.isEmail(email)
+        validator(email)
         ? this.setState({emailValid: true})
         : this.setState({emailValid: false});
 
