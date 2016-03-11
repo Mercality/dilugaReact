@@ -48,9 +48,9 @@ var NuevoPedido = React.createClass({
     },
 
     removeFromCart: function(uuid) {
-        cartProducts = this.state.cartProducts;
+        var cartProducts = this.state.cartProducts;
 
-        newCart = cartProducts.filter(function(product){
+        var newCart = cartProducts.filter(function(product){
             return product['uuid'] !== uuid;
         });
 
