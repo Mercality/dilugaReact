@@ -1,6 +1,7 @@
 var Fetch = require('whatwg-fetch');
+var env = require('../../env.js');
 
-var baseUrl = 'http://localhost:6069';
+var baseUrl = 'http://' + env.serverAddr + ':' + env.serverPort;
 var ingredients = '/ingredients';
 var service = {
     get: function(url) {
