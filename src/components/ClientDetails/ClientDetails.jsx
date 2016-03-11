@@ -5,10 +5,14 @@ var ClientSearch = require('./ClientSearch.jsx');
 var Reflux = require('reflux');
 var Actions = require('../../reflux/Actions.jsx');
 var ClientsStore = require('../../reflux/ClientsStore.jsx');
+var PedidosStore = require('../../reflux/PedidosStore.jsx');
 
 var ClientDetails = React.createClass({
 
-    mixins: [Reflux.listenTo(ClientsStore, 'onGetClient')],
+    mixins: [
+        Reflux.listenTo(ClientsStore, 'onGetClient'),
+        Reflux.listenTo(PedidosStore, 'onPostPedido'),
+    ],
 
     getInitialState: function() {
         return {
@@ -22,6 +26,10 @@ var ClientDetails = React.createClass({
         /// MAX STACK ERROR
 
 
+    },
+
+    onPostPedido: function(e, msg) {
+        this.setState({client:{}});
     },
 
     onSubmit: function(e, id) {

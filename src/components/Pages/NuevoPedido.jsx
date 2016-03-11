@@ -11,7 +11,7 @@ var PedidosStore = require('../../reflux/PedidosStore.jsx');
 var NuevoPedido = React.createClass({
     mixins: [
         Reflux.listenTo(ProductStore, 'onChange'),
-        Reflux.listenTo(PedidosStore, 'newPedido')
+        Reflux.listenTo(PedidosStore, 'onPostPedido')
     ],
 
     getInitialState: function() {
@@ -33,13 +33,23 @@ var NuevoPedido = React.createClass({
     componentDidMount: function() {
 
     },
-
+    onPostPedido: function(e, msg) {
+        this.setState({
+            cartProducts: [],
+            totals: {
+                base: 0,
+                tax: 0
+            },
+            clientSelected: false
+        });
+    },
     onChange: function(event, data) {
         this.setState({productList: data});
     },
 
 
     addToCart: function(product) {
+        console.log('yes');
         var actCart = this.state.cartProducts;
 
         actCart.push(product);
@@ -70,7 +80,7 @@ var NuevoPedido = React.createClass({
     },
 
     submitCart: function(e) {
-        if (typeof this.state.clientSelect === 'object' && this.state.cartProducts.length > 0) {
+        if (typeof this.state.clientSelected === 'object' && this.state.cartProducts.length > 0) {
             var client = this.state.clientSelected;
             var date = new Date(Date.now());
             var body = {

@@ -9,7 +9,7 @@ var PedidosStore = Reflux.createStore({
         HTTP.post('/pedidos', body)
         .then(function(response) {
             console.log(response);
-
+            this.trigger('postPedido');
         }.bind(this));
     },
 

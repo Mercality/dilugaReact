@@ -14,7 +14,7 @@ var ProductRow = React.createClass({
         if (e.target.value > 0) this.setState({qty:e.target.value});
     },
     onClick: function(e){
-        
+
         if (this.state.qty > 0) {
 
             var product = {
@@ -52,7 +52,7 @@ var ProductRow = React.createClass({
                 <td>{this.props.product.code}</td>
                 <td>{this.props.product.desc}</td>
                 <td className="text-center">{this.props.product.stock}</td>
-                <td className="text-center"><input onChange={this.qtyChange} value={this.state.qty} className="productQty" type="Number" /></td>
+                <td className="text-center"><input onChange={this.qtyChange} value={this.state.qty} className="productQty" min="1" type="number" /></td>
                 <td className="productPrice">{this.props.product.price}</td>
                 <td className="text-center" onClick={this.onClick}><span className="fa fa-cart-plus"></span></td>
             </tr>
