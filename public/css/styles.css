@@ -24,6 +24,9 @@ body, .container-fluid {
   .animated {
     animation-duration: .2s ;
   }
+  .animated .pulse {
+    animation-duration: .4s ;
+  }
 
   .componentWrap {
     padding:5px 20px 20px 20px;
@@ -43,9 +46,12 @@ body, .container-fluid {
     font-size:25px;
     cursor:pointer;
   }
-    span.fa.fa-cart-plus:hover {
-      color:orange;
-    }
+  span.fa.fa-cart-plus:hover {
+    color:orange;
+  }
+  span.fa.fa-cart-plus:active {
+    color:#333;
+  }
   .filtering {
     margin-bottom:10px;
   }

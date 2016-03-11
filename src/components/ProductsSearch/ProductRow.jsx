@@ -1,5 +1,7 @@
 var React = require('react');
 var uuid = require('../../services/uuid.js');
+var classie = require('desandro-classie');
+var whichAnim = require('../../services/whichAnimation.js');
 
 //props.product = {code: String, desc: String, stock: Integer, price: Decimal}
 var ProductRow = React.createClass({
@@ -12,7 +14,9 @@ var ProductRow = React.createClass({
         if (e.target.value > 0) this.setState({qty:e.target.value});
     },
     onClick: function(e){
+        
         if (this.state.qty > 0) {
+
             var product = {
                 uuid: uuid(),
                 code: this.props.product.code,
@@ -22,7 +26,23 @@ var ProductRow = React.createClass({
                 subtotal: this.props.product.price*this.state.qty
             };
 
-            this.props.addToCart(product);
+            var cartBtn = e.target;
+            var animation = whichAnim();
+
+            classie.add(cartBtn, 'animated');
+            classie.add(cartBtn, 'pulse');
+            cartBtn.style.color = '#333';
+
+            cartBtn.addEventListener(animation, function(e) {
+                classie.remove(cartBtn, 'pulse');
+                cartBtn.style.color = '';
+                this.props.addToCart(product);
+            }.bind(this));
+
+        } else {
+
+            //Show message indicating that there's no qty set.
+
         }
     },
 
