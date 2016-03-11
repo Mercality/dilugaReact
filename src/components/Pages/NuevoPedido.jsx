@@ -70,14 +70,23 @@ var NuevoPedido = React.createClass({
     },
 
     submitCart: function(e) {
-        var body = {
-            id: 10,
-            cliente: 'ramon',
-            fecha: Date.now(),
-            total: this.state.totals.base,
-            detallePedido: this.state.cartProducts
+        if (typeof this.state.clientSelect === 'object' && this.state.cartProducts.length > 0) {
+            var client = this.state.clientSelected;
+            var date = new Date(Date.now());
+            var body = {
+                id: '',
+                cliente: client.name,
+                fecha: date.getDay() + ' / ' + date.getMonth() + ' / ' + date.getFullYear(),
+                total: this.state.totals.base,
+                detallePedido: this.state.cartProducts
+            }
+            Actions.postPedido(body);
+        } else {
+
+            //!!!!!!Show message indicating that the request can't be done.!!!!!!!!
+
         }
-        Actions.postPedido(body);
+
     },
 
     resetCart: function(e) {
@@ -91,7 +100,7 @@ var NuevoPedido = React.createClass({
     render: function() {
 
         var productsAndCart = false;
-        if (this.state.clientSelected) {
+        if (typeof this.state.clientSelected === 'object') {
             productsAndCart = (
                 <div className="row">
                     <div className="col-sm-12 animated zoomIn">

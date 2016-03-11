@@ -46,7 +46,7 @@ var ClientDetails = React.createClass({
         }
 
         this.state.disableInput
-        ? this.props.clientSelected(true)
+        ? this.props.clientSelected(this.state.client)
         : this.props.clientSelected(false)
 
     },
