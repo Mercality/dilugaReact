@@ -10,14 +10,13 @@
   },
   "browserify-shim": {},
   "scripts": {
-    "start": "watchify src/main.jsx -v -t [ babelify --presets [ react es2015 ] ]  -o public/js/main.js",
+    "start": "SET NODE_ENV=production & watchify src/main.jsx -v -t [ babelify --presets [ react es2015 ] ]  -o public/js/main.js",
     "dist": "SET NODE_ENV=production & browserify src/main.jsx -v -t [ babelify --presets [ react es2015 ] ] -g [uglifyify] -o public/js/bundle.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "desandro-classie": "^1.0.1",
-    "node-uuid": "^1.4.7",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.0",
@@ -36,7 +35,6 @@
     "express": "^4.13.4",
     "gulp": "^3.9.1",
     "vinyl-source-stream": "^1.1.0",
-
     "watchify": "^3.7.0"
   }
 }

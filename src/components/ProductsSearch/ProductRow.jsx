@@ -1,5 +1,5 @@
 var React = require('react');
-var uuid = require('node-uuid');
+var uuid = require('../../services/uuid.js');
 
 //props.product = {code: String, desc: String, stock: Integer, price: Decimal}
 var ProductRow = React.createClass({
@@ -14,7 +14,7 @@ var ProductRow = React.createClass({
     onClick: function(e){
         if (this.state.qty > 0) {
             var product = {
-                uuid: uuid.v1(),
+                uuid: uuid(),
                 code: this.props.product.code,
                 desc: this.props.product.desc,
                 qty: this.state.qty,
