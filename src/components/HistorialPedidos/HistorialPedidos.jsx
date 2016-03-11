@@ -6,9 +6,6 @@ var Reflux = require('reflux');
 var Actions = require('../../reflux/Actions.jsx');
 var PedidosStore = require('../../reflux/PedidosStore.jsx');
 
-var pedidos = require('../../mockData.js').pedidos; //Remove this when http service is set.
-
-
 var HistorialPedidos = React.createClass({
 
     mixins: [Reflux.listenTo(PedidosStore, 'onChange')],
@@ -18,19 +15,24 @@ var HistorialPedidos = React.createClass({
             pedidos:[]
         };
     },
-    getDefaultProps: function() {
-        return {pedidos:pedidos};
+
+    componentWillMount: function() {
+        Actions.getPedidos();
+    },
+
+    onChange: function(e, pedidos) {
+        this.setState({pedidos:pedidos});
     },
 
     render: function() {
 
-        var pedidos = this.props.pedidos.map(function(pedido) {
+        var pedidos = this.state.pedidos.map(function(pedido) {
             return (
                     <Pedido key={pedido.id+Date.now()/3600} pedido={pedido} />
             )
         });
 
-        var detalles = this.props.pedidos.map(function(pedido) {
+        var detalles = this.state.pedidos.map(function(pedido) {
             return (
                     <PedidoDetalle key={Math.random()}  pedido={pedido} />
             )

@@ -9,12 +9,22 @@ var PedidosStore = Reflux.createStore({
         HTTP.post('/pedidos', body)
         .then(function(response) {
             console.log(response);
-            
+
+        }.bind(this));
+    },
+
+    getPedidos: function() {
+        HTTP.get('/pedidos')
+        .then(HTTP.checkStatus)
+        .then(function(json) {
+
+            this.pedidos = json;
+            this.fireUpdate();
         }.bind(this));
     },
 
     fireUpdate: function() {
-        this.trigger('change');
+        this.trigger('change', this.pedidos);
     },
 
 });
