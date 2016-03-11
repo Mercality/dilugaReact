@@ -40,7 +40,7 @@ var ShoppingCart = React.createClass({
 
                 <div>
                     <button onClick={this.props.submitCart} className="btn btn-primary">Enviar</button>
-                    <button className="btn btn-warning">Reiniciar</button>
+                    <button onClick={this.props.resetCart} className="btn btn-warning">Reiniciar</button>
                 </div>
 
             </div>

@@ -80,6 +80,10 @@ var NuevoPedido = React.createClass({
         Actions.postPedido(body);
     },
 
+    resetCart: function(e) {
+        this.setState({cartProducts:[], totals:{base: 0, tax: 0}})
+    },
+
     clientSelected: function(selected) {
         this.setState({clientSelected: selected});
     },
@@ -101,7 +105,8 @@ var NuevoPedido = React.createClass({
                         <ShoppingCart products={this.state.cartProducts}
                             removeFromCart={this.removeFromCart}
                             totals={this.state.totals}
-                            submitCart={this.submitCart} />
+                            submitCart={this.submitCart}
+                            resetCart={this.resetCart} />
 
                     </div>
                 </div>
