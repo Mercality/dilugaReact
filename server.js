@@ -7,7 +7,7 @@ var app = express();
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "POST, GET");
+  res.header("Access-Control-Allow-Methods", "POST, GET, PUT");
   next();
 });
 
@@ -75,6 +75,41 @@ app.post('/pedidos', function(req, res) {
     data.pedidos.push(pedido);
     res.status(200).send(pedido);
     console.log(pedido);
+});
+
+app.put('/pedido/:id', function(req, res) {
+    var id = req.params.id;
+    console.log(id)
+    var editado = req.body;
+    data.pedidos = data.pedidos.map(function(pedido){
+        if (pedido.id == id) {
+            pedido.cliente = editado.cliente;
+            pedido.fecha = editado.fecha;
+            pedido.total = editado.total;
+            pedido.detallePedido = editado.detallePedido;
+
+            return pedido;
+        }
+        else {
+            return pedido
+        }
+
+    })
+
+
+    res.status(200).send(editado);
+    console.log("PUT TO SERVER");
+});
+
+app.get('/pedido/:id', function(req, res) {
+    var id = req.params.id;
+
+    var pedido = data.pedidos.filter(function(pedido) {
+        return pedido['id'] == id;
+    });
+
+    pedido = pedido[0];
+    res.status(200).send(pedido);
 });
 
 app.listen(6069);

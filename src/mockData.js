@@ -1,7 +1,7 @@
 var data = {
     clientes: [
         {
-            codigo:108,
+            codigo:10,
             name: 'Repuestos Los Gallegos, C.A.',
             rif: 'J304008234',
             addr: 'Calle real',
@@ -11,7 +11,7 @@ var data = {
 
         },
         {
-            codigo:110,
+            codigo:20,
             name: 'Inversiones DONCAR 2012',
             rif: 'J00045778',
             addr: 'Calle orinoco cruce con acacia local 76',
@@ -24,6 +24,7 @@ var data = {
     pedidos: [
         {
             id:1,
+            codigo_cliente:10,
             cliente: 'Repuestos Los Gallegos',
             fecha: '2015-20-01',
             total: '128.657,69',
@@ -38,6 +39,7 @@ var data = {
         },
         {
             id:2,
+            codigo_cliente:20,
             cliente: 'Estación de Servicio La Palma',
             fecha: '2015-12-16',
             total: '85.658,69',
@@ -52,6 +54,7 @@ var data = {
         },
         {
             id:3,
+            codigo_cliente:30,
             cliente: 'Auto Repuestos Manguito, C.A.',
             fecha: '2015-03-16',
             total: '5.365,78',
@@ -72,6 +75,7 @@ var data = {
         },
         {
             id:4,
+            codigo_cliente:40,
             cliente: 'Sucesion Nieto Causal',
             fecha: '2016-23-12',
             total: '35.213,54',
