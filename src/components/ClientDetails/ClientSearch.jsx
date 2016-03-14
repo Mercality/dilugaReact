@@ -1,7 +1,12 @@
 var React = require('react');
 
+var Reflux = require('reflux');
+var Actions = require('../../reflux/Actions.jsx');
+var ClientsStore = require('../../reflux/ClientsStore.jsx');
 
 var ClientSearch = React.createClass({
+
+    mixins: [Reflux.listenTo(ClientsStore, 'onChange')],
 
     getInitialState: function() {
         return {
@@ -9,8 +14,11 @@ var ClientSearch = React.createClass({
         };
     },
 
-    onChange: function(e) {
-        this.setState({codigo:e.target.value});
+    onChange: function(e, client) {
+        if (typeof client === 'object')
+            this.setState({codigo:client.codigo})
+        else
+            this.setState({codigo:e.target.value});
     },
 
     onSubmit: function(e) {

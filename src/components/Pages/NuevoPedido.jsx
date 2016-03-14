@@ -11,8 +11,9 @@ var PedidosStore = require('../../reflux/PedidosStore.jsx');
 var NuevoPedido = React.createClass({
     mixins: [
         Reflux.listenTo(ProductStore, 'onChange'),
-        Reflux.listenTo(PedidosStore, 'onPostPedido'),
-        Reflux.listenTo(PedidosStore, 'onEditPedido')
+        Reflux.listenTo(PedidosStore, 'onEditPedido'),
+        Reflux.listenTo(PedidosStore, 'onPostPedido')
+
     ],
 
     getInitialState: function() {
@@ -44,7 +45,7 @@ var NuevoPedido = React.createClass({
 
 
     },
-    onPostPedido: function(e, put) {
+    onPostPedido: function(e) {
         this.setState({
             cartProducts: [],
             totals: {
