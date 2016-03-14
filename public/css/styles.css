@@ -131,3 +131,21 @@ ul.nav.navbar-nav.side-nav, nav.navbar.navbar-inverse.navbar-fixed-top {
 .clientDetails {
   margin-top:20px;
 }
+
+th.headLink:hover {
+  background:#C95438;
+}
+
+th.headLink:hover > a {
+  color:white
+}
+
+a.editHeadLink {
+  color:#C95438;
+  text-decoration: none;
+  display:block;
+}
+
+a.editHeadLink:hover {
+    color:white;
+}

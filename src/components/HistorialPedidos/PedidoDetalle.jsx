@@ -1,6 +1,6 @@
 var React = require('react');
 var ProductoDetalle = require('./ProductoDetalle.jsx');
-
+var Link = require('react-router/lib/Link');
 
 var PedidoDetalle = React.createClass({
 
@@ -19,6 +19,11 @@ var PedidoDetalle = React.createClass({
                     <div className="table-responsive">
                         <table  className="table well">
                             <tbody>
+                            <tr className="table-heading">
+                                <th colSpan="5" className="text-center headLink">
+                                    <Link className="editHeadLink" to={"/pedido/editar/"+this.props.pedido.id}>Editar</Link>
+                                </th>
+                            </tr>
                             <tr className="table-heading">
                                 <th>Codigo</th><th>Descripcion</th><th className="productQty">Cantidad</th><th className="productQty">Precio</th><th className="productQty">Subtotal</th>
                             </tr>
