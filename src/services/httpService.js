@@ -25,6 +25,19 @@ var service = {
         })
     },
 
+    put: function(url, body) {
+        return fetch(baseUrl + url, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'put',
+            body: JSON.stringify(body)
+        })
+        .then(function(response) {
+            return response.json();
+        })
+    },
+
     checkStatus: function(response) {
           if (response.status >= 200 && response.status < 300) {
             return response.json()
