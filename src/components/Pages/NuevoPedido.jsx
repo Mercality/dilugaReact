@@ -11,7 +11,8 @@ var PedidosStore = require('../../reflux/PedidosStore.jsx');
 var NuevoPedido = React.createClass({
     mixins: [
         Reflux.listenTo(ProductStore, 'onChange'),
-        Reflux.listenTo(PedidosStore, 'onPostPedido')
+        Reflux.listenTo(PedidosStore, 'onPostPedido'),
+        Reflux.listenTo(PedidosStore, 'onEditPedido')
     ],
 
     getInitialState: function() {
@@ -28,12 +29,22 @@ var NuevoPedido = React.createClass({
 
     componentWillMount: function() {
         Actions.getProducts();
+
+        if (this.props.params.id) {
+            Actions.getEditPedidos(this.props.params.id);
+        }
     },
 
     componentDidMount: function() {
 
     },
-    onPostPedido: function(e, msg) {
+    onEditPedido: function(e, cart) {
+        this.updateSum(cart);
+        this.setState({cartProducts: cart});
+
+
+    },
+    onPostPedido: function(e, put) {
         this.setState({
             cartProducts: [],
             totals: {
@@ -42,6 +53,7 @@ var NuevoPedido = React.createClass({
             },
             clientSelected: false
         });
+
     },
     onChange: function(event, data) {
         this.setState({productList: data});
@@ -72,7 +84,7 @@ var NuevoPedido = React.createClass({
         var totals = {base:0, tax: 0};
 
         for (var i = 0; i <= cart.length-1; i++) {
-            totals.base = totals.base + cart[i].subtotal;
+            totals.base = Math.round((totals.base + cart[i].subtotal)*100)/100;
         }
 
         totals.tax = Math.round((totals.base*12/100),2);
@@ -80,21 +92,39 @@ var NuevoPedido = React.createClass({
     },
 
     submitCart: function(e) {
-        if (typeof this.state.clientSelected === 'object' && this.state.cartProducts.length > 0) {
-            var client = this.state.clientSelected;
+        if (this.props.route.editing) {
             var date = new Date(Date.now());
-            var body = {
-                id: '',
-                cliente: client.name,
+            var cliente = this.state.clientSelected;
+            body = {
+                id: this.props.params.id,
+                cliente: cliente.name,
+                codigo_cliente: cliente.codigo_cliente,
                 fecha: date.getDay() + ' / ' + date.getMonth() + ' / ' + date.getFullYear(),
                 total: this.state.totals.base,
                 detallePedido: this.state.cartProducts
             }
-            Actions.postPedido(body);
-        } else {
 
-            //!!!!!!Show message indicating that the request can't be done.!!!!!!!!
+            Actions.putPedido(body);
 
+        }
+
+        else {
+            if (typeof this.state.clientSelected === 'object' && this.state.cartProducts.length > 0) {
+                var client = this.state.clientSelected;
+                var date = new Date(Date.now());
+                var body = {
+                    id: '',
+                    cliente: client.name,
+                    fecha: date.getDay() + ' / ' + date.getMonth() + ' / ' + date.getFullYear(),
+                    total: this.state.totals.base,
+                    detallePedido: this.state.cartProducts
+                }
+                Actions.postPedido(body);
+            } else {
+
+                //!!!!!!Show message indicating that the request can't be done.!!!!!!!!
+
+            }
         }
 
     },

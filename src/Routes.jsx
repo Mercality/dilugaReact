@@ -21,6 +21,7 @@ var Routes  = (
             <IndexRoute component={HomePage} />
             <Route path="/historial" component={Historial} />
             <Route path="/pedido/nuevo" component={NuevoPedido} />
+            <Route path="/pedido/editar/:id" editing="true" component={NuevoPedido} />
         </Route>
     </Router>
 );
