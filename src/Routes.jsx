@@ -5,6 +5,7 @@ var hashHistory = require('history/lib/createHashHistory');
 var IndexRoute = require('react-router/lib/IndexRoute');
 var Auth = require('./services/auth.js');
 var Route = require('react-router/lib/Route');
+var LoginRequired = require('./LoginRequired.jsx');
 
 var History = useRouterHistory(hashHistory)({
     queryKey: false
@@ -20,7 +21,9 @@ var Routes  = (
     <Router history={History}>
         <Route path="/" component={Base}>
             <IndexRoute component={HomePage} />
-            <Route path="/historial" component={Historial} onEnter={Auth.check} />
+            <Route component={LoginRequired}>
+                <Route path="/historial" component={Historial} />
+            </Route>
             <Route path="/pedido/nuevo" component={NuevoPedido} />
             <Route path="/pedido/editar/:id" editing="true" component={NuevoPedido} />
         </Route>

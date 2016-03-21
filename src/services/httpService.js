@@ -14,7 +14,7 @@ var service = {
     post: function(url, body, apiUrl) {
         baseUrl = apiUrl !== undefined ? apiUrl : baseUrl;
         return fetch(baseUrl + url, {
-            credentials: 'include',
+            //credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

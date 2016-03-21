@@ -14,7 +14,7 @@ var AuthStore = Reflux.createStore({
             password: credentials.password,
         };
 
-        HTTP.post('/oauth/access_token', parameters, 'http://lubricantes.app')
+        HTTP.post('/api/v1/oauth/access_token', parameters, 'http://lubricantes.app')
         .then(HTTP.checkStatus)
         .then(function(json) {
             this.token = json.access_token;

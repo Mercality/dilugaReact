@@ -16,7 +16,6 @@ var LoginPage = React.createClass({
             loggedIn: false,
         };
     },
-
     onLogin: function(e, token) {
         this.setState({loggedIn: true});
     },
