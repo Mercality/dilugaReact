@@ -11,10 +11,12 @@ var service = {
         });
     },
 
-    post: function(url, body) {
+    post: function(url, body, apiUrl) {
+        baseUrl = apiUrl !== undefined ? apiUrl : baseUrl;
         return fetch(baseUrl + url, {
+            credentials: 'include',
             headers: {
-                'Accept': 'text/plain',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             method: 'post',

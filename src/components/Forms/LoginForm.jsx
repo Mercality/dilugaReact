@@ -37,20 +37,11 @@ var LoginForm = React.createClass({
     //Prevent default submission, validate fields and trigger desired action.
     onSubmit: function(e) {
         e.preventDefault();
-
         var user = {
-            email: this.state.email,
+            username: this.state.email,
             password: this.state.password,
-            remember: this.state.rememberMe
-        };
-
-        this.setState({
-            users: this.state.users.concat(user),
-            email: '',
-            password:'',
-            emailValid: false,
-            rememberMe: false,
-        });
+        }
+        this.props.loginSubmit(user);
     },
 
     //Validate email address and change class to show user there's and error.

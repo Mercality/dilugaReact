@@ -5,8 +5,10 @@ var Actions = Reflux.createActions([
     'getClient',
     'postPedido',
     'getPedidos',
-    'getEditPedidos',
-    'putPedido'
+
+    //Authentication
+    'login',
+    'auth_check',
 ]);
 
 module.exports = Actions;
