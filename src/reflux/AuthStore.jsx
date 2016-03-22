@@ -1,4 +1,5 @@
 var HTTP = require('../services/httpService.js');
+var Cookie = require('../services/cookie.js');
 var Reflux = require('reflux');
 var Actions = require('./Actions.jsx');
 
@@ -17,8 +18,8 @@ var AuthStore = Reflux.createStore({
         HTTP.post('/api/v1/oauth/access_token', parameters, 'http://lubricantes.app')
         .then(HTTP.checkStatus)
         .then(function(json) {
-            this.token = json.access_token;
-            this.trigger('login', this.token);
+            Cookie.createCookie('access_token', json.access_token, 0.2);
+            this.trigger('login');
         }.bind(this))
         .catch(function(error){
             console.log(error);
@@ -26,8 +27,9 @@ var AuthStore = Reflux.createStore({
     },
 
     auth_check: function() {
-        if (this.token !== undefined) {
-            this.trigger('isLogged');
+        console.log(Cookie.readCookie('access_token'));
+        if (Cookie.readCookie('access_token') !== null) {
+            return true;
         } else {
             return false;
         }

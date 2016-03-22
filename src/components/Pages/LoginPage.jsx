@@ -1,5 +1,6 @@
 var React = require('react');
 var LoginForm = require('../Forms/LoginForm.jsx');
+var History = require('react-router/lib/hashHistory');
 
 var Reflux = require('reflux');
 var Actions = require('../../reflux/Actions.jsx');
@@ -18,6 +19,7 @@ var LoginPage = React.createClass({
     },
     onLogin: function(e, token) {
         this.setState({loggedIn: true});
+        History.goBack();
     },
 
     onSubmit: function(user) {
