@@ -15,14 +15,25 @@ var LoginPage = React.createClass({
     getInitialState: function() {
         return {
             loggedIn: false,
+            errorMsg: '',
+            loading:''
         };
     },
+
     onLogin: function(e, token) {
-        this.setState({loggedIn: true});
-        History.goBack();
+        this.setState({loading:''});
+        if (e === 'success') {
+            this.setState({loggedIn: true});
+            History.goBack();
+        }
+        if (e === 'failed') {
+            this.setState({errorMsg: 'Nombre de usuario o contraseña incorrectos.'})
+        }
+
     },
 
     onSubmit: function(user) {
+        this.setState({loading:'block'})
         Actions.login(user);
     },
 
@@ -32,7 +43,7 @@ var LoginPage = React.createClass({
         }
         return (
             <div>
-                <LoginForm loginSubmit={this.onSubmit} />
+                <LoginForm errorMsg={this.state.errorMsg} loading={this.state.loading} loginSubmit={this.onSubmit} />
                 {loged}
 
             </div>

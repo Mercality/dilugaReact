@@ -5,10 +5,10 @@ var Link = require('react-router/lib/Link');
 var PedidoDetalle = React.createClass({
 
     render: function() {
-        var productos = this.props.pedido.detallePedido.map(function(producto) {
-            return <ProductoDetalle key={producto.code+Date.now()/3600}
-                code={producto.code}
-                desc={producto.desc}
+        var productos = this.props.pedido.detail.map(function(producto) {
+            return <ProductoDetalle key={producto.product_code+Date.now()/3600}
+                code={producto.product_code}
+                desc={producto.product_desc}
                 qty={producto.qty}
                 price={producto.price} />
         });

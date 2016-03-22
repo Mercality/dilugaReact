@@ -19,6 +19,7 @@ var ProductSearch = React.createClass({
 
     //This functions is passed to the corresponding childs to perform queries.
     filterProducts: function(q) {
+        console.log(this.props.products);
         var query = new RegExp(q, 'gi');
         var products = this.props.products.filter(function(product){
             return product.desc.match(query) || product.code.toString().match(query);

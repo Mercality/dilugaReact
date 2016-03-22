@@ -1,18 +1,18 @@
 var Fetch = require('whatwg-fetch');
 var env = require('../../env.js');
 
-var baseUrl = 'http://' + env.serverAddr + ':' + env.serverPort;
+var baseUrl = 'http://' + env.serverAddr;
 var ingredients = '/ingredients';
 var service = {
     get: function(url) {
         return fetch(baseUrl + url)
         .then (function(response) {
             return response;
-        });
+        })
+        .then(this.checkStatus);
     },
 
-    post: function(url, body, apiUrl) {
-        baseUrl = apiUrl !== undefined ? apiUrl : baseUrl;
+    post: function(url, body) {
         return fetch(baseUrl + url, {
             //credentials: 'include',
             headers: {
@@ -41,17 +41,13 @@ var service = {
     },
 
     checkStatus: function(response) {
-          if (response.status >= 200 && response.status < 300) {
+          if (response.status >= 200 && response.status < 300)
             return response.json()
-          }
-          else if (typeof response === 'string') {
-              return response;
-          } else {
 
-            var error = new Error(response.statusText)
-            error.response = response
-            throw error
-          }
+         else
+            var error = {status: response.status, statusText: response.statusText }
+            return error;
+
     },
 }
 

@@ -15,11 +15,15 @@ var AuthStore = Reflux.createStore({
             password: credentials.password,
         };
 
-        HTTP.post('/api/v1/oauth/access_token', parameters, 'http://lubricantes.app')
-        .then(HTTP.checkStatus)
+        HTTP.post('/oauth/access_token', parameters)
         .then(function(json) {
-            Cookie.createCookie('access_token', json.access_token, 0.2);
-            this.trigger('login');
+            if (typeof json.access_token === 'string') {
+                this.trigger('success');
+            } else {
+                this.trigger('failed');
+            }
+
+
         }.bind(this))
         .catch(function(error){
             console.log(error);

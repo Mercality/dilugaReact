@@ -38,7 +38,7 @@ var ProductoDetalle = React.createClass({
                     <span className=""><a href="#" onClick={this.qtyClick}>{this.state.qty}</a></span>
                     <span className="hidden">
                         <input  style={{width:45}} type="number" size="2" value={this.state.qty} onChange={this.qtyChange} />
-                         <span style={{fontSize:19, cursor:'pointer'}} onClick={this.saveClick} className="fa fa-floppy-o"></span>
+                        <span style={{fontSize:19, cursor:'pointer'}} onClick={this.saveClick} className="fa fa-floppy-o"></span>
                     </span>
                 </td>
                 {/*Swap Qty with input */}

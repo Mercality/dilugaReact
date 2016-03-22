@@ -12,7 +12,7 @@ var HistorialPedidos = React.createClass({
 
     getInitialState: function() {
         return {
-            pedidos:[]
+            pedidos:[] // {id, date, client_id, lines, subtotal, tax, total, salesman_id}
         };
     },
 

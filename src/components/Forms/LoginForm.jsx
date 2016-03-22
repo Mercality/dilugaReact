@@ -1,6 +1,7 @@
 var React = require('react');
 var validator = require('validator/lib/isEmail');
 var toggleErrors = require('../../services/toggleErrors');
+var Loading = require('../Loading.jsx');
 
 var LoginForm = React.createClass({
 
@@ -11,7 +12,7 @@ var LoginForm = React.createClass({
             emailValid: false,
             password:'',
             rememberMe: false,
-            users: [] //REplace with web service conection
+            users: [], //REplace with web service conection
         };
     },
 
@@ -57,7 +58,9 @@ var LoginForm = React.createClass({
 
     render: function() {
         return (
-            <form className="form-signin">
+            <form style={{position:'relative'}} className="form-signin">
+                <Loading active={this.props.loading} />
+
                 <h2 className="form-signin-heading">Inicie Sesión</h2>
 
                 <div className="form-group">
@@ -69,12 +72,13 @@ var LoginForm = React.createClass({
                     <label htmlFor="inputPassword" className="sr-only">Password</label>
                     <input onChange={this.changePassword} value={this.state.password} type="password" id="inputPassword" className="form-control" placeholder="Password" required />
                 </div>
-
+                <span className="text-danger">{this.props.errorMsg}</span>
                 <div className="checkbox">
                     <label>
                         <input onChange={this.rememberChange} type="checkbox" checked={this.state.rememberMe} value={this.state.rememberMe} /> Recordarme
                     </label>
                 </div>
+
 
                 <button className="btn btn-lg btn-primary btn-block" onClick={this.onSubmit} type="submit">Iniciar Sesión</button>
             </form>

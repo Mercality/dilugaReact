@@ -7,8 +7,7 @@ var ClientsStore = Reflux.createStore({
 
     getClient: function(id) {
 
-        HTTP.get('/clientes/'+id)
-        .then(HTTP.checkStatus)
+        HTTP.get('/clients/'+id)
         .then(function(response) {
             this.client = response.json;
             this.fireUpdate();

@@ -7,29 +7,25 @@ var PedidosStore = Reflux.createStore({
     listenables: [Actions],
     postPedido: function(body) {
 
-        HTTP.post('/pedidos', body)
+        HTTP.post('/orders', body)
         .then(function(response) {
-            console.log(response);
             this.trigger('postPedido');
         }.bind(this));
     },
 
     getPedidos: function() {
-        HTTP.get('/pedidos')
-        .then(HTTP.checkStatus)
+        HTTP.get('/orders?client=true&detail=true')
         .then(function(json) {
-
-            this.pedidos = json;
+            this.pedidos = json.data;
             this.fireUpdate();
         }.bind(this));
     },
 
     getEditPedidos: function(id) {
-        HTTP.get('/pedido/'+id)
-        .then(HTTP.checkStatus)
+        HTTP.get('/orders/'+id+'?client=true&detail=true')
         .then(function(json) {
-            Actions.getClient(json.codigo_cliente);
-            var cartProducts = json.detallePedido;
+            console.log(json);
+            var cartProducts = json.detail;
             cartProducts.map(function(product) {
                 product.subtotal = Math.round(product.price*product.qty*100)/100;
                 product.uuid = uuid();
@@ -42,7 +38,7 @@ var PedidosStore = Reflux.createStore({
     putPedido: function(body) {
         HTTP.put('/pedido/'+body.id, body)
         .then(function(json) {
-            console.log(json);
+
             this.trigger('postPedido', true);
 
         }.bind(this));

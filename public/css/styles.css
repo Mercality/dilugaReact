@@ -149,3 +149,35 @@ a.editHeadLink {
 a.editHeadLink:hover {
     color:white;
 }
+
+
+
+.hover-content {
+
+    position:absolute;
+    width:100%;
+    top:50%;
+    margin-top:-25px;
+
+}
+.hover-content .animated {
+        animation: rotate .9s infinite linear;
+        -moz-animation: rotate .9s infinite linear;
+        -webkit-animation: rotate .9s infinite linear;
+}
+
+@keyframes rotate {
+  0%    { transform: rotate(0deg); }
+  100%  { transform: rotate(360deg); }
+}
+
+.icon-hover {
+    z-index: 15;
+    text-align: center;
+    background-color: rgba(171, 163, 155, 0.6);
+    display:none;
+    position:absolute;
+    width:100%;
+    height: 100%;
+    opacity:.9;
+}
