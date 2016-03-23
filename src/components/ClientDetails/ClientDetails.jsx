@@ -43,9 +43,9 @@ var ClientDetails = React.createClass({
     },
 
     onGetClient: function(e, client) {
-
+        console.log(client);
         //Means there as an error on the request
-        if (client.hasOwnProperty('response')) {
+        if (client.codigo === undefined) {
             this.setState({client:{}, errorMessage:'No se encontraron resultados'});
 
         //A client was successfully retrieved.

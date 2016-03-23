@@ -7,9 +7,19 @@ var ClientsStore = Reflux.createStore({
 
     getClient: function(id) {
 
-        HTTP.get('/clients/'+id)
-        .then(function(response) {
-            this.client = response.json;
+        HTTP.get('/clients/'+id+'?code=true')
+        .then(function(json) {
+            console.log(json);
+            var client = {
+                codigo:json.code,
+                name: json.name,
+                rif: json.business_type+json.business_id,
+                addr: json.address,
+                phone: json.phone,
+                email: json.email,
+                ultimo: json.last_order
+            }
+            this.client = client;
             this.fireUpdate();
         }.bind(this))
         .catch(function(error){
