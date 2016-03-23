@@ -15,11 +15,13 @@ var HomePage = require('./components/Pages/HomePage.jsx');
 var Historial = require('./components/Pages/Historial.jsx');
 var NuevoPedido = require('./components/Pages/NuevoPedido.jsx');
 var LoginPage = require('./components/Pages/LoginPage.jsx');
+var Messages = require('./components/Messages.jsx');
 
 var Routes  = (
     <Router history={History}>
         <Route path="/" component={Base}>
             <IndexRoute component={HomePage} />
+            <Route path="/messages" component={Messages} />
             <Route path="/historial" component={Historial} onEnter={Auth.check} />
             <Route path="/pedido/nuevo" component={NuevoPedido} />
             <Route path="/pedido/editar/:id" editing="true" component={NuevoPedido} />

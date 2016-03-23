@@ -1,4 +1,5 @@
 var React = require('react');
+var History = require('react-router/lib/hashHistory');
 var ClientDetails = require('../ClientDetails/ClientDetails.jsx');
 var ProductSearch = require('../ProductsSearch/ProductsSearch.jsx');
 var ShoppingCart = require('../ShoppingCart/ShoppingCart.jsx');
@@ -46,9 +47,13 @@ var NuevoPedido = React.createClass({
             this.setState({cartProducts: cart});
         }
     },
-    onPostPedido: function(e) {
-        if (e === 'postPedido') {
+    onPostPedido: function(e, status) {
+        if (e === 'postPedido' && status === 'success') {
             this.setState(this.getInitialState());
+            History.push('/messages');
+            History.replace({
+                pathname: '/messages?status=OK&message=Pedido creado correctamente'
+            })
         }
 
     },

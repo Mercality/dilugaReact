@@ -33,8 +33,10 @@ var PedidosStore = Reflux.createStore({
 
         HTTP.post('/orders', body)
         .then(function(response) {
-            console.log(response);
-            this.trigger('postPedido');
+            if (response.status !== 201)
+                this.trigger('postPedido', 'error');
+            else
+                this.trigger('postPedido', 'success');
         }.bind(this));
 
     },
