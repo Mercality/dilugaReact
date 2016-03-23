@@ -7,7 +7,7 @@ var SearchFilters = React.createClass({
     render: function() {
         return (
             <div className="filtering">
-                <SearchBox filter={this.props.filter} />  <CategoryList filter={this.props.filter} categories={categories} />
+                <SearchBox filter={this.props.filter} isLoading={this.props.isLoading} />  <CategoryList filter={this.props.filter} categories={categories} />
             </div>
         );
     }

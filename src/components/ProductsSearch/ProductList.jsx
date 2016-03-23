@@ -1,5 +1,6 @@
 var React = require('react');
 var ProductRow = require('./ProductRow.jsx');
+var Loading = require('../Loading.jsx');
 
 var ProductList = React.createClass({
 
@@ -8,7 +9,8 @@ var ProductList = React.createClass({
             return <ProductRow addToCart={this.props.addToCart} key={product.code+Date.now()/3600} product={product} />
         }.bind(this));
         return (
-            <div className="productsTable table-responsive">
+            <div style={{position:'relative'}} className="productsTable table-responsive">
+            <Loading active={this.props.loading} />
                 <table className="table">
                     <tbody>
                         <tr>

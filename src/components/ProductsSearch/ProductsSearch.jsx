@@ -25,7 +25,7 @@ var ProductSearch = React.createClass({
     },
     //This functions is passed to the corresponding childs to perform queries.
     filterProducts: function(q) {
-        Actions.getProducts(q);
+
         /*
         console.log(this.props.products);
         var query = new RegExp(q, 'gi');
@@ -41,8 +41,8 @@ var ProductSearch = React.createClass({
         return (
             <div className="componentWrap">
                 <h3>Lista de Productos</h3>
-                <SearchFilters filter={this.filterProducts} />
-                <ProductList addToCart={this.props.addToCart} products={this.state.products} />
+            <SearchFilters filter={this.props.filter} isLoading={this.props.isLoading} />
+            <ProductList addToCart={this.props.addToCart} loading={this.props.loading} products={this.state.products} />
             </div>
         );
     }

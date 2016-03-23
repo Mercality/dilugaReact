@@ -25,11 +25,12 @@ var NuevoPedido = React.createClass({
             },
             productList: [],
             clientSelected:false,
+            loading:'',
         };
     },
 
     componentWillMount: function() {
-        Actions.getProducts();
+        //Actions.getProducts();
 
         if (this.props.params.id) {
             Actions.getEditPedidos(this.props.params.id);
@@ -57,7 +58,7 @@ var NuevoPedido = React.createClass({
 
     },
     onChange: function(event, data) {
-        this.setState({productList: data});
+        this.setState({productList: data, loading:''});
     },
 
 
@@ -138,6 +139,15 @@ var NuevoPedido = React.createClass({
         this.setState({clientSelected: selected});
     },
 
+    filter: function(q) {
+        this.setState({loading:'block'});
+        Actions.getProducts(q);
+    },
+
+    isLoading: function() {
+        this.setState({loading:'block'});
+    },
+
     render: function() {
 
         var productsAndCart = false;
@@ -147,7 +157,10 @@ var NuevoPedido = React.createClass({
                     <div className="col-sm-12 animated zoomIn">
 
                         <ProductSearch addToCart={this.addToCart}
-                             products={this.state.productList} />
+                             products={this.state.productList}
+                             filter={this.filter}
+                             loading={this.state.loading}
+                             isLoading={this.isLoading} />
 
                     </div>
                     <div className="col-sm-12 animated zoomIn">
