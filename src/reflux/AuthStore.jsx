@@ -18,6 +18,7 @@ var AuthStore = Reflux.createStore({
         HTTP.post('/oauth/access_token', parameters)
         .then(function(json) {
             if (typeof json.access_token === 'string') {
+                Cookie.createCookie('access_token', json.access_token, 0.2);
                 this.trigger('success');
             } else {
                 this.trigger('failed');
@@ -31,7 +32,7 @@ var AuthStore = Reflux.createStore({
     },
 
     auth_check: function() {
-        console.log(Cookie.readCookie('access_token'));
+
         if (Cookie.readCookie('access_token') !== null) {
             return true;
         } else {

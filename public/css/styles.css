@@ -172,6 +172,8 @@ a.editHeadLink:hover {
 }
 
 .icon-hover {
+    box-shadow: inset 1px 1px 10px white;
+    border-radius: 5px;
     z-index: 15;
     text-align: center;
     background-color: rgba(171, 163, 155, 0.6);

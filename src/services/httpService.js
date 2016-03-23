@@ -14,7 +14,6 @@ var service = {
 
     post: function(url, body) {
         return fetch(baseUrl + url, {
-            //credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -25,6 +24,7 @@ var service = {
         .then(function(response) {
             return response;
         })
+        .then(this.checkStatus);
     },
 
     put: function(url, body) {

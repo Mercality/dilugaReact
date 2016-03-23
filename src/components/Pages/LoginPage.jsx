@@ -23,7 +23,7 @@ var LoginPage = React.createClass({
     onLogin: function(e, token) {
         this.setState({loading:''});
         if (e === 'success') {
-            this.setState({loggedIn: true});
+            this.setState({loggedIn: true, errorMsg: ''});
             History.goBack();
         }
         if (e === 'failed') {
