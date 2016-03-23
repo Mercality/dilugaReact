@@ -6,12 +6,19 @@ var ClientsStore = require('../../reflux/ClientsStore.jsx');
 
 var ClientSearch = React.createClass({
 
-    mixins: [Reflux.listenTo(ClientsStore, 'onChange')],
+    mixins: [
+        Reflux.listenTo(ClientsStore, 'onChange'),
+    ],
 
     getInitialState: function() {
         return {
             codigo:'',
         };
+    },
+
+    componentWillMount: function() {
+        if (this.props.disable === false)
+        this.setState({codigo:''})
     },
 
     onChange: function(e, client) {

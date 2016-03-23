@@ -41,23 +41,19 @@ var NuevoPedido = React.createClass({
 
     },
     onEditPedido: function(e, cart) {
-        this.updateSum(cart);
-        this.setState({cartProducts: cart});
-
-
+        if (e === 'editPedido') {
+            this.updateSum(cart);
+            this.setState({cartProducts: cart});
+        }
     },
     onPostPedido: function(e) {
-        this.setState({
-            cartProducts: [],
-            totals: {
-                base: 0,
-                tax: 0
-            },
-            clientSelected: false
-        });
+        if (e === 'postPedido') {
+            this.setState(this.getInitialState());
+        }
 
     },
     onChange: function(event, data) {
+        if (event === 'change')
         this.setState({productList: data, loading:''});
     },
 
@@ -117,11 +113,11 @@ var NuevoPedido = React.createClass({
                 var body = {
                     id: '',
                     cliente: client.name,
-                    fecha: date.getDay() + ' / ' + date.getMonth() + ' / ' + date.getFullYear(),
+                    fecha: date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay(),
                     total: this.state.totals.base,
                     detallePedido: this.state.cartProducts
                 }
-                Actions.postPedido(body);
+                Actions.postPedido(client, this.state.cartProducts, this.state.totals);
             } else {
 
                 //!!!!!!Show message indicating that the request can't be done.!!!!!!!!
@@ -136,7 +132,10 @@ var NuevoPedido = React.createClass({
     },
 
     clientSelected: function(selected) {
-        this.setState({clientSelected: selected});
+        if (selected === false)
+            this.setState(this.getInitialState());
+        else
+            this.setState({clientSelected: selected});
     },
 
     filter: function(q) {

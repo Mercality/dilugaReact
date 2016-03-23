@@ -5,12 +5,38 @@ var uuid = require('../services/uuid.js');
 
 var PedidosStore = Reflux.createStore({
     listenables: [Actions],
-    postPedido: function(body) {
+    postPedido: function(client, cart, totals) {
+
+        var fcart = [];
+        cart.forEach(function(product, index) {
+            fcart[index] = {
+                product_code: product.code,
+                product_desc: product.desc,
+                qty: parseFloat(product.qty),
+                price: parseFloat(product.price),
+            }
+        });
+
+        var date = new Date(Date.now());
+        var body = {
+            date: date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay(),
+            subtotal: totals.base,
+            tax: totals.tax,
+            total: totals.base + totals.tax,
+            salesman_id: 2, /////////!!!!!!!!!!! CHANGE THIS TO ACTUAL SALESMAN !!!!!!!!!!//////////////
+            code: client.codigo,
+            detail: fcart,
+        };
+
+        console.log(body);
+
 
         HTTP.post('/orders', body)
         .then(function(response) {
+            console.log(response);
             this.trigger('postPedido');
         }.bind(this));
+
     },
 
     getPedidos: function() {

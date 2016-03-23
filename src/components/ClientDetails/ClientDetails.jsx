@@ -29,7 +29,7 @@ var ClientDetails = React.createClass({
     },
 
     onPostPedido: function(e, msg) {
-        this.setState({client:{}});
+        this.setState({client:{}, disableInput: false});
     },
 
     onSubmit: function(e, id) {
