@@ -1,5 +1,4 @@
 var React = require('react');
-var delay = require('../../services/delay');
 var _ = require('underscore');
 
 var SearchBox = React.createClass({
