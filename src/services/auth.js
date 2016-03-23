@@ -13,6 +13,12 @@ var Auth = {
             })
         }
 
+    },
+
+    loginCheck: function(nextState, replace) {
+        if (AuthStore.auth_check() === true) {
+            History.goBack();
+        }
     }
 }
 

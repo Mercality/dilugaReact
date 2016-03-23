@@ -24,7 +24,7 @@ var Routes  = (
             <Route path="/pedido/nuevo" component={NuevoPedido} />
             <Route path="/pedido/editar/:id" editing="true" component={NuevoPedido} />
         </Route>
-        <Route path="/login" component={LoginPage} />
+        <Route path="/login" component={LoginPage} onEnter={Auth.loginCheck} />
     </Router>
 );
 
