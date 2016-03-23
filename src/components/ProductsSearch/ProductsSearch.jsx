@@ -1,12 +1,16 @@
 var React = require('react');
 var ProductList = require('./ProductList.jsx');
 var SearchFilters = require('./SearchFilters.jsx');
-var products = require('../../mockData.js').products; //Remove when conected to web service
+var Actions = require('../../reflux/Actions.jsx');
+var Reflux = require('reflux');
+var ProductStore = require('../../reflux/ProductStore.jsx');
 
 var ProductSearch = React.createClass({
 
     //We load products as props to save the original products data for filtering
-
+    mixins: [
+        Reflux.listenTo(ProductStore, 'onChange'),
+    ],
 
     //The products state changes upon filtering
     getInitialState: function() {
@@ -16,9 +20,13 @@ var ProductSearch = React.createClass({
     },
 
 
-
+    onChange: function(e, products) {
+        this.setState({products: products});
+    },
     //This functions is passed to the corresponding childs to perform queries.
     filterProducts: function(q) {
+        Actions.getProducts(q);
+        /*
         console.log(this.props.products);
         var query = new RegExp(q, 'gi');
         var products = this.props.products.filter(function(product){
@@ -26,6 +34,7 @@ var ProductSearch = React.createClass({
         });
 
         this.setState({products:products.slice(0,5)});
+        */
     },
 
     render: function() {

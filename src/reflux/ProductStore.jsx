@@ -1,14 +1,14 @@
-var HTTP = require('../services/httpService.js');
+    var HTTP = require('../services/httpService.js');
 var Reflux = require('reflux');
 var Actions = require('./Actions.jsx');
 
 var ProductStore = Reflux.createStore({
     listenables: [Actions],
-    getProducts: function(body) {
-        HTTP.get('/products?perPage=500')
+    getProducts: function(query) {
+        HTTP.get('/products?qcode='+query+'&qdesc='+query)
         .then(function(json) {
             var products = [];
-            json.data.forEach(function(product, index) {
+            json.forEach(function(product, index) {
                 products[index] = {
                     code: product.code,
                     desc: product.description,
