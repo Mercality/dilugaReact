@@ -52,13 +52,28 @@ var PedidosStore = Reflux.createStore({
     getEditPedidos: function(id) {
         HTTP.get('/orders/'+id+'?client=true&detail=true')
         .then(function(json) {
-            console.log(json);
-            var cartProducts = json.detail;
-            cartProducts.map(function(product) {
-                product.subtotal = Math.round(product.price*product.qty*100)/100;
-                product.uuid = uuid();
+            var cartProducts = [];
+            json.detail.forEach(function(product, index) {
+                cartProducts[index] = {
+                    code: product.product_code,
+                    desc: product.product_desc,
+                    qty: product.qty,
+                    price: product.price,
+                    subtotal: Math.round(product.price*product.qty*100)/100,
+                    uuid: uuid(),
+                }
             });
-            this.trigger('editPedido', cartProducts);
+            var client = {
+                codigo: json.client.code,
+                name: json.client.name,
+                rif: json.client.business_type+ json.client.business_id,
+                phone: json.client.phone,
+                email: json.client.email,
+                addr: json.client.address,
+            }
+
+
+            this.trigger('editPedido', cartProducts, client);
 
         }.bind(this));
     },

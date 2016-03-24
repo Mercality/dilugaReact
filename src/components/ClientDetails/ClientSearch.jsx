@@ -21,6 +21,11 @@ var ClientSearch = React.createClass({
         this.setState({codigo:''})
     },
 
+    componentWillReceiveProps: function(nextProps) {
+        if (nextProps.editing)
+        this.setState({codigo: nextProps.editing})
+    },
+
     onChange: function(e, client) {
         if (typeof client === 'object')
             this.setState({codigo:client.codigo})

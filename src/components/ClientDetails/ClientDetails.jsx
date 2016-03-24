@@ -22,10 +22,9 @@ var ClientDetails = React.createClass({
         };
     },
 
+
     componentWillReceiveProps: function(nextProps) {
-        /// MAX STACK ERROR
-
-
+        this.setState({client: nextProps.client, disableInput: true});
     },
 
     onPostPedido: function(e, msg) {
@@ -82,6 +81,7 @@ var ClientDetails = React.createClass({
                     <div className="col-md-3 col-sm-4 col-xs-8">
 
                         <ClientSearch onSubmit={this.onSubmit}
+                            editing={this.state.client.codigo}
                             errorMessage={this.state.errorMessage}
                             disable={this.state.disableInput}
                             clickEdit={this.clickEdit} />

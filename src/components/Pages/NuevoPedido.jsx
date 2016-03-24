@@ -41,10 +41,11 @@ var NuevoPedido = React.createClass({
     componentDidMount: function() {
 
     },
-    onEditPedido: function(e, cart) {
+    onEditPedido: function(e, cart, client) {
+
         if (e === 'editPedido') {
             this.updateSum(cart);
-            this.setState({cartProducts: cart});
+            this.setState({cartProducts: cart, clientSelected: client});
         }
     },
     onPostPedido: function(e, status) {
@@ -197,7 +198,7 @@ var NuevoPedido = React.createClass({
 
             <div className="row">
                 <div className="col-sm-12">
-                    <ClientDetails clientSelected={this.clientSelected}/>
+                    <ClientDetails client={this.state.clientSelected} clientSelected={this.clientSelected}/>
                 </div>
             </div>
 
