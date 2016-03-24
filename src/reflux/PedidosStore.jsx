@@ -79,6 +79,7 @@ var PedidosStore = Reflux.createStore({
     },
 
     putPedido: function(data) {
+        ////////////////////////////// THIS NEEDS URGENT CLEANUP ///////////////////////////////////
         var detail = [];
         var body = {
             id: data.id,
