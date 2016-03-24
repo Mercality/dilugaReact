@@ -100,10 +100,9 @@ var NuevoPedido = React.createClass({
             var date = new Date(Date.now());
             var cliente = this.state.clientSelected;
             body = {
+                client: cliente,
                 id: this.props.params.id,
-                cliente: cliente.name,
-                codigo_cliente: cliente.codigo_cliente,
-                fecha: date.getDay() + ' / ' + date.getMonth() + ' / ' + date.getFullYear(),
+                fecha: date.getDay() + '-' + date.getMonth() + '-' + date.getFullYear(),
                 total: this.state.totals.base,
                 detallePedido: this.state.cartProducts
             }
@@ -114,7 +113,7 @@ var NuevoPedido = React.createClass({
 
         else {
             if (typeof this.state.clientSelected === 'object' && this.state.cartProducts.length > 0) {
-                var client = this.state.clientSelected;
+                var cliente = this.state.clientSelected;
                 var date = new Date(Date.now());
                 var body = {
                     id: '',

@@ -6,6 +6,7 @@ var Actions = Reflux.createActions([
     'postPedido',
     'getPedidos',
     'getEditPedidos',
+    'putPedido',
 
     //Authentication
     'login',

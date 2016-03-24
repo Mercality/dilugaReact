@@ -78,10 +78,33 @@ var PedidosStore = Reflux.createStore({
         }.bind(this));
     },
 
-    putPedido: function(body) {
-        HTTP.put('/pedido/'+body.id, body)
-        .then(function(json) {
+    putPedido: function(data) {
+        var detail = [];
+        var body = {
+            id: data.id,
+            client_id: data.client.codigo,
+            date: data.fecha,
+            salesman_id: 2,
+            subtotal: data.total,
+            tax: Math.round(data.total*100*12,2)/100,
+            total: data.total + (Math.round(data.total*100*12,2)/100),
+            detail: [],
+        };
 
+        console.log(body);
+
+        data.detallePedido.forEach(function(product, index) {
+            body.detail[index] = {
+                product_code: product.code,
+                product_desc: product.desc,
+                qty: product.qty,
+                price: product.price,
+            }
+        });
+
+        HTTP.put('/orders/'+body.id, body)
+        .then(function(json) {
+            console.log(json);
             this.trigger('postPedido', true);
 
         }.bind(this));
