@@ -75,7 +75,7 @@ var NuevoPedido = React.createClass({
 
 
     addToCart: function(product) {
-        console.log('yes');
+        console.log(product);
         var actCart = this.state.cartProducts;
 
         actCart.push(product);

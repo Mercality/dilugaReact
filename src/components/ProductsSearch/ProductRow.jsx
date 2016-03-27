@@ -11,11 +11,11 @@ var ProductRow = React.createClass({
         };
     },
     qtyChange: function(e) {
-        if (e.target.value > 0) this.setState({qty:e.target.value});
+        if (e.target.value > 0 && e.target.value <= this.props.product.stock) this.setState({qty:e.target.value});
     },
     onClick: function(e){
-
-        if (this.state.qty > 0) {
+        console.log(this.props.product.stock)
+        if (this.state.qty > 0 && this.props.product.stock >= this.state.qty) {
 
             var product = {
                 uuid: uuid(),
