@@ -13,7 +13,8 @@ var NuevoPedido = React.createClass({
     mixins: [
         Reflux.listenTo(ProductStore, 'onChange'),
         Reflux.listenTo(PedidosStore, 'onEditPedido'),
-        Reflux.listenTo(PedidosStore, 'onPostPedido')
+        Reflux.listenTo(PedidosStore, 'onPostPedido'),
+        Reflux.listenTo(PedidosStore, 'onPutPedido')
 
     ],
 
@@ -57,6 +58,15 @@ var NuevoPedido = React.createClass({
             })
         }
 
+    },
+
+    onPutPedido: function(e) {
+        if (e === 'putPedido') {
+            History.push('/messages');
+            History.replace({
+                pathname: '/messages?status=OK&message=Pedido modificado correctamente'
+            })
+        }
     },
     onChange: function(event, data) {
         if (event === 'change')
@@ -117,12 +127,12 @@ var NuevoPedido = React.createClass({
                 var date = new Date(Date.now());
                 var body = {
                     id: '',
-                    cliente: client.name,
+                    cliente: cliente.name,
                     fecha: date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay(),
                     total: this.state.totals.base,
                     detallePedido: this.state.cartProducts
                 }
-                Actions.postPedido(client, this.state.cartProducts, this.state.totals);
+                Actions.postPedido(cliente, this.state.cartProducts, this.state.totals);
             } else {
 
                 //!!!!!!Show message indicating that the request can't be done.!!!!!!!!

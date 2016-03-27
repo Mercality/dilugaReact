@@ -106,7 +106,7 @@ var PedidosStore = Reflux.createStore({
         HTTP.put('/orders/'+body.id, body)
         .then(function(json) {
             console.log(json);
-            this.trigger('postPedido', true);
+            this.trigger('putPedido', true);
 
         }.bind(this));
     },
