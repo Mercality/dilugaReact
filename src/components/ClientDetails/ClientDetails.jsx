@@ -24,6 +24,7 @@ var ClientDetails = React.createClass({
 
 
     componentWillReceiveProps: function(nextProps) {
+        if (nextProps.client)
         this.setState({client: nextProps.client, disableInput: true});
     },
 
