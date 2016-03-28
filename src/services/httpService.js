@@ -45,7 +45,11 @@ var service = {
             return response.json()
 
          else
-            var error = {status: response.status, statusText: response.statusText }
+             var error = {
+                 status: response.status,
+                 statusText: response.statusText,
+                 messages: response.json()
+             }
             return error;
 
     },

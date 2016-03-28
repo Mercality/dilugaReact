@@ -33,6 +33,7 @@ var PedidosStore = Reflux.createStore({
 
         HTTP.post('/orders', body)
         .then(function(response) {
+            console.log(response);
             if (response.status !== 201)
                 this.trigger('postPedido', 'error');
             else
@@ -44,6 +45,7 @@ var PedidosStore = Reflux.createStore({
     getPedidos: function() {
         HTTP.get('/orders?client=true&detail=true')
         .then(function(json) {
+            console.log(json);
             this.pedidos = json.data;
             this.fireUpdate();
         }.bind(this));
