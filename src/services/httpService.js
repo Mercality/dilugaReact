@@ -5,7 +5,12 @@ var baseUrl = 'http://' + env.serverAddr;
 var ingredients = '/ingredients';
 var service = {
     get: function(url) {
-        return fetch(baseUrl + url)
+        return fetch(baseUrl + url, {
+            headers: {
+                'Accept': 'application/json',
+            },
+            'method': 'get'
+        })
         .then (function(response) {
             return response;
         })
@@ -31,6 +36,7 @@ var service = {
         return fetch(baseUrl + url, {
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             method: 'put',
             body: JSON.stringify(body)
@@ -41,19 +47,19 @@ var service = {
     },
 
     checkStatus: function(response) {
+        
           if (response.status >= 200 && response.status < 300)
             return response.json()
 
          else
-             var error = {
+             return {
+                 error: true,
                  status: response.status,
-                 statusText: response.statusText,
-                 messages: response.json()
-             }
-            return error;
+                 text: response.statusText,
+                 json: response.json()
+             };
 
     },
 }
-
 
 module.exports = service;

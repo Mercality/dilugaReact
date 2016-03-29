@@ -2,6 +2,7 @@ var HTTP = require('../services/httpService.js');
 var Reflux = require('reflux');
 var Actions = require('./Actions.jsx');
 var uuid = require('../services/uuid.js');
+var handler = require('../services/errorHandler.js');
 
 var PedidosStore = Reflux.createStore({
     listenables: [Actions],
@@ -33,7 +34,7 @@ var PedidosStore = Reflux.createStore({
 
         HTTP.post('/orders', body)
         .then(function(response) {
-            console.log(response);
+            console.log(response)
             if (response.status !== 201)
                 this.trigger('postPedido', 'error');
             else
@@ -43,12 +44,16 @@ var PedidosStore = Reflux.createStore({
     },
 
     getPedidos: function() {
-        HTTP.get('/orders?client=true&detail=true')
+        HTTP.get('/orderss?client=true&detail=true')
+        .then(handler.check)
         .then(function(json) {
-            console.log(json);
-            this.pedidos = json.data;
-            this.fireUpdate();
-        }.bind(this));
+            console.log('esto no debe salir');
+
+            this.trigger('change', json.data);
+        }.bind(this))
+        .catch(function(e) {
+            console.log(e.message);
+        }) ;
     },
 
     getEditPedidos: function(id) {
