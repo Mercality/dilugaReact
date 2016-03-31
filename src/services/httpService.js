@@ -26,9 +26,6 @@ var service = {
             method: 'post',
             body: JSON.stringify(body)
         })
-        .then(function(response) {
-            return response;
-        })
         .then(this.checkStatus);
     },
 
@@ -41,13 +38,11 @@ var service = {
             method: 'put',
             body: JSON.stringify(body)
         })
-        .then(function(response) {
-            return response.json();
-        })
+        .then(this.checkStatus);
     },
 
     checkStatus: function(response) {
-        
+
           if (response.status >= 200 && response.status < 300)
             return response.json()
 

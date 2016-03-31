@@ -6,8 +6,11 @@ var Messages = React.createClass({
         History.goBack();
     },
     render: function() {
+        var list = [];
+        if (this.props.location.query.messageList) {
+            list = JSON.parse(decodeURIComponent(this.props.location.query.messageList));
+        }
 
-        var list = JSON.parse(decodeURIComponent(this.props.location.query.messageList));
         var elems = [];
         Object.keys(list).forEach(function(key, index) {
             elems[index] = <li key={key}>{key+': '+list[key]}</li>

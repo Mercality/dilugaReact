@@ -3,9 +3,9 @@ var React = require('react');
 var errorHandler = {
 
     check: function(res) {
-
         if (res.error) {
             res.json.then(function(error) {
+                console.log(error);
                 var message = error.statusText || 'Not Found',
                 status = error.statusCode,
                 messageList = '&messageList='+encodeURIComponent(JSON.stringify(error));
@@ -19,9 +19,15 @@ var errorHandler = {
 
             })
             throw new Error('The was an error, check messages page for detailed information');
+        } else {
+            return res;
         }
 
     },
+
+    success: function(res) {
+
+    }
 
 }
 

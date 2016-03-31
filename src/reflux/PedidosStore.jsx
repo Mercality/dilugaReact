@@ -6,11 +6,69 @@ var handler = require('../services/errorHandler.js');
 
 var PedidosStore = Reflux.createStore({
     listenables: [Actions],
-    postPedido: function(client, cart, totals) {
 
-        var fcart = [];
+    /*
+    * GET request to the specified URI
+    * Triggers the CHANGE event
+    *
+    */
+    getPedidos: function() {
+        HTTP.get('/orders?client=true&detail=true')
+        .then(handler.check)
+        .then(trigger.bind(this, event='change'))
+        .catch(printException) ;
+    },
+
+
+    /*
+    * POST request to the specified URI
+    * Formats the body to the API requirements using _formatPedidoBody()
+    * Triggers the postedPedido event
+    *
+    */
+    postPedido: function(client, cart, totals) {
+        var body = this._formatPedidoBody(cart, totals, client);
+
+        HTTP.post('/orders', body)
+        .then(handler.check)
+        .then(trigger.bind(this, event='postedPedido'))
+        //.catch(printException);
+    },
+
+
+    /*
+    * GET request to the specified URI for retrieving the date to be edited by the user
+    * Formats the data for using with the client app via _formatPedidoEditing()
+    * Triggers the editPedido event.
+    */
+    getEditPedidos: function(id) {
+        HTTP.get('/orders/'+id+'?client=true&detail=true')
+        .then(handler.check)
+        .then(this._formatPedidoEditing)
+        //.catch(printException);
+    },
+
+    /*
+    * PUT request to the specified URI for updating a selected order
+    * Formats the body to the API requirements using _formatPedidoBody()
+    * Triggers the putPedido event.
+    */
+    putPedido: function(data) {
+        var body = this._formatPedidoBody(data.detallePedido);
+            body.id = data.id;
+
+        HTTP.put('/orders/'+body.id, body)
+        .then(handler.check)
+        .then(function(json) { this.trigger('putPedido', true) }.bind(this));
+    },
+
+    _formatPedidoBody: function(cart, totals = {}, client = {}) {
+        var detail = [],
+            date = new Date(Date.now()),
+            body = {};
+
         cart.forEach(function(product, index) {
-            fcart[index] = {
+            detail[index] = {
                 product_code: product.code,
                 product_desc: product.desc,
                 qty: parseFloat(product.qty),
@@ -18,110 +76,55 @@ var PedidosStore = Reflux.createStore({
             }
         });
 
-        var date = new Date(Date.now());
-        var body = {
+        return body = {
             date: date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay(),
-            subtotal: totals.base,
-            tax: totals.tax,
-            total: totals.base + totals.tax,
-            salesman_id: 2, /////////!!!!!!!!!!! CHANGE THIS TO ACTUAL SALESMAN !!!!!!!!!!//////////////
-            code: client.codigo,
-            detail: fcart,
+            subtotal: totals.base || null,
+            tax: totals.tax || null,
+            total: totals.base + totals.tax || null,
+            salesman_id: 2 || null, /////////!!!!!!!!!!! CHANGE THIS TO ACTUAL SALESMAN !!!!!!!!!!//////////////
+            code: client.codigo || null,
+            detail: detail,
         };
-
-        console.log(body);
-
-
-        HTTP.post('/orders', body)
-        .then(function(response) {
-            console.log(response)
-            if (response.status !== 201)
-                this.trigger('postPedido', 'error');
-            else
-                this.trigger('postPedido', 'success');
-        }.bind(this));
-
     },
 
-    getPedidos: function() {
-        HTTP.get('/orderss?client=true&detail=true')
-        .then(handler.check)
-        .then(function(json) {
-            console.log('esto no debe salir');
+    _formatPedidoEditing: function(json) {
+        var order = {cart: [], client: {}};
 
-            this.trigger('change', json.data);
-        }.bind(this))
-        .catch(function(e) {
-            console.log(e.message);
-        }) ;
-    },
-
-    getEditPedidos: function(id) {
-        HTTP.get('/orders/'+id+'?client=true&detail=true')
-        .then(function(json) {
-            var cartProducts = [];
-            json.detail.forEach(function(product, index) {
-                cartProducts[index] = {
-                    code: product.product_code,
-                    desc: product.product_desc,
-                    qty: product.qty,
-                    price: product.price,
-                    subtotal: Math.round(product.price*product.qty*100)/100,
-                    uuid: uuid(),
-                }
-            });
-            var client = {
-                codigo: json.client.code,
-                name: json.client.name,
-                rif: json.client.business_type+ json.client.business_id,
-                phone: json.client.phone,
-                email: json.client.email,
-                addr: json.client.address,
-            }
-
-
-            this.trigger('editPedido', cartProducts, client);
-
-        }.bind(this));
-    },
-
-    putPedido: function(data) {
-        ////////////////////////////// THIS NEEDS URGENT CLEANUP ///////////////////////////////////
-        var detail = [];
-        var body = {
-            id: data.id,
-            client_id: data.client.codigo,
-            date: data.fecha,
-            salesman_id: 2,
-            subtotal: data.total,
-            tax: Math.round(data.total*100*12,2)/100,
-            total: data.total + (Math.round(data.total*100*12,2)/100),
-            detail: [],
-        };
-
-        console.log(body);
-
-        data.detallePedido.forEach(function(product, index) {
-            body.detail[index] = {
-                product_code: product.code,
-                product_desc: product.desc,
+        json.detail.forEach(function(product, index) {
+            order.cart[index] = {
+                code: product.product_code,
+                desc: product.product_desc,
                 qty: product.qty,
                 price: product.price,
+                subtotal: Math.round(product.price*product.qty*100)/100,
+                uuid: uuid(),
             }
         });
 
-        HTTP.put('/orders/'+body.id, body)
-        .then(function(json) {
-            console.log(json);
-            this.trigger('putPedido', true);
+        order.client = {
+            codigo: json.client.code,
+            name: json.client.name,
+            rif: json.client.business_type+ json.client.business_id,
+            phone: json.client.phone,
+            email: json.client.email,
+            addr: json.client.address,
+        }
 
-        }.bind(this));
-    },
-
-    fireUpdate: function() {
-        this.trigger('change', this.pedidos);
-    },
+        this.trigger('editPedido',order.cart, order.client);
+    }
 
 });
+
+
+function trigger(event, json) {
+    if (event === 'postedPedido')
+        this.trigger(event, json);
+    else
+        this.trigger(event, json.data);
+}
+
+function printException(e) {
+    console.log(e.message);
+}
 
 module.exports = PedidosStore;

@@ -11,10 +11,10 @@ var PedidosStore = require('../../reflux/PedidosStore.jsx');
 
 var NuevoPedido = React.createClass({
     mixins: [
-        Reflux.listenTo(ProductStore, 'onChange'),
-        Reflux.listenTo(PedidosStore, 'onEditPedido'),
-        Reflux.listenTo(PedidosStore, 'onPostPedido'),
-        Reflux.listenTo(PedidosStore, 'onPutPedido')
+        Reflux.listenTo(ProductStore, 'onChange'),       //GET Product List
+        Reflux.listenTo(PedidosStore, 'onPostedPedido'), //Pedido was created
+        Reflux.listenTo(PedidosStore, 'onEditPedido'),   //GET Pedido for edition
+        Reflux.listenTo(PedidosStore, 'onPutPedido')     //Pedido was edited
 
     ],
 
@@ -33,15 +33,10 @@ var NuevoPedido = React.createClass({
 
     componentWillMount: function() {
         //Actions.getProducts();
-
-        if (this.props.params.id) {
+        if (this.props.params.id)
             Actions.getEditPedidos(this.props.params.id);
-        }
     },
 
-    componentDidMount: function() {
-
-    },
     onEditPedido: function(e, cart, client) {
 
         if (e === 'editPedido') {
@@ -49,15 +44,14 @@ var NuevoPedido = React.createClass({
             this.setState({cartProducts: cart, clientSelected: client});
         }
     },
-    onPostPedido: function(e, status) {
-        if (e === 'postPedido' && status === 'success') {
-            this.setState(this.getInitialState());
+    onPostedPedido: function(e) {
+        if (e === 'postedPedido') {
             History.push('/messages');
             History.replace({
-                pathname: '/messages?status=OK&message=Pedido creado correctamente'
+                pathname: '/messages?status=OK&message=Pedido modificado correctamente'
             })
+            console.log(data);
         }
-
     },
 
     onPutPedido: function(e) {
