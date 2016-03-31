@@ -40,6 +40,10 @@ var AuthStore = Reflux.createStore({
         }
     },
 
+    get_token: function() {
+        return Cookie.readCookie('access_token');
+    },
+
     fireUpdate: function(error) {
 
     },

@@ -19,6 +19,10 @@ var Auth = {
         if (AuthStore.auth_check() === true) {
             History.goBack();
         }
+    },
+
+    get_token: function() {
+        return AuthStore.get_token();
     }
 }
 

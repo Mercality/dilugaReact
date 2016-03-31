@@ -3,6 +3,7 @@ var Reflux = require('reflux');
 var Actions = require('./Actions.jsx');
 var uuid = require('../services/uuid.js');
 var handler = require('../services/errorHandler.js');
+var auth = require('./AuthStore.jsx');
 
 var PedidosStore = Reflux.createStore({
     listenables: [Actions],
@@ -13,7 +14,7 @@ var PedidosStore = Reflux.createStore({
     *
     */
     getPedidos: function() {
-        HTTP.get('/orders?client=true&detail=true')
+        HTTP.get('/orders?client=true&detail=true', auth.get_token())
         .then(handler.check)
         .then(trigger.bind(this, event='change'))
         .catch(printException) ;

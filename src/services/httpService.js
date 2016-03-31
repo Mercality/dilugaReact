@@ -4,15 +4,17 @@ var env = require('../../env.js');
 var baseUrl = 'http://' + env.serverAddr;
 var ingredients = '/ingredients';
 var service = {
-    get: function(url) {
+    
+    get: function(url, authorization) {
+        var headers = {
+            'Accept': 'application/json',
+        }
+        if (authorization) headers.Authorization = 'Bearer ' + authorization;
+
+
         return fetch(baseUrl + url, {
-            headers: {
-                'Accept': 'application/json',
-            },
+            headers: headers,
             'method': 'get'
-        })
-        .then (function(response) {
-            return response;
         })
         .then(this.checkStatus);
     },
