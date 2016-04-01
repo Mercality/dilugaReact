@@ -4,13 +4,12 @@ var env = require('../../env.js');
 var baseUrl = 'http://' + env.serverAddr;
 var ingredients = '/ingredients';
 var service = {
-    
+
     get: function(url, authorization) {
         var headers = {
             'Accept': 'application/json',
         }
         if (authorization) headers.Authorization = 'Bearer ' + authorization;
-
 
         return fetch(baseUrl + url, {
             headers: headers,
@@ -19,24 +18,29 @@ var service = {
         .then(this.checkStatus);
     },
 
-    post: function(url, body) {
+    post: function(url, body, authorization) {
+        var headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+        if (authorization) headers.Authorization = 'Bearer ' + authorization;
         return fetch(baseUrl + url, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+            headers: headers,
             method: 'post',
             body: JSON.stringify(body)
         })
         .then(this.checkStatus);
     },
 
-    put: function(url, body) {
+    put: function(url, body, authorization) {
+        var headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+        if (authorization) headers.Authorization = 'Bearer ' + authorization;
+
         return fetch(baseUrl + url, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
+            headers: headers,
             method: 'put',
             body: JSON.stringify(body)
         })

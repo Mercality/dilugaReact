@@ -13,8 +13,10 @@ var PedidosStore = Reflux.createStore({
     * Triggers the CHANGE event
     *
     */
-    getPedidos: function() {
-        HTTP.get('/orders?client=true&detail=true', auth.get_token())
+    getPedidos: function(pageNo) {
+        var page = '&perPage=10&page=1';
+        if (pageNo) page = '&perPage=10&page='+pageNo;
+        HTTP.get('/orders?client=true&detail=true'+page, auth.get_token())
         .then(handler.check)
         .then(trigger.bind(this, event='change'))
         .catch(printException) ;
@@ -30,7 +32,7 @@ var PedidosStore = Reflux.createStore({
     postPedido: function(client, cart, totals) {
         var body = this._formatPedidoBody(cart, totals, client);
 
-        HTTP.post('/orders', body)
+        HTTP.post('/orders', body, auth.get_token())
         .then(handler.check)
         .then(trigger.bind(this, event='postedPedido'))
         //.catch(printException);
@@ -43,7 +45,7 @@ var PedidosStore = Reflux.createStore({
     * Triggers the editPedido event.
     */
     getEditPedidos: function(id) {
-        HTTP.get('/orders/'+id+'?client=true&detail=true')
+        HTTP.get('/orders/'+id+'?client=true&detail=true', auth.get_token())
         .then(handler.check)
         .then(this._formatPedidoEditing)
         //.catch(printException);
@@ -58,7 +60,7 @@ var PedidosStore = Reflux.createStore({
         var body = this._formatPedidoBody(data.detallePedido);
             body.id = data.id;
 
-        HTTP.put('/orders/'+body.id, body)
+        HTTP.put('/orders/'+body.id, body, auth.get_token())
         .then(handler.check)
         .then(function(json) { this.trigger('putPedido', true) }.bind(this));
     },
@@ -118,10 +120,7 @@ var PedidosStore = Reflux.createStore({
 
 
 function trigger(event, json) {
-    if (event === 'postedPedido')
         this.trigger(event, json);
-    else
-        this.trigger(event, json.data);
 }
 
 function printException(e) {

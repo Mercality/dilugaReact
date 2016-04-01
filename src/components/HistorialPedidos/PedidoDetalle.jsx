@@ -1,12 +1,13 @@
 var React = require('react');
 var ProductoDetalle = require('./ProductoDetalle.jsx');
 var Link = require('react-router/lib/Link');
+var uuid = require('../../services/uuid.js');
 
 var PedidoDetalle = React.createClass({
 
     render: function() {
         var productos = this.props.pedido.detail.map(function(producto) {
-            return <ProductoDetalle key={producto.product_code+Date.now()/3600}
+            return <ProductoDetalle key={producto.product_code+uuid()}
                 code={producto.product_code}
                 desc={producto.product_desc}
                 qty={producto.qty}

@@ -1,38 +1,18 @@
 var React = require('react');
 var PedidoDetalle = require('./PedidoDetalle.jsx');
 var Pedido = require('./Pedido.jsx');
-
-var Reflux = require('reflux');
-var Actions = require('../../reflux/Actions.jsx');
-var PedidosStore = require('../../reflux/PedidosStore.jsx');
-
+var Loading = require('../Loading.jsx');
 var HistorialPedidos = React.createClass({
-
-    mixins: [Reflux.listenTo(PedidosStore, 'onChange')],
-
-    getInitialState: function() {
-        return {
-            pedidos:[] // {id, date, client_id, lines, subtotal, tax, total, salesman_id}
-        };
-    },
-
-    componentWillMount: function() {
-        Actions.getPedidos();
-    },
-
-    onChange: function(e, pedidos) {
-        this.setState({pedidos:pedidos});
-    },
 
     render: function() {
 
-        var pedidos = this.state.pedidos.map(function(pedido) {
+        var pedidos = this.props.pedidos.map(function(pedido) {
             return (
                     <Pedido key={pedido.id+Date.now()/3600} pedido={pedido} />
             )
         });
 
-        var detalles = this.state.pedidos.map(function(pedido) {
+        var detalles = this.props.pedidos.map(function(pedido) {
             return (
                     <PedidoDetalle key={Math.random()}  pedido={pedido} />
             )
@@ -45,17 +25,22 @@ var HistorialPedidos = React.createClass({
         }
 
         return (
-            <div className="componentWrap">
-                <h3>Ultimos Pedidos</h3>
-                <table className="table">
-                    <tbody>
-                        <tr>
-                            <th>Pedido</th><th>Cliente</th><th>Fecha</th><th className="text-center">Total</th>
-                        </tr>
-                        {pedidos}
-                    </tbody>
-                  </table>
+            <div className="row">
+                <div className="componentWrap" style={{position:'relative'}}>
+                    <Loading active={this.props.loading} />
+                    <h3>Ultimos Pedidos</h3>
+
+                    <table className="table">
+                        <tbody>
+                            <tr>
+                                <th>Pedido</th><th>Cliente</th><th>Fecha</th><th className="text-center">Total</th>
+                            </tr>
+                            {pedidos}
+                        </tbody>
+                      </table>
+                </div>
             </div>
+
         );
     }
 
