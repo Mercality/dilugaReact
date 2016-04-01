@@ -19,7 +19,7 @@ var PedidosStore = Reflux.createStore({
         HTTP.get('/orders?client=true&detail=true'+page, auth.get_token())
         .then(handler.check)
         .then(trigger.bind(this, event='change'))
-        .catch(printException) ;
+        //.catch(printException) ;
     },
 
 
@@ -111,6 +111,7 @@ var PedidosStore = Reflux.createStore({
             phone: json.client.phone,
             email: json.client.email,
             addr: json.client.address,
+            ultimo: json.client.last_order,
         }
 
         this.trigger('editPedido',order.cart, order.client);

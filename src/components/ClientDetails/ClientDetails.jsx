@@ -1,6 +1,7 @@
 var React = require('react');
 var Details = require('./Details.jsx');
 var ClientSearch = require('./ClientSearch.jsx');
+var dateFormat = require('../../services/dateFormat.js');
 
 var Reflux = require('reflux');
 var Actions = require('../../reflux/Actions.jsx');
@@ -25,6 +26,7 @@ var ClientDetails = React.createClass({
 
     componentWillReceiveProps: function(nextProps) {
         if (nextProps.client)
+        console.log(nextProps);
         this.setState({client: nextProps.client, disableInput: true});
     },
 
@@ -69,7 +71,7 @@ var ClientDetails = React.createClass({
 
             ultimo = (
                 <div className=" col-md-9 col-sm-8 col-xs-12">
-                    <h4 className="text-right"><strong>Ultimo Pedido: </strong><span>{this.state.client.ultimo}</span></h4>
+                    <h4 className="text-right"><strong>Ultimo Pedido: </strong><span>{dateFormat.human(this.state.client.ultimo)}</span></h4>
                 </div>
             );
         }
