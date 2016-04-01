@@ -9,6 +9,7 @@ var headers = [
     {title:'Cantidad', width:0},
     {title:'Precio', width:0},
     {title:'Subtotal', width:0},
+    {title: 'Borrar', width:10}
 ];
 
 

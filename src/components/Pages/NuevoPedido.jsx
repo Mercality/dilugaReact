@@ -48,7 +48,7 @@ var NuevoPedido = React.createClass({
         if (e === 'postedPedido') {
             History.push('/messages');
             History.replace({
-                pathname: '/messages?status=OK&message=Pedido modificado correctamente'
+                pathname: '/messages?status=OK&message=Pedido creado correctamente'
             })
             console.log(data);
         }
@@ -92,10 +92,10 @@ var NuevoPedido = React.createClass({
         var totals = {base:0, tax: 0};
 
         for (var i = 0; i <= cart.length-1; i++) {
-            totals.base = Math.round((totals.base + cart[i].subtotal)*100)/100;
+            totals.base = totals.base + cart[i].subtotal;
         }
 
-        totals.tax = Math.round((totals.base*12/100),2);
+        totals.tax = Math.round((totals.base*12/100)*100,2)/100;
         this.setState({totals:totals});
     },
 

@@ -43,8 +43,8 @@ var ProductoDetalle = React.createClass({
                 </td>
                 {/*Swap Qty with input */}
 
-                <td className="productPrice">{this.props.price}</td>
-                <td className="productPrice">{this.props.price*this.props.qty}</td>
+                <td className="productPrice">{this.props.price.toFixed(2)}</td>
+                <td className="productPrice">{(Math.round(this.props.price*this.props.qty*100,2)/100).toFixed(2)}</td>
             </tr>
         );
     }

@@ -99,7 +99,7 @@ var PedidosStore = Reflux.createStore({
                 desc: product.product_desc,
                 qty: product.qty,
                 price: product.price,
-                subtotal: Math.round(product.price*product.qty*100)/100,
+                subtotal: Math.round(product.price*product.qty*100,2)/100,
                 uuid: uuid(),
             }
         });
