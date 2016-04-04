@@ -50,7 +50,6 @@ var NuevoPedido = React.createClass({
             History.replace({
                 pathname: '/messages?status=OK&message=Pedido creado correctamente'
             })
-            console.log(data);
         }
     },
 
@@ -69,7 +68,6 @@ var NuevoPedido = React.createClass({
 
 
     addToCart: function(product) {
-        console.log(product);
         var actCart = this.state.cartProducts;
 
         actCart.push(product);
@@ -141,8 +139,11 @@ var NuevoPedido = React.createClass({
     },
 
     clientSelected: function(selected) {
-        if (selected === false)
+
+        if (selected.codigo === undefined) {
             this.setState(this.getInitialState());
+        }
+
         else
             this.setState({clientSelected: selected});
     },

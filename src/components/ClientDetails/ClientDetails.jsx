@@ -17,7 +17,6 @@ var ClientDetails = React.createClass({
 
     getInitialState: function() {
         return {
-            client: {},
             errorMessage: '',
             disableInput: false,
         };
@@ -25,13 +24,11 @@ var ClientDetails = React.createClass({
 
 
     componentWillReceiveProps: function(nextProps) {
-        if (nextProps.client)
-        console.log(nextProps);
-        this.setState({client: nextProps.client, disableInput: true});
+
     },
 
     onPostPedido: function(e, msg) {
-        this.setState({client:{}, disableInput: false});
+        this.setState({disableInput: false});
     },
 
     onSubmit: function(e, id) {
@@ -40,23 +37,22 @@ var ClientDetails = React.createClass({
     },
 
     clickEdit: function(e) {
-        this.setState({client:{}, disableInput: false});
+        this.setState({disableInput: false});
         this.props.clientSelected(false)
     },
 
     onGetClient: function(e, client) {
-        console.log(client);
         //Means there as an error on the request
         if (client.codigo === undefined) {
-            this.setState({client:{}, errorMessage:'No se encontraron resultados'});
+            this.setState({client:{}, errorMessage:'Cliente no existe o no pertenece al actual vendedor.'});
 
         //A client was successfully retrieved.
         } else {
             this.setState({client:client, errorMessage:'', disableInput:true});
         }
 
-        this.state.disableInput
-        ? this.props.clientSelected(this.state.client)
+        client.codigo !== undefined
+        ? this.props.clientSelected(client)
         : this.props.clientSelected(false)
 
     },
@@ -65,13 +61,13 @@ var ClientDetails = React.createClass({
         var details = '',
         ultimo = '';
 
-        if (this.state.client.hasOwnProperty('codigo')) {
+        if (this.props.client.hasOwnProperty('codigo')) {
 
-            details = <Details client={this.state.client} />;
+            details = <Details client={this.props.client} />;
 
             ultimo = (
                 <div className=" col-md-9 col-sm-8 col-xs-12">
-                    <h4 className="text-right"><strong>Ultimo Pedido: </strong><span>{dateFormat.human(this.state.client.ultimo)}</span></h4>
+                    <h4 className="text-right"><strong>Ultimo Pedido: </strong><span>{dateFormat.human(this.props.client.ultimo)}</span></h4>
                 </div>
             );
         }
@@ -84,7 +80,7 @@ var ClientDetails = React.createClass({
                     <div className="col-md-3 col-sm-4 col-xs-8">
 
                         <ClientSearch onSubmit={this.onSubmit}
-                            editing={this.state.client.codigo}
+                            editing={this.props.client.codigo}
                             errorMessage={this.state.errorMessage}
                             disable={this.state.disableInput}
                             clickEdit={this.clickEdit} />

@@ -10,8 +10,7 @@ var dateFormat = {
     human: function(dat) {
         var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
         var date = new Date(dat);
-        console.log(dat);
-        console.log(date);
+
         var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate(),
             month = date.getMonth(),
             year = date.getFullYear();
