@@ -31,6 +31,21 @@ var AuthStore = Reflux.createStore({
         }.bind(this));
     },
 
+    getLoggedUser: function() {
+        HTTP.get('/auth/user?salesman=true', this.get_token())
+        .then(function(json) {
+            this.trigger('getUser', json);
+        }.bind(this));
+    },
+
+    logout: function() {
+        HTTP.get('/auth/apilogout', this.get_token())
+        .then(function(json) {
+            Cookie.eraseCookie('access_token')
+            this.trigger('logout');
+        }.bind(this));
+    },
+
     auth_check: function() {
 
         if (Cookie.readCookie('access_token') !== null) {

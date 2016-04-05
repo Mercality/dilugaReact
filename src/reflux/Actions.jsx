@@ -11,7 +11,9 @@ var Actions = Reflux.createActions([
     //Authentication
     'login',
     'auth_check',
-    'getToken'
+    'getToken',
+    'getLoggedUser',
+    'logout',
 ]);
 
 module.exports = Actions;

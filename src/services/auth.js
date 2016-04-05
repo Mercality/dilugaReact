@@ -23,6 +23,10 @@ var Auth = {
 
     get_token: function() {
         return AuthStore.get_token();
+    },
+
+    logout: function() {
+        Actions.logout();
     }
 }
 
