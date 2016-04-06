@@ -20,7 +20,7 @@ var Messages = require('./components/Messages.jsx');
 
 var Routes  = (
     <Router history={History}>
-        <Route path="/" component={Base}>
+        <Route path="/" component={Base} onEnter={Auth.check}>
             <IndexRoute component={HomePage} />
             <Route path="/messages" component={Messages} />
             <Route path="/historial" component={Historial} onEnter={Auth.check} />

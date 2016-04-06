@@ -90,17 +90,17 @@ var UserMenu = React.createClass({
                             <a href="#" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-user"></i> {this.props.user.name} <b className="caret"></b></a>
                             <ul className="dropdown-menu">
                                 <li>
-                                    <a href="#"><i className="fa fa-fw fa-user"></i> Profile</a>
+                                    <Link to="/user"><i className="fa fa-fw fa-user"></i> Perfil</Link>
                                 </li>
                                 <li>
-                                    <a href="#"><i className="fa fa-fw fa-envelope"></i> Inbox</a>
+                                    <a href="https://www.diluga.com.ve/webmail" target="_blank"><i className="fa fa-fw fa-envelope"></i> Correo</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i className="fa fa-fw fa-gear"></i> Settings</a>
+                                    <a href="#"><i className="fa fa-fw fa-gear"></i> Configuración</a>
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <Link to="/logout"><i className="fa fa-fw fa-power-off"></i> Log Out</Link>
+                                    <Link to="/logout"><i className="fa fa-fw fa-power-off"></i> Cerrar Sesión</Link>
                                 </li>
                             </ul>
                         </li>

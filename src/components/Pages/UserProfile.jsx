@@ -19,10 +19,10 @@ var UserProfile = React.createClass({
     },
 
     render: function() {
-        console.log(this.state.user)
+
         return (
             <div className="componentWrap">
-                <h1>Hola</h1>
+                <h1>Perfil de Usuario</h1>
                 <div className="row">
                     <div className="userForm">
                         <form action="">
@@ -37,8 +37,8 @@ var UserProfile = React.createClass({
                                 disabled={true}
                                 value={this.state.user.salesman.email} />
                             <TextInput name='phone'
-                                label='phone'
-                                placeholder='phone'
+                                label='Teléfono'
+                                placeholder='Teléfono'
                                 disabled={true}
                                 value={this.state.user.salesman.phone} />
                             <TextInput name='zone'
@@ -46,6 +46,9 @@ var UserProfile = React.createClass({
                                 placeholder='Zona'
                                 disabled={true}
                                 value={this.state.user.salesman.zone} />
+
+                            <button type="submit" className="btn btn-primary">Guardar</button>
+                            <button type="submit" className="btn btn-default">Cancelar</button>
 
                         </form>
                     </div>
