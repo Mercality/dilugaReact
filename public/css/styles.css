@@ -183,3 +183,9 @@ a.editHeadLink:hover {
     height: 100%;
     opacity:.9;
 }
+
+.userForm {
+    min-width:300px;
+    width:50%;
+    margin:auto;
+}

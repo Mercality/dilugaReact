@@ -15,6 +15,7 @@ var HomePage = require('./components/Pages/HomePage.jsx');
 var Historial = require('./components/Pages/Historial.jsx');
 var NuevoPedido = require('./components/Pages/NuevoPedido.jsx');
 var LoginPage = require('./components/Pages/LoginPage.jsx');
+var UserProfile = require('./components/Pages/UserProfile.jsx');
 var Messages = require('./components/Messages.jsx');
 
 var Routes  = (
@@ -25,9 +26,11 @@ var Routes  = (
             <Route path="/historial" component={Historial} onEnter={Auth.check} />
             <Route path="/pedido/nuevo" component={NuevoPedido} />
             <Route path="/pedido/editar/:id" editing="true" component={NuevoPedido} />
+            <Route path="/user" component={UserProfile} />
         </Route>
         <Route path="/login" component={LoginPage} onEnter={Auth.loginCheck} />
         <Route path="/logout" component={LoginPage} onEnter={Auth.logout} />
+
     </Router>
 );
 
