@@ -19,9 +19,9 @@ var AuthStore = Reflux.createStore({
         .then(function(json) {
             if (typeof json.access_token === 'string') {
                 Cookie.createCookie('access_token', json.access_token, 0.2);
-                this.trigger('success');
+                this.trigger('success', json);
             } else {
-                this.trigger('failed');
+                this.trigger('failed', json);
             }
 
 
