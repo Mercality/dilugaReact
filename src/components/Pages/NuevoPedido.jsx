@@ -60,29 +60,47 @@ var NuevoPedido = React.createClass({
                 pathname: '/messages?status=OK&message=Pedido modificado correctamente'
             })
         }
+
     },
-    onChange: function(event, data) {
-        if (event === 'change')
-        this.setState({productList: data, loading:''});
+    onChange: function(event, list) {
+        if (event === 'change') {
+
+            this.state.cartProducts.forEach(function(product, index) {
+                this.updateProductList(list, product.code, product.qty, 'rest');
+            }.bind(this));
+
+            this.setState({productList: list, loading:''});
+        }
+
     },
 
-
+    /*
+    *    ShoppingCart Related Functions
+    *
+    *
+    */
     addToCart: function(product) {
         var actCart = this.state.cartProducts;
+        var list = this.state.productList;
 
         actCart.push(product);
-        this.setState({cartProducts: actCart});
+
+        list = this.updateProductList(this.state.productList, product.code, product.qty, 'rest');
+
+        this.setState({cartProducts: actCart, productList: list});
         this.updateSum(actCart);
     },
 
     removeFromCart: function(uuid) {
         var cartProducts = this.state.cartProducts;
-
+        var list = this.state.productList;
         var newCart = cartProducts.filter(function(product){
-            return product['uuid'] !== uuid;
-        });
 
-        this.setState({cartProducts: newCart});
+            if (product['uuid'] === uuid) list = this.updateProductList(this.state.productList, product.code, product.qty, 'sum');
+            return product['uuid'] !== uuid;
+        }.bind(this));
+
+        this.setState({cartProducts: newCart, productList: list});
         this.updateSum(newCart);
     },
 
@@ -138,6 +156,12 @@ var NuevoPedido = React.createClass({
         this.setState({cartProducts:[], totals:{base: 0, tax: 0}})
     },
 
+
+    /*
+    *    ClientDetails related functions
+    *
+    *
+    */
     clientSelected: function(selected) {
 
         if (selected.codigo === undefined) {
@@ -148,6 +172,29 @@ var NuevoPedido = React.createClass({
             this.setState({clientSelected: selected});
     },
 
+
+    /*
+    *    ProductSearch Related Fucntions
+    *
+    *
+    */
+    updateProductList: function(list, code, qty, operation) {
+
+        list.map(function(product, index) {
+            if (product.code === code) {
+
+                operation === 'rest'
+                ? product.stock -= qty
+                : product.stock += qty
+                return product;
+            } else {
+                return product;
+            }
+        });
+
+        return list;
+    },
+
     filter: function(q) {
         this.setState({loading:'block'});
         Actions.getProducts(q);
@@ -156,6 +203,10 @@ var NuevoPedido = React.createClass({
     isLoading: function() {
         this.setState({loading:'block'});
     },
+
+
+
+
 
     render: function() {
 

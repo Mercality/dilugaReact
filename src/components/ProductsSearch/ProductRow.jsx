@@ -14,17 +14,18 @@ var ProductRow = React.createClass({
         if (e.target.value > 0 && e.target.value <= this.props.product.stock) this.setState({qty:e.target.value});
     },
     onClick: function(e){
-        console.log(this.props.product.stock)
         if (this.state.qty > 0 && this.props.product.stock >= this.state.qty) {
 
             var product = {
                 uuid: uuid(),
                 code: this.props.product.code,
                 desc: this.props.product.desc,
-                qty: this.state.qty,
-                price: this.props.product.price,
-                subtotal: this.props.product.price*this.state.qty
+                qty: parseInt(this.state.qty),
+                price: parseFloat(this.props.product.price),
+                subtotal: Math.round((this.props.product.price*this.state.qty*100),2) / 100
             };
+            
+            
 
             var cartBtn = e.target;
             var animation = whichAnim();
