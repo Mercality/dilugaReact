@@ -13,8 +13,9 @@ var HistorialPedidos = React.createClass({
         });
 
         var detalles = this.props.pedidos.map(function(pedido) {
+            var editable = pedido.processed;
             return (
-                    <PedidoDetalle key={Math.random()}  pedido={pedido} />
+                    <PedidoDetalle key={Math.random()}  pedido={pedido} editable={editable} />
             )
         });
         var length = pedidos.length;
@@ -29,15 +30,20 @@ var HistorialPedidos = React.createClass({
                 <div className="componentWrap" style={{position:'relative'}}>
                     <Loading active={this.props.loading} />
                     <h3>Ultimos Pedidos</h3>
-
-                    <table className="table">
-                        <tbody>
-                            <tr>
-                                <th>Pedido</th><th>Cliente</th><th>Fecha</th><th className="text-center">Total</th>
-                            </tr>
-                            {pedidos}
-                        </tbody>
-                      </table>
+                    <div className="table-responsive">
+                        <table className="table">
+                            <tbody>
+                                <tr>
+                                    <th>Pedido</th>
+                                    <th>Cliente</th>
+                                    <th>Fecha</th>
+                                    <th className="text-center">Total</th>
+                                    <th style={{width:50}}>Procesado</th>
+                                </tr>
+                                {pedidos}
+                            </tbody>
+                          </table>
+                      </div>
                 </div>
             </div>
 
