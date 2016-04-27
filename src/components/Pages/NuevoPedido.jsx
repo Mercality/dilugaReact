@@ -3,6 +3,7 @@ var History = require('react-router/lib/hashHistory');
 var ClientDetails = require('../ClientDetails/ClientDetails.jsx');
 var ProductSearch = require('../ProductsSearch/ProductsSearch.jsx');
 var ShoppingCart = require('../ShoppingCart/ShoppingCart.jsx');
+var Loading = require('../Loading.jsx');
 
 var Reflux = require('reflux');
 var Actions = require('../../reflux/Actions.jsx');
@@ -28,6 +29,7 @@ var NuevoPedido = React.createClass({
             productList: [],
             clientSelected:false,
             loading:'',
+            load: '',
         };
     },
 
@@ -116,6 +118,7 @@ var NuevoPedido = React.createClass({
     },
 
     submitCart: function(e) {
+        this.setState({load: 'block'})
         if (this.props.route.editing) {
             var date = new Date(Date.now());
             var cliente = this.state.clientSelected;
@@ -237,7 +240,8 @@ var NuevoPedido = React.createClass({
         }
 
         return (
-            <div>
+            <div style={{position:'relative'}}>
+            <Loading active={this.state.load} />
             <div className="row">
                 <div className="col-lg-12">
                     <h1 className="page-header">
@@ -256,9 +260,13 @@ var NuevoPedido = React.createClass({
                     <ClientDetails client={this.state.clientSelected} clientSelected={this.clientSelected}/>
                 </div>
             </div>
+                <div>
 
-                {productsAndCart}
-
+                    {productsAndCart}
+                    
+                </div>
+                
+                
             </div>
         );
     }
