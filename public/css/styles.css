@@ -189,3 +189,13 @@ a.editHeadLink:hover {
     width:50%;
     margin:auto;
 }
+
+@media (max-width: 1200px) {
+  h1.page-header, ol.breadcrumb, h3 {
+    margin:8px;
+  }
+
+  nav.navbar {
+    margin-bottom:10px;
+  }
+}

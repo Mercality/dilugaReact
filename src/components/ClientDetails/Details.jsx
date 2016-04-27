@@ -25,7 +25,7 @@ var Details = React.createClass({
                     <p>{this.props.client.phone}</p>
                 </div>
 
-                <div className="col-md-4 col-xs-4">
+                <div className="col-md-4 col-xs-12">
                     <h4><strong>Email:</strong></h4>
                     <p>{this.props.client.email}</p>
                 </div>
