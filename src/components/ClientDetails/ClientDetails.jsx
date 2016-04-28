@@ -85,6 +85,14 @@ var ClientDetails = React.createClass({
                             disable={this.state.disableInput}
                             clickEdit={this.clickEdit} />
 
+                        <div className="checkbox">
+                            <label>
+                                <input type="checkbox" 
+                                disabled={this.props.disabled}
+                                checked={this.state.pAceite}
+                                onChange={this.props.changepAceite} /> ¿Pedido de Aceite?
+                            </label>
+                        </div>
                     </div>
 
                     {ultimo}

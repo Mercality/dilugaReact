@@ -4,8 +4,9 @@ var Actions = require('./Actions.jsx');
 
 var ProductStore = Reflux.createStore({
     listenables: [Actions],
-    getProducts: function(query) {
-        HTTP.get('/products?qcode='+query+'&qdesc='+query)
+    getProducts: function(query, lub) {
+
+        HTTP.get('/products?qcode='+query+'&qdesc='+query+'&lubricantes='+lub)
         .then(function(json) {
             var products = [];
             json.forEach(function(product, index) {

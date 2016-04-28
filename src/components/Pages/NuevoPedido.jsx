@@ -30,6 +30,7 @@ var NuevoPedido = React.createClass({
             clientSelected:false,
             loading:'',
             load: '',
+            pAceite: false,
         };
     },
 
@@ -175,6 +176,10 @@ var NuevoPedido = React.createClass({
             this.setState({clientSelected: selected});
     },
 
+    changepAceite: function(e) {
+        this.setState({pAceite: e.target.checked});
+    },
+
 
     /*
     *    ProductSearch Related Fucntions
@@ -199,8 +204,11 @@ var NuevoPedido = React.createClass({
     },
 
     filter: function(q) {
+        var aceite = undefined;
+        if (this.state.pAceite) aceite = true
         this.setState({loading:'block'});
-        Actions.getProducts(q);
+        
+        Actions.getProducts(q, aceite);
     },
 
     isLoading: function() {
@@ -214,6 +222,7 @@ var NuevoPedido = React.createClass({
     render: function() {
 
         var productsAndCart = false;
+        var disabled = typeof this.state.clientSelected === 'object' ? true : false;
         if (typeof this.state.clientSelected === 'object') {
             productsAndCart = (
                 <div className="row">
@@ -257,7 +266,10 @@ var NuevoPedido = React.createClass({
 
             <div className="row">
                 <div className="col-sm-12">
-                    <ClientDetails client={this.state.clientSelected} clientSelected={this.clientSelected}/>
+                    <ClientDetails client={this.state.clientSelected} 
+                    clientSelected={this.clientSelected}
+                    changepAceite={this.changepAceite}
+                    disabled={disabled} />
                 </div>
             </div>
                 <div>
