@@ -13,7 +13,7 @@ var HistorialPedidos = React.createClass({
         });
 
         var detalles = this.props.pedidos.map(function(pedido) {
-            var editable = pedido.processed;
+            var editable = !pedido.processed;
             return (
                     <PedidoDetalle key={Math.random()}  pedido={pedido} editable={editable} />
             )
