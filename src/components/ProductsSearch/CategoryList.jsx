@@ -9,12 +9,13 @@ var CategoryList = React.createClass({
     },
     onChange: function(e) {
         this.setState({selected:e.target.value});
-        this.props.filter(e.target.value);
+        this.props.filter(e.target.value, 'select');
     },
     render: function() {
 
-        var options = this.props.categories.map(function(category) {
-            return <option key={category+Date.now()/3600} value={category}>{category}</option>
+        var options = this.props.select.map(function(option) {
+
+            return <option key={option.value} value={option.value}>{option.label}</option>
         });
 
         return (

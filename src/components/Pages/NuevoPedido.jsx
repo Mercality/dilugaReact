@@ -12,7 +12,8 @@ var PedidosStore = require('../../reflux/PedidosStore.jsx');
 
 var NuevoPedido = React.createClass({
     mixins: [
-        Reflux.listenTo(ProductStore, 'onChange'),       //GET Product List
+        Reflux.listenTo(ProductStore, 'onChange'),
+        Reflux.listenTo(ProductStore, 'onGetDepartments'),       //GET Product List
         Reflux.listenTo(PedidosStore, 'onPostedPedido'), //Pedido was created
         Reflux.listenTo(PedidosStore, 'onEditPedido'),   //GET Pedido for edition
         Reflux.listenTo(PedidosStore, 'onPutPedido')     //Pedido was edited
@@ -36,8 +37,24 @@ var NuevoPedido = React.createClass({
 
     componentWillMount: function() {
         //Actions.getProducts();
+        Actions.getDepartments();
         if (this.props.params.id)
             Actions.getEditPedidos(this.props.params.id);
+    },
+
+    onGetDepartments: function(event, departments) {
+        
+        if (event === 'getDepartments') {
+            departments = departments.map(function(dep) {
+                return {
+                    value: dep.id,
+                    label: dep.description
+                }
+            });
+              
+            this.setState({departments: departments})    
+        }
+        
     },
 
     onEditPedido: function(e, cart, client) {
@@ -232,7 +249,8 @@ var NuevoPedido = React.createClass({
                              products={this.state.productList}
                              filter={this.filter}
                              loading={this.state.loading}
-                             isLoading={this.isLoading} />
+                             isLoading={this.isLoading}
+                             select={this.state.departments} />
 
                     </div>
                     <div className="col-sm-12 animated zoomIn">

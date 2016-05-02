@@ -14,7 +14,7 @@ var SearchBox = React.createClass({
         this.setState({value:e.target.value});
         this.props.isLoading();
         //Filters the objects in parent Element
-        this.filter(e.target.value);
+        this.filter(e.target.value, 'text');
     },
 
 

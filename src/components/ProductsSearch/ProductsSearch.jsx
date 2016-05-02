@@ -9,7 +9,7 @@ var ProductSearch = React.createClass({
         return (
             <div className="componentWrap">
                 <h3>Lista de Productos</h3>
-            <SearchFilters filter={this.props.filter} isLoading={this.props.isLoading} />
+            <SearchFilters filter={this.props.filter} isLoading={this.props.isLoading} select={this.props.select} />
             <ProductList addToCart={this.props.addToCart} loading={this.props.loading} products={this.props.products} />
             </div>
         );
