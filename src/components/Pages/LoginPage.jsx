@@ -24,7 +24,9 @@ var LoginPage = React.createClass({
         this.setState({loading:''});
         if (e === 'success') {
             this.setState({loggedIn: true, errorMsg: ''});
-            History.goBack();
+            History.replace({
+                pathName: 'historial'
+            })
         }
         if (e === 'failed') {
             this.setState({errorMsg: 'Nombre de usuario o contraseña incorrectos.'})
