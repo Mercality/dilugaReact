@@ -5,8 +5,38 @@ var UserMenu = React.createClass({
 
     render: function() {
         return (
+            
                     <ul className="nav navbar-right top-nav">
+
                         <li className="dropdown">
+                            <a href="#" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-user"></i> {this.props.user.name} <b className="caret"></b></a>
+                            <ul className="dropdown-menu">
+                                <li>
+                                    <Link to="/user"><i className="fa fa-fw fa-user"></i> Perfil</Link>
+                                </li>
+                                <li>
+                                    <a href="https://www.diluga.com.ve/webmail" target="_blank"><i className="fa fa-fw fa-envelope"></i> Correo</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i className="fa fa-fw fa-gear"></i> Configuración</a>
+                                </li>
+                                <li className="divider"></li>
+                                <li>
+                                    <Link to="/logout"><i className="fa fa-fw fa-power-off"></i> Cerrar Sesión</Link>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+        );
+    }
+
+});
+
+module.exports = UserMenu;
+
+
+ /*                       <li className="dropdown">
                             <a href="#" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-envelope"></i> <b className="caret"></b></a>
                             <ul className="dropdown-menu message-dropdown">
                                 <li className="message-preview">
@@ -86,29 +116,5 @@ var UserMenu = React.createClass({
                                 </li>
                             </ul>
                         </li>
-                        <li className="dropdown">
-                            <a href="#" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-user"></i> {this.props.user.name} <b className="caret"></b></a>
-                            <ul className="dropdown-menu">
-                                <li>
-                                    <Link to="/user"><i className="fa fa-fw fa-user"></i> Perfil</Link>
-                                </li>
-                                <li>
-                                    <a href="https://www.diluga.com.ve/webmail" target="_blank"><i className="fa fa-fw fa-envelope"></i> Correo</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i className="fa fa-fw fa-gear"></i> Configuración</a>
-                                </li>
-                                <li className="divider"></li>
-                                <li>
-                                    <Link to="/logout"><i className="fa fa-fw fa-power-off"></i> Cerrar Sesión</Link>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
 
-        );
-    }
-
-});
-
-module.exports = UserMenu;
+*/

@@ -48,8 +48,8 @@ var NavBar = React.createClass({
                             <NavItem  className="" href="/historial" icon="fa fa-w fa-history" text="Historial de Pedidos" />
                             <NavItem  className="" href="/pedido/nuevo" icon="fa fa-w fa-pencil" text="Tomar Pedido" />
                             <NavItem  className="" href="/productos" icon="fa fa-w fa-truck" text="Inventario" />
-                            <NavItem  className="" href="#" icon="fa fa-w fa-table" text="Estadistica" />
-                            <NavItem  className="" href="#" icon="fa fa-w fa-users" text="Usuarios(Admin)" />
+                            {/*<NavItem  className="" href="#" icon="fa fa-w fa-table" text="Estadistica" />*/}
+                            {/*<NavItem  className="" href="#" icon="fa fa-w fa-users" text="Usuarios(Admin)" />*/}
                         </ul>
                     </div>
 
