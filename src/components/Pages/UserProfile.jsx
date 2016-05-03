@@ -12,8 +12,13 @@ var UserProfile = React.createClass({
         };
     },
 
+    componentWillMount: function() {
+        //getUser is called in the navbar on every request so it's not needed to call it here.
+    },
+
     onGetUser: function(e, user) {
         if (e === 'getUser') {
+            console.log(user);
             this.setState({user: user});
         }
     },
@@ -45,7 +50,7 @@ var UserProfile = React.createClass({
                                 label='Zona'
                                 placeholder='Zona'
                                 disabled={true}
-                                value={this.state.user.salesman.zone} />
+                                value={this.state.user.salesman.zone_code} />
 
                             <button type="submit" className="btn btn-primary">Guardar</button>
                             <button type="submit" className="btn btn-default">Cancelar</button>
