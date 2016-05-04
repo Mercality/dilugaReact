@@ -9,6 +9,7 @@ var Reflux = require('reflux');
 var Actions = require('../../reflux/Actions.jsx');
 var ProductStore = require('../../reflux/ProductStore.jsx');
 var PedidosStore = require('../../reflux/PedidosStore.jsx');
+var AuthStore = require('../../reflux/AuthStore.jsx');
 
 var NuevoPedido = React.createClass({
     mixins: [
@@ -16,7 +17,8 @@ var NuevoPedido = React.createClass({
         Reflux.listenTo(ProductStore, 'onGetDepartments'),       //GET Product List
         Reflux.listenTo(PedidosStore, 'onPostedPedido'), //Pedido was created
         Reflux.listenTo(PedidosStore, 'onEditPedido'),   //GET Pedido for edition
-        Reflux.listenTo(PedidosStore, 'onPutPedido')     //Pedido was edited
+        Reflux.listenTo(PedidosStore, 'onPutPedido'),
+        Reflux.listenTo(AuthStore, 'onGetUser')     //Pedido was edited
 
     ],
 
@@ -32,6 +34,7 @@ var NuevoPedido = React.createClass({
             loading:'',
             load: '',
             pAceite: false,
+            user: {salesman: {}}
         };
     },
 
@@ -94,6 +97,11 @@ var NuevoPedido = React.createClass({
 
     },
 
+    onGetUser: function(event, user) {
+        if (event === 'getUser')
+            this.setState({user: user});
+    },
+
     /*
     *    ShoppingCart Related Functions
     *
@@ -145,7 +153,8 @@ var NuevoPedido = React.createClass({
                 id: this.props.params.id,
                 fecha: date.getDay() + '-' + date.getMonth() + '-' + date.getFullYear(),
                 total: this.state.totals.base,
-                detallePedido: this.state.cartProducts
+                detallePedido: this.state.cartProducts,
+                salesman: this.state.user.salesman
             }
 
             Actions.putPedido(body);
@@ -163,7 +172,7 @@ var NuevoPedido = React.createClass({
                     total: this.state.totals.base,
                     detallePedido: this.state.cartProducts
                 }
-                Actions.postPedido(cliente, this.state.cartProducts, this.state.totals);
+                Actions.postPedido(cliente, this.state.cartProducts, this.state.totals, this.state.user.salesman);
             } else {
 
                 //!!!!!!Show message indicating that the request can't be done.!!!!!!!!
@@ -237,7 +246,7 @@ var NuevoPedido = React.createClass({
 
 
     render: function() {
-
+        
         var productsAndCart = false;
         var disabled = typeof this.state.clientSelected === 'object' ? true : false;
         if (typeof this.state.clientSelected === 'object') {

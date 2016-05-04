@@ -29,8 +29,8 @@ var PedidosStore = Reflux.createStore({
     * Triggers the postedPedido event
     *
     */
-    postPedido: function(client, cart, totals) {
-        var body = this._formatPedidoBody(cart, totals, client);
+    postPedido: function(client, cart, totals, salesman) {
+        var body = this._formatPedidoBody(cart, totals, client, salesman);
 
         HTTP.post('/orders', body, auth.get_token())
         .then(handler.check)
@@ -65,7 +65,7 @@ var PedidosStore = Reflux.createStore({
         .then(function(json) { this.trigger('putPedido', true) }.bind(this));
     },
 
-    _formatPedidoBody: function(cart, totals = {}, client = {}) {
+    _formatPedidoBody: function(cart, totals = {}, client = {}, salesman = {}) {
         var detail = [],
             date = new Date(Date.now()),
             body = {};
@@ -84,7 +84,7 @@ var PedidosStore = Reflux.createStore({
             subtotal: totals.base || null,
             tax: totals.tax || null,
             total: totals.base + totals.tax || null,
-            salesman_id: 2 || null, /////////!!!!!!!!!!! CHANGE THIS TO ACTUAL SALESMAN !!!!!!!!!!//////////////
+            salesman_id: salesman.id || null, /////////!!!!!!!!!!! CHANGE THIS TO ACTUAL SALESMAN !!!!!!!!!!//////////////
             code: client.codigo || null,
             detail: detail,
         };

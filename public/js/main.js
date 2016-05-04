@@ -28215,6 +28215,7 @@ var Reflux = require('reflux');
 var Actions = require('../../reflux/Actions.jsx');
 var ProductStore = require('../../reflux/ProductStore.jsx');
 var PedidosStore = require('../../reflux/PedidosStore.jsx');
+var AuthStore = require('../../reflux/AuthStore.jsx');
 
 var NuevoPedido = React.createClass({
     displayName: 'NuevoPedido',
@@ -28222,7 +28223,7 @@ var NuevoPedido = React.createClass({
     mixins: [Reflux.listenTo(ProductStore, 'onChange'), Reflux.listenTo(ProductStore, 'onGetDepartments'), //GET Product List
     Reflux.listenTo(PedidosStore, 'onPostedPedido'), //Pedido was created
     Reflux.listenTo(PedidosStore, 'onEditPedido'), //GET Pedido for edition
-    Reflux.listenTo(PedidosStore, 'onPutPedido') //Pedido was edited
+    Reflux.listenTo(PedidosStore, 'onPutPedido'), Reflux.listenTo(AuthStore, 'onGetUser') //Pedido was edited
 
     ],
 
@@ -28237,7 +28238,8 @@ var NuevoPedido = React.createClass({
             clientSelected: false,
             loading: '',
             load: '',
-            pAceite: false
+            pAceite: false,
+            user: { salesman: {} }
         };
     },
 
@@ -28296,6 +28298,10 @@ var NuevoPedido = React.createClass({
         }
     },
 
+    onGetUser: function onGetUser(event, user) {
+        if (event === 'getUser') this.setState({ user: user });
+    },
+
     /*
     *    ShoppingCart Related Functions
     *
@@ -28347,7 +28353,8 @@ var NuevoPedido = React.createClass({
                 id: this.props.params.id,
                 fecha: date.getDay() + '-' + date.getMonth() + '-' + date.getFullYear(),
                 total: this.state.totals.base,
-                detallePedido: this.state.cartProducts
+                detallePedido: this.state.cartProducts,
+                salesman: this.state.user.salesman
             };
 
             Actions.putPedido(body);
@@ -28362,7 +28369,7 @@ var NuevoPedido = React.createClass({
                     total: this.state.totals.base,
                     detallePedido: this.state.cartProducts
                 };
-                Actions.postPedido(cliente, this.state.cartProducts, this.state.totals);
+                Actions.postPedido(cliente, this.state.cartProducts, this.state.totals, this.state.user.salesman);
             } else {
 
                 //!!!!!!Show message indicating that the request can't be done.!!!!!!!!
@@ -28509,7 +28516,7 @@ var NuevoPedido = React.createClass({
 
 module.exports = NuevoPedido;
 
-},{"../../reflux/Actions.jsx":268,"../../reflux/PedidosStore.jsx":271,"../../reflux/ProductStore.jsx":272,"../ClientDetails/ClientDetails.jsx":238,"../Loading.jsx":246,"../ProductsSearch/ProductsSearch.jsx":258,"../ShoppingCart/ShoppingCart.jsx":265,"react":206,"react-router/lib/hashHistory":72,"reflux":222}],254:[function(require,module,exports){
+},{"../../reflux/Actions.jsx":268,"../../reflux/AuthStore.jsx":269,"../../reflux/PedidosStore.jsx":271,"../../reflux/ProductStore.jsx":272,"../ClientDetails/ClientDetails.jsx":238,"../Loading.jsx":246,"../ProductsSearch/ProductsSearch.jsx":258,"../ShoppingCart/ShoppingCart.jsx":265,"react":206,"react-router/lib/hashHistory":72,"reflux":222}],254:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -29456,8 +29463,8 @@ var PedidosStore = Reflux.createStore({
     * Triggers the postedPedido event
     *
     */
-    postPedido: function postPedido(client, cart, totals) {
-        var body = this._formatPedidoBody(cart, totals, client);
+    postPedido: function postPedido(client, cart, totals, salesman) {
+        var body = this._formatPedidoBody(cart, totals, client, salesman);
 
         HTTP.post('/orders', body, auth.get_token()).then(handler.check).then(trigger.bind(this, event = 'postedPedido'));
         //.catch(printException);
@@ -29490,6 +29497,7 @@ var PedidosStore = Reflux.createStore({
     _formatPedidoBody: function _formatPedidoBody(cart) {
         var totals = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
         var client = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+        var salesman = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
 
         var detail = [],
             date = new Date(Date.now()),
@@ -29509,7 +29517,7 @@ var PedidosStore = Reflux.createStore({
             subtotal: totals.base || null,
             tax: totals.tax || null,
             total: totals.base + totals.tax || null,
-            salesman_id: 2 || null, /////////!!!!!!!!!!! CHANGE THIS TO ACTUAL SALESMAN !!!!!!!!!!//////////////
+            salesman_id: salesman.id || null, /////////!!!!!!!!!!! CHANGE THIS TO ACTUAL SALESMAN !!!!!!!!!!//////////////
             code: client.codigo || null,
             detail: detail
         };
