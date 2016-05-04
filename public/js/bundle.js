@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";var env={serverAddr:"192.168.8.15:8000/api/v1",serverPort:"6069"};module.exports=env;
+"use strict";var env="localhost:3000"===window.location.host?{serverAddr:"192.168.8.15:8000/api/v1",serverPort:"6069"}:{serverAddr:"diluga.com.ve/api/v1",serverPort:"80"};module.exports=env;
 
 },{}],2:[function(require,module,exports){
 !function(){"use strict";function e(){for(var r=[],o=0;o<arguments.length;o++){var f=arguments[o];if(f){var i=typeof f;if("string"===i||"number"===i)r.push(f);else if(Array.isArray(f))r.push(e.apply(null,f));else if("object"===i)for(var t in f)n.call(f,t)&&f[t]&&r.push(t)}}return r.join(" ")}var n={}.hasOwnProperty;"undefined"!=typeof module&&module.exports?module.exports=e:"function"==typeof define&&"object"==typeof define.amd&&define.amd?define("classnames",[],function(){return e}):window.classNames=e}();
