@@ -6,7 +6,7 @@ var env = window.location.host === 'localhost:3000' ? {
     serverPort: '6069'
 } : {
     serverAddr: 'https://diluga.com.ve/api/v1',
-    serverPort: '80'
+    serverPort: '443'
 };
 
 module.exports = env;
