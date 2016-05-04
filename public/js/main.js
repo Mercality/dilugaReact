@@ -2,10 +2,10 @@
 'use strict';
 
 var env = window.location.host === 'localhost:3000' ? {
-    serverAddr: '192.168.8.15:8000/api/v1',
+    serverAddr: 'http://192.168.8.15:8000/api/v1',
     serverPort: '6069'
 } : {
-    serverAddr: 'diluga.com.ve/api/v1',
+    serverAddr: 'https://diluga.com.ve/api/v1',
     serverPort: '80'
 };
 
@@ -29793,7 +29793,7 @@ module.exports = errorHandler;
 var Fetch = require('whatwg-fetch');
 var env = require('../../env.js');
 
-var baseUrl = 'http://' + env.serverAddr;
+var baseUrl = env.serverAddr;
 var ingredients = '/ingredients';
 var service = {
 
