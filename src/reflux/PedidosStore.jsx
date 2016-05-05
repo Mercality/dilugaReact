@@ -75,7 +75,7 @@ var PedidosStore = Reflux.createStore({
             pedido.tax = parseFloat(pedido.tax);
             pedido.total = parseFloat(pedido.total);
             pedido.salesman_id = parseInt(pedido.salesman_id);
-            pedido.proccesed = parseInt(pedido.proccesed);
+            pedido.processed = parseInt(pedido.processed);
 
         });
 
