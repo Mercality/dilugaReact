@@ -15,6 +15,7 @@ var PedidosStore = Reflux.createStore({
     */
     getPedidos: function(pageNo) {
         var page = '&perPage=10&page=1';
+        var event = '' ;
         if (pageNo) page = '&perPage=10&page='+pageNo;
         HTTP.get('/orders?client=true&detail=true'+page, auth.get_token())
         .then(handler.check)
