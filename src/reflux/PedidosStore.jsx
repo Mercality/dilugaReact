@@ -18,6 +18,7 @@ var PedidosStore = Reflux.createStore({
         if (pageNo) page = '&perPage=10&page='+pageNo;
         HTTP.get('/orders?client=true&detail=true'+page, auth.get_token())
         .then(handler.check)
+        .then(this._parse)
         .then(trigger.bind(this, event='change'))
         //.catch(printException) ;
     },
@@ -63,6 +64,22 @@ var PedidosStore = Reflux.createStore({
         HTTP.put('/orders/'+body.id, body, auth.get_token())
         .then(handler.check)
         .then(function(json) { this.trigger('putPedido', true) }.bind(this));
+    },
+
+    _parse: function(json) {
+        json.data.forEach(function(pedido) {
+            pedido.id = parseInt(pedido.id);
+            pedido.client_id = parseInt(pedido.client_id);
+            pedido.lines = parseFloat(pedido.lines);
+            pedido.subtotal = parseFloat(pedido.subtotal);
+            pedido.tax = parseFloat(pedido.tax);
+            pedido.total = parseFloat(pedido.total);
+            pedido.salesman_id = parseInt(pedido.salesman_id);
+            pedido.proccesed = parseInt(pedido.proccesed);
+
+        });
+
+        return json;
     },
 
     _formatPedidoBody: function(cart, totals = {}, client = {}, salesman = {}) {
