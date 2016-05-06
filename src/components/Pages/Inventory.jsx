@@ -2,6 +2,7 @@ var React = require('react');
 
 var Pagination = require('react-js-pagination');
 var SearchFilters = require('../ProductsSearch/SearchFilters.jsx');
+var Loading = require('../Loading.jsx');
 
 var Reflux = require('reflux');
 var ProductStore = require('../../reflux/ProductStore.jsx');
@@ -20,18 +21,20 @@ var Inventory = React.createClass({
 			filtered: [],
 			departments: [],
 			page: 1,
-			loading: false
+			loading: false,
 		};
 	},
 
 	componentWillMount: function() {
 		Actions.getAllProducts();
 		Actions.getDepartments();
+
+		this.setState({productsLoading: 'block'});
 	},
 
 	onGetProducts: function(event, products) {
 		if (event === 'change')
-		this.setState({products: products});
+		this.setState({products: products, productsLoading: ''});
 	},
 
 	onGetDepartments: function(event, departments) {
@@ -104,42 +107,46 @@ var Inventory = React.createClass({
 
 
         return (
+        	<div className="row" style={{position:'relative'}}>
+	        	<Loading active={this.state.productsLoading} />
 
-            <div className="componentWrap">
-            <h1>Lista de Productos</h1>
+	            <div className="componentWrap">
+	            
+	            <h1>Lista de Productos</h1>
 
-            <SearchFilters
-            	filter={this.filter}
-            	isLoading={this.isLoading}
-            	select={this.state.departments} />
+	            <SearchFilters
+	            	filter={this.filter}
+	            	isLoading={this.isLoading}
+	            	select={this.state.departments} />
 
-            <div className="text-center">
-	            <Pagination
-	                	activePage={this.state.page}
-	                	totalItemsCount={count}
-	                	itemsCountPerPage={20}
-	                	onChange={this.onChangePage} />
-             </div>   	
-                <div className="table-responsive">
-                	<table className="table">
-                		<thead>
-                			<tr>
-		                		<th>Codigo</th>
-		                		<th>Descripcion</th>
-		                		<th>Existencia</th>
-		                		<th>Precio</th>
-                			</tr>
-                		</thead>
-                		
-                		
+	            <div className="text-center">
+		            <Pagination
+		                	activePage={this.state.page}
+		                	totalItemsCount={count}
+		                	itemsCountPerPage={20}
+		                	onChange={this.onChangePage} />
+	             </div>   	
+	                <div className="table-responsive">
+	                	<table className="table">
+	                		<thead>
+	                			<tr>
+			                		<th>Codigo</th>
+			                		<th>Descripcion</th>
+			                		<th>Existencia</th>
+			                		<th>Precio</th>
+	                			</tr>
+	                		</thead>
+	                		
+	                		
 
-                		<tbody>
-                			{lines}
+	                		<tbody>
+	                			{lines}
 
-                		</tbody>
-                	</table>
+	                		</tbody>
+	                	</table>
 
-                </div>
+	                </div>
+	            </div>
             </div>
         );
     }
