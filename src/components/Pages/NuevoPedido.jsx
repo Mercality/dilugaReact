@@ -33,6 +33,7 @@ var NuevoPedido = React.createClass({
             clientSelected:false,
             loading:'',
             load: '',
+            clientLoading: '',
             pAceite: false,
             user: {salesman: {}}
         };
@@ -209,6 +210,12 @@ var NuevoPedido = React.createClass({
             this.setState({clientSelected: selected});
     },
 
+    clientIsLoading: function(loading) {
+        loading
+        ? this.setState({clientLoading:'block'})
+        : this.setState({clientLoading: ''})
+    },
+
     changepAceite: function(e) {
         this.setState({pAceite: e.target.checked});
     },
@@ -298,13 +305,16 @@ var NuevoPedido = React.createClass({
                 </div>
             </div>
 
-            <div className="row">
+            <div className="row" style={{position:'relative'}}>
+                <Loading active={this.state.clientLoading} />
                 <div className="col-sm-12">
                     <ClientDetails client={this.state.clientSelected} 
                     clientSelected={this.clientSelected}
                     changepAceite={this.changepAceite}
-                    disabled={disabled} />
+                    disabled={disabled}
+                    clientIsLoading={this.clientIsLoading} />
                 </div>
+
             </div>
                 <div>
 

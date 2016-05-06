@@ -34,6 +34,7 @@ var ClientDetails = React.createClass({
     onSubmit: function(e, id) {
         e.preventDefault();
         Actions.getClient(id);
+        this.props.clientIsLoading(true);
     },
 
     clickEdit: function(e) {
@@ -54,6 +55,8 @@ var ClientDetails = React.createClass({
         client.codigo !== undefined
         ? this.props.clientSelected(client)
         : this.props.clientSelected(false)
+
+        this.props.clientIsLoading(false);
 
     },
 
