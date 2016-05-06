@@ -40,9 +40,14 @@ var NuevoPedido = React.createClass({
 
     componentWillMount: function() {
         //Actions.getProducts();
+        Actions.getLoggedUser();
         Actions.getDepartments();
         if (this.props.params.id)
             Actions.getEditPedidos(this.props.params.id);
+    },
+
+    componentDidMount: function() {
+        
     },
 
     onGetDepartments: function(event, departments) {
@@ -98,8 +103,10 @@ var NuevoPedido = React.createClass({
     },
 
     onGetUser: function(event, user) {
+        console.log(user);
         if (event === 'getUser')
             this.setState({user: user});
+
     },
 
     /*

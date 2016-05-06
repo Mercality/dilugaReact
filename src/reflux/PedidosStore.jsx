@@ -33,7 +33,7 @@ var PedidosStore = Reflux.createStore({
     */
     postPedido: function(client, cart, totals, salesman) {
         var body = this._formatPedidoBody(cart, totals, client, salesman);
-
+        console.log(salesman)
         HTTP.post('/orders', body, auth.get_token())
         .then(handler.check)
         .then(trigger.bind(this, event='postedPedido'))
