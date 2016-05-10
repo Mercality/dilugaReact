@@ -16,7 +16,7 @@ var dateFormat = {
         var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate(),
             month = date.getMonth(),
             year = date.getFullYear();
-        return day+1 + ' de ' + meses[month] + ' de ' + year;
+        return day + ' de ' + meses[month] + ' de ' + year;
     }
 }
 
