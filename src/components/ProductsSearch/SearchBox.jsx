@@ -21,10 +21,11 @@ var SearchBox = React.createClass({
     render: function() {
         return (
             <span>
-                <label>Busqueda: </label> <input onChange={this.onChange}
-                                                 value={this.state.value}
-                                                 type="text" size="10"
-                                                 placeholder="Filtro..." />
+                <input onChange={this.onChange}
+                     value={this.state.value}
+                     type="text" size="10"
+                     placeholder="Busqueda..."
+                     className="form-control" />
             </span>
         );
     }

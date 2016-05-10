@@ -13,6 +13,7 @@ var UserProfile = React.createClass({
     },
 
     componentWillMount: function() {
+        Actions.getLoggedUser();
         //getUser is called in the navbar on every request so it's not needed to call it here.
     },
 

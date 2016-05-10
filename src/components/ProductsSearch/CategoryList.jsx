@@ -20,8 +20,9 @@ var CategoryList = React.createClass({
 
         return (
             <span>
-                <label>Categorias: </label>
-                <select onChange={this.onChange} value={this.state.selected}>
+                
+                <select className="form-control" onChange={this.onChange} value={this.state.selected}>
+                    <option value="" disabled defaultValue>Departamentos</option>
                     {options}
                 </select>
             </span>

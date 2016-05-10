@@ -112,7 +112,7 @@ var Inventory = React.createClass({
 
 	            <div className="componentWrap">
 	            
-	            <h1>Lista de Productos</h1>
+	            <h1 style={{marginBottom:30}}>Lista de Productos</h1>
 
 	            <SearchFilters
 	            	filter={this.filter}

@@ -255,7 +255,7 @@ var NuevoPedido = React.createClass({
         return list;
     },
 
-    filter: function(query) {
+    filter: function(query, type) {
         /*var aceite = undefined;
         if (this.state.pAceite) aceite = true
         this.setState({loading:'block'});
@@ -263,10 +263,19 @@ var NuevoPedido = React.createClass({
         //Actions.getProducts(q, aceite);
         */
         var products = this.state.productList;
-        var reg = new RegExp(query, 'gi');
-        products = products.filter(function(product) {
-            return product.desc.match(reg) || product.code.match(reg);
-        });
+
+        if (type === 'select') {
+            products = products.filter(function(product) {
+                return product.department == query;
+            });
+        }
+
+        if (type === 'text') {
+            var reg = new RegExp(query, 'gi');
+            products = products.filter(function(product) {
+                return product.desc.match(reg) || product.code.match(reg);
+            });
+        }
 
         this.setState({filtered: products, loading:''});
 
