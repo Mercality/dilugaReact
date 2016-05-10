@@ -29,13 +29,14 @@ var NuevoPedido = React.createClass({
                 base: 0,
                 tax: 0,
             },
-            productList: [],
             clientSelected:false,
             loading:'',
             load: '',
             clientLoading: '',
             pAceite: false,
-            user: {salesman: {}}
+            user: {salesman: {}},
+            productList: [],
+            filtered: []
         };
     },
 
@@ -43,6 +44,8 @@ var NuevoPedido = React.createClass({
         //Actions.getProducts();
         Actions.getLoggedUser();
         Actions.getDepartments();
+        Actions.getAllProducts();
+        this.setState({loading:'block'})
         if (this.props.params.id)
             Actions.getEditPedidos(this.props.params.id);
     },
@@ -203,7 +206,16 @@ var NuevoPedido = React.createClass({
     clientSelected: function(selected) {
 
         if (selected.codigo === undefined) {
-            this.setState(this.getInitialState());
+            this.setState({cartProducts:[],
+            totals: {
+                base: 0,
+                tax: 0,
+            },
+            clientSelected:false,
+            loading:'',
+            load: '',
+            clientLoading: '',
+            pAceite: false,});
         }
 
         else
@@ -243,12 +255,21 @@ var NuevoPedido = React.createClass({
         return list;
     },
 
-    filter: function(q) {
-        var aceite = undefined;
+    filter: function(query) {
+        /*var aceite = undefined;
         if (this.state.pAceite) aceite = true
         this.setState({loading:'block'});
         
-        Actions.getProducts(q, aceite);
+        //Actions.getProducts(q, aceite);
+        */
+        var products = this.state.productList;
+        var reg = new RegExp(query, 'gi');
+        products = products.filter(function(product) {
+            return product.desc.match(reg) || product.code.match(reg);
+        });
+
+        this.setState({filtered: products, loading:''});
+
     },
 
     isLoading: function() {
@@ -269,7 +290,7 @@ var NuevoPedido = React.createClass({
                     <div className="col-sm-12 animated zoomIn">
 
                         <ProductSearch addToCart={this.addToCart}
-                             products={this.state.productList}
+                             products={this.state.filtered}
                              filter={this.filter}
                              loading={this.state.loading}
                              isLoading={this.isLoading}
