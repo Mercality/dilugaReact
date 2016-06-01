@@ -1,5 +1,5 @@
 var React = require('react');
-var Router = require('react-router/lib/router')
+var Router = require('react-router/lib/Router')
 var useRouterHistory = require('react-router/lib/useRouterHistory');
 var hashHistory = require('history/lib/createHashHistory');
 var IndexRoute = require('react-router/lib/IndexRoute');
