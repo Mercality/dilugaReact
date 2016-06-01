@@ -61,7 +61,7 @@ body, .container-fluid {
 
   .form-signin {
   max-width: 330px;
-  padding: 15px;
+  /*padding: 15px;*/
   margin: 0 auto;
 }
 .form-signin .form-signin-heading,
@@ -188,4 +188,14 @@ a.editHeadLink:hover {
     min-width:300px;
     width:50%;
     margin:auto;
+}
+
+@media (max-width: 1200px) {
+  h1.page-header, ol.breadcrumb, h3 {
+    margin:8px;
+  }
+
+  nav.navbar {
+    margin-bottom:10px;
+  }
 }

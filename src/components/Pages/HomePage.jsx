@@ -4,7 +4,7 @@ var HomePage = React.createClass({
 
     render: function() {
         return (
-            <h1>HomePage</h1>
+            <h1>Fuerza de Ventas DILUGA </h1>
         );
     }
 

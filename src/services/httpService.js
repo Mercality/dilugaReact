@@ -1,7 +1,7 @@
 var Fetch = require('whatwg-fetch');
 var env = require('../../env.js');
 
-var baseUrl = 'http://' + env.serverAddr;
+var baseUrl = env.serverAddr;
 var ingredients = '/ingredients';
 var service = {
 

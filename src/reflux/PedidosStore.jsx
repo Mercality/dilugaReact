@@ -15,9 +15,11 @@ var PedidosStore = Reflux.createStore({
     */
     getPedidos: function(pageNo) {
         var page = '&perPage=10&page=1';
+        var event = '' ;
         if (pageNo) page = '&perPage=10&page='+pageNo;
         HTTP.get('/orders?client=true&detail=true'+page, auth.get_token())
         .then(handler.check)
+        .then(this._parse)
         .then(trigger.bind(this, event='change'))
         //.catch(printException) ;
     },
@@ -29,9 +31,9 @@ var PedidosStore = Reflux.createStore({
     * Triggers the postedPedido event
     *
     */
-    postPedido: function(client, cart, totals) {
-        var body = this._formatPedidoBody(cart, totals, client);
-
+    postPedido: function(client, cart, totals, salesman) {
+        var body = this._formatPedidoBody(cart, totals, client, salesman);
+        var event = '';
         HTTP.post('/orders', body, auth.get_token())
         .then(handler.check)
         .then(trigger.bind(this, event='postedPedido'))
@@ -65,7 +67,23 @@ var PedidosStore = Reflux.createStore({
         .then(function(json) { this.trigger('putPedido', true) }.bind(this));
     },
 
-    _formatPedidoBody: function(cart, totals = {}, client = {}) {
+    _parse: function(json) {
+        json.data.forEach(function(pedido) {
+            pedido.id = parseInt(pedido.id);
+            pedido.client_id = parseInt(pedido.client_id);
+            pedido.lines = parseFloat(pedido.lines);
+            pedido.subtotal = parseFloat(pedido.subtotal);
+            pedido.tax = parseFloat(pedido.tax);
+            pedido.total = parseFloat(pedido.total);
+            pedido.salesman_id = parseInt(pedido.salesman_id);
+            pedido.processed = parseInt(pedido.processed);
+
+        });
+
+        return json;
+    },
+
+    _formatPedidoBody: function(cart, totals = {}, client = {}, salesman = {}) {
         var detail = [],
             date = new Date(Date.now()),
             body = {};
@@ -84,7 +102,7 @@ var PedidosStore = Reflux.createStore({
             subtotal: totals.base || null,
             tax: totals.tax || null,
             total: totals.base + totals.tax || null,
-            salesman_id: 2 || null, /////////!!!!!!!!!!! CHANGE THIS TO ACTUAL SALESMAN !!!!!!!!!!//////////////
+            salesman_id: salesman.id || null, /////////!!!!!!!!!!! CHANGE THIS TO ACTUAL SALESMAN !!!!!!!!!!//////////////
             code: client.codigo || null,
             detail: detail,
         };

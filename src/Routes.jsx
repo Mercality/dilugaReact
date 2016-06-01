@@ -18,6 +18,8 @@ var LoginPage = require('./components/Pages/LoginPage.jsx');
 var UserProfile = require('./components/Pages/UserProfile.jsx');
 var Messages = require('./components/Messages.jsx');
 
+var Inventory = require('./components/Pages/Inventory.jsx');
+
 var Routes  = (
     <Router history={History}>
         <Route path="/" component={Base} onEnter={Auth.check}>
@@ -26,6 +28,7 @@ var Routes  = (
             <Route path="/historial" component={Historial} onEnter={Auth.check} />
             <Route path="/pedido/nuevo" component={NuevoPedido} />
             <Route path="/pedido/editar/:id" editing="true" component={NuevoPedido} />
+            <Route path="/productos" component={Inventory} />
             <Route path="/user" component={UserProfile} />
         </Route>
         <Route path="/login" component={LoginPage} onEnter={Auth.loginCheck} />

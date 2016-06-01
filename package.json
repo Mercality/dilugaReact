@@ -12,7 +12,8 @@
     "scripts": {
         "start": "SET NODE_ENV=production & watchify src/main.jsx -v -t [ babelify --presets [ react es2015 ] ]  -o public/js/main.js",
         "dist": "SET NODE_ENV=production & browserify src/main.jsx -v -t [ babelify --presets [ react es2015 ] ] -g [uglifyify] -o public/js/bundle.js",
-        "dev-server": "nodemon server.js | serve public | npm start"
+        "dev-server": "nodemon server.js | serve public | npm start",
+        "deploy": "npm run dist && git commit -am \"Dist Build\"&& git push bucket master && sleep 10 && ssh lubrican@diluga.com.ve \"cp -u -R -v React/diluga-front/public/. public_html/diluga_app/ && mv -f public_html/diluga_app/js/bundle.js public_html/diluga_app/js/main.js\""
     },
     "author": "",
     "license": "ISC",

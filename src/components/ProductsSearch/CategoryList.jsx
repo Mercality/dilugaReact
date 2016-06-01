@@ -9,18 +9,20 @@ var CategoryList = React.createClass({
     },
     onChange: function(e) {
         this.setState({selected:e.target.value});
-        this.props.filter(e.target.value);
+        this.props.filter(e.target.value, 'select');
     },
     render: function() {
 
-        var options = this.props.categories.map(function(category) {
-            return <option key={category+Date.now()/3600} value={category}>{category}</option>
+        var options = this.props.select.map(function(option) {
+
+            return <option key={option.value} value={option.value}>{option.label}</option>
         });
 
         return (
             <span>
-                <label>Categorias: </label>
-                <select onChange={this.onChange} value={this.state.selected}>
+                
+                <select className="form-control" onChange={this.onChange} value={this.state.selected}>
+                    <option value="" disabled defaultValue>Departamentos</option>
                     {options}
                 </select>
             </span>

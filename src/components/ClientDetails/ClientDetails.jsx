@@ -34,6 +34,7 @@ var ClientDetails = React.createClass({
     onSubmit: function(e, id) {
         e.preventDefault();
         Actions.getClient(id);
+        this.props.clientIsLoading(true);
     },
 
     clickEdit: function(e) {
@@ -54,6 +55,8 @@ var ClientDetails = React.createClass({
         client.codigo !== undefined
         ? this.props.clientSelected(client)
         : this.props.clientSelected(false)
+
+        this.props.clientIsLoading(false);
 
     },
 
@@ -85,6 +88,14 @@ var ClientDetails = React.createClass({
                             disable={this.state.disableInput}
                             clickEdit={this.clickEdit} />
 
+                        <div className="checkbox">
+                            <label>
+                                <input type="checkbox" 
+                                disabled={this.props.disabled}
+                                checked={this.state.pAceite}
+                                onChange={this.props.changepAceite} /> ¿Pedido de Aceite?
+                            </label>
+                        </div>
                     </div>
 
                     {ultimo}

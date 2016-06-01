@@ -14,19 +14,28 @@ var PedidoDetalle = React.createClass({
                 price={producto.price} />
         });
 
+        var edit = this.props.editable
+        ?
+        <th colSpan="5" className="text-center headLink">
+                <Link className="editHeadLink" to={"/pedido/editar/"+this.props.pedido.id} disabled={this.props.editable}>Editar</Link>
+        </th>
+        : '';
+
         return (
             <tr>
-                <td id={'detail'+this.props.pedido.id} className="hidden  animated zoomIn " colSpan="4">
+                <td id={'detail'+this.props.pedido.id} className="hidden  animated zoomIn " colSpan="5">
                     <div className="table-responsive">
                         <table  className="table well">
                             <tbody>
                             <tr className="table-heading">
-                                <th colSpan="5" className="text-center headLink">
-                                    <Link className="editHeadLink" to={"/pedido/editar/"+this.props.pedido.id}>Editar</Link>
-                                </th>
+                                {edit} 
                             </tr>
                             <tr className="table-heading">
-                                <th>Codigo</th><th>Descripcion</th><th className="productQty">Cantidad</th><th className="productQty">Precio</th><th className="productQty">Subtotal</th>
+                                <th>Codigo</th>
+                                <th>Descripcion</th>
+                                <th className="productQty">Cantidad</th>
+                                <th className="productQty">Precio</th>
+                                <th className="productQty">Subtotal</th>
                             </tr>
                                 {productos}
                             </tbody>

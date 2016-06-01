@@ -22,6 +22,7 @@ var Historial = React.createClass({
     },
 
     componentWillMount: function() {
+        this.setState({loading:'block'});
         Actions.getPedidos();
     },
     onChange: function(e, pedidos) {

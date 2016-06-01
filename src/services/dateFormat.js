@@ -1,6 +1,8 @@
 var dateFormat = {
     format: function(date, separator) {
-        var date = new Date(date);
+        date = date.split('-');
+        var date = new Date(date[0],date[1],date[2]);
+
         var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate(),
             month = date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth(),
             year = date.getFullYear();
@@ -14,7 +16,7 @@ var dateFormat = {
         var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate(),
             month = date.getMonth(),
             year = date.getFullYear();
-        return day+1 + ' de ' + meses[month] + ' de ' + year;
+        return day + ' de ' + meses[month] + ' de ' + year;
     }
 }
 
